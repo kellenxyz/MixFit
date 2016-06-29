@@ -20,6 +20,7 @@
 		4361B5EE1D237C2A00C8E8E8 /* RobotoCondensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4361B5EA1D237A9E00C8E8E8 /* RobotoCondensed-Regular.ttf */; };
 		4361B5EF1D237C2C00C8E8E8 /* RobotoCondensed-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4361B5E91D237A9E00C8E8E8 /* RobotoCondensed-Light.ttf */; };
 		4361B5F01D237C2F00C8E8E8 /* RobotoCondensed-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4361B5E81D237A9E00C8E8E8 /* RobotoCondensed-Bold.ttf */; };
+		4361B5F21D24533600C8E8E8 /* NewMixlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4361B5F11D24533600C8E8E8 /* NewMixlistViewController.swift */; };
 		43A986CA1D07946B008276DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A986C91D07946B008276DF /* AppDelegate.swift */; };
 		43A986CF1D07946B008276DF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43A986CD1D07946B008276DF /* Main.storyboard */; };
 		43A986D21D07946B008276DF /* MixFit.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 43A986D01D07946B008276DF /* MixFit.xcdatamodeld */; };
@@ -34,6 +35,7 @@
 		43A987081D10E131008276DF /* SubMuscleGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A987071D10E131008276DF /* SubMuscleGroupsTableViewController.swift */; };
 		43A9870A1D11FDA9008276DF /* ExercisePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A987091D11FDA9008276DF /* ExercisePageViewController.swift */; };
 		43A9870C1D11FDBC008276DF /* ExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A9870B1D11FDBC008276DF /* ExerciseViewController.swift */; };
+		43B447001D24853D0019F897 /* EditMixlistTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B446FF1D24853D0019F897 /* EditMixlistTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +66,7 @@
 		4361B5E81D237A9E00C8E8E8 /* RobotoCondensed-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Bold.ttf"; sourceTree = "<group>"; };
 		4361B5E91D237A9E00C8E8E8 /* RobotoCondensed-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Light.ttf"; sourceTree = "<group>"; };
 		4361B5EA1D237A9E00C8E8E8 /* RobotoCondensed-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Regular.ttf"; sourceTree = "<group>"; };
+		4361B5F11D24533600C8E8E8 /* NewMixlistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMixlistViewController.swift; sourceTree = "<group>"; };
 		43A986C61D07946B008276DF /* MixFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MixFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43A986C91D07946B008276DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		43A986CE1D07946B008276DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -84,6 +87,7 @@
 		43A987071D10E131008276DF /* SubMuscleGroupsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubMuscleGroupsTableViewController.swift; sourceTree = "<group>"; };
 		43A987091D11FDA9008276DF /* ExercisePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExercisePageViewController.swift; sourceTree = "<group>"; };
 		43A9870B1D11FDBC008276DF /* ExerciseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseViewController.swift; sourceTree = "<group>"; };
+		43B446FF1D24853D0019F897 /* EditMixlistTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditMixlistTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +190,8 @@
 				43A987091D11FDA9008276DF /* ExercisePageViewController.swift */,
 				43A9870B1D11FDBC008276DF /* ExerciseViewController.swift */,
 				4361B5DE1D19E81B00C8E8E8 /* NotificationAlertViewController.swift */,
+				4361B5F11D24533600C8E8E8 /* NewMixlistViewController.swift */,
+				43B446FF1D24853D0019F897 /* EditMixlistTableViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -361,7 +367,9 @@
 				43A9870C1D11FDBC008276DF /* ExerciseViewController.swift in Sources */,
 				43A986CA1D07946B008276DF /* AppDelegate.swift in Sources */,
 				4361B5E31D1B505100C8E8E8 /* MuscleGroupTableViewCell.swift in Sources */,
+				43B447001D24853D0019F897 /* EditMixlistTableViewController.swift in Sources */,
 				4361B5DF1D19E81B00C8E8E8 /* NotificationAlertViewController.swift in Sources */,
+				4361B5F21D24533600C8E8E8 /* NewMixlistViewController.swift in Sources */,
 				4361B5DB1D19D2A800C8E8E8 /* MixlistDetailTableViewController.swift in Sources */,
 				4361B5E71D21EA2200C8E8E8 /* TableSectionHeader.swift in Sources */,
 				4361B5E11D1B4F2200C8E8E8 /* CustomImageView.swift in Sources */,

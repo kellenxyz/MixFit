@@ -10,8 +10,10 @@ import UIKit
 
 class HomeTableViewController: UITableViewController {
 
-//    let kTableHeaderHeight: CGFloat = 150.0
-//    var headerView: UIView!
+    /*
+    let kTableHeaderHeight: CGFloat = 150.0
+    var headerView: UIView!
+    */
     var muscleGroups: [String] = []
     var expansionPacks: [String] = []
 
@@ -33,13 +35,17 @@ class HomeTableViewController: UITableViewController {
         muscleGroups = ["Back", "Chest", "Legs", "Arms", "Shoulders", "Core", "Full Body"]
         expansionPacks = ["Kettlebell", "Bodyweight"]
 
+        /*
         // Assign storyboard headerView to headerView property
-//        headerView = tableView.tableHeaderView
-//        tableView.tableHeaderView = nil
-//        tableView.addSubview(headerView)
+        headerView = tableView.tableHeaderView
+        tableView.tableHeaderView = nil
+        tableView.addSubview(headerView)
 
-//        tableView.contentInset = UIEdgeInsets(top: kTableHeaderHeight, left: 0, bottom: 0, right: 0)
-//        tableView.contentOffset = CGPoint(x: 0, y: -kTableHeaderHeight)
+        tableView.contentInset = UIEdgeInsets(top: kTableHeaderHeight, left: 0, bottom: 0, right: 0)
+        tableView.contentOffset = CGPoint(x: 0, y: -kTableHeaderHeight)
+
+        updateHeaderView()
+        */
 
         tableView.separatorColor = UIColor(colorLiteralRed: 0.92, green: 0.92, blue: 0.92, alpha: 1)
 
@@ -51,26 +57,27 @@ class HomeTableViewController: UITableViewController {
 
     }
 
-//    func updateHeaderView() {
-//        var headerRect = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: kTableHeaderHeight)
-//        if tableView.contentOffset.y < -kTableHeaderHeight {
-//            headerRect.origin.y = tableView.contentOffset.y
-//            headerRect.size.height = -tableView.contentOffset.y
-//        }
-//
-//        self.tableView.tableHeaderView?.frame = headerRect
-//    }
+    /*
+    func updateHeaderView() {
+        var headerRect = CGRect(x: 0, y: -kTableHeaderHeight, width: tableView.bounds.width, height: kTableHeaderHeight)
+        if tableView.contentOffset.y < -kTableHeaderHeight {
+            headerRect.origin.y = tableView.contentOffset.y
+            headerRect.size.height = -tableView.contentOffset.y
+        }
+
+        headerView.frame = headerRect
+
+        if tableView.contentOffset.y >= 0 {
+            tableView.contentInset = UIEdgeInsetsZero
+        } else {
+            tableView.contentInset = UIEdgeInsets(top: min(-tableView.contentOffset.y, kTableHeaderHeight), left: 0, bottom: 0, right: 0)
+        }
+
+    }
+    */
 
     override func scrollViewDidScroll(scrollView: UIScrollView) {
 //        updateHeaderView()
-
-        
-
-//        if tableView.contentOffset.y >= 0 {
-//            tableView.contentInset = UIEdgeInsetsZero
-//        } else {
-//            tableView.contentInset = UIEdgeInsets(top: min(-tableView.contentOffset.y, kTableHeaderHeight), left: 0, bottom: 0, right: 0)
-//        }
     }
 
 
@@ -94,16 +101,19 @@ class HomeTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> MuscleGroupTableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MuscleGroupCell", forIndexPath: indexPath) as! MuscleGroupTableViewCell
 
+        var cellTitle: String
         if indexPath.section == 0 {
-            let cellTitle: String = muscleGroups[indexPath.row]
+            cellTitle = muscleGroups[indexPath.row]
             cell.mgCellTextLabel.text = cellTitle.uppercaseString
-
-            if cellTitle == "Legs" || cellTitle == "Arms" {
-                cell.accessoryType = .DisclosureIndicator
-            }
         } else {
-            let cellTitle: String = "Kettlebell Expansion"
+            cellTitle = "Kettlebell Expansion"
             cell.mgCellTextLabel.text = cellTitle.uppercaseString
+        }
+
+        if cellTitle == "Legs" || cellTitle == "Arms" {
+            cell.accessoryType = .DisclosureIndicator
+        } else {
+            cell.accessoryType = .None
         }
 
 

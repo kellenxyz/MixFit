@@ -7,14 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4361B5DB1D19D2A800C8E8E8 /* MixlistDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4361B5DA1D19D2A800C8E8E8 /* MixlistDetailTableViewController.swift */; };
+		4361B5DD1D19D83E00C8E8E8 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4361B5DC1D19D83E00C8E8E8 /* CustomButton.swift */; };
+		4361B5DF1D19E81B00C8E8E8 /* NotificationAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4361B5DE1D19E81B00C8E8E8 /* NotificationAlertViewController.swift */; };
+		4361B5E11D1B4F2200C8E8E8 /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4361B5E01D1B4F2200C8E8E8 /* CustomImageView.swift */; };
+		4361B5E31D1B505100C8E8E8 /* MuscleGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4361B5E21D1B505100C8E8E8 /* MuscleGroupTableViewCell.swift */; };
+		4361B5E51D21E91E00C8E8E8 /* TableSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4361B5E41D21E91E00C8E8E8 /* TableSectionHeader.xib */; };
+		4361B5E71D21EA2200C8E8E8 /* TableSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4361B5E61D21EA2200C8E8E8 /* TableSectionHeader.swift */; };
+		4361B5EB1D237A9E00C8E8E8 /* RobotoCondensed-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4361B5E81D237A9E00C8E8E8 /* RobotoCondensed-Bold.ttf */; };
+		4361B5EC1D237A9E00C8E8E8 /* RobotoCondensed-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4361B5E91D237A9E00C8E8E8 /* RobotoCondensed-Light.ttf */; };
+		4361B5ED1D237A9E00C8E8E8 /* RobotoCondensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4361B5EA1D237A9E00C8E8E8 /* RobotoCondensed-Regular.ttf */; };
+		4361B5EE1D237C2A00C8E8E8 /* RobotoCondensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4361B5EA1D237A9E00C8E8E8 /* RobotoCondensed-Regular.ttf */; };
+		4361B5EF1D237C2C00C8E8E8 /* RobotoCondensed-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4361B5E91D237A9E00C8E8E8 /* RobotoCondensed-Light.ttf */; };
+		4361B5F01D237C2F00C8E8E8 /* RobotoCondensed-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4361B5E81D237A9E00C8E8E8 /* RobotoCondensed-Bold.ttf */; };
 		43A986CA1D07946B008276DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A986C91D07946B008276DF /* AppDelegate.swift */; };
-		43A986CC1D07946B008276DF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A986CB1D07946B008276DF /* ViewController.swift */; };
 		43A986CF1D07946B008276DF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43A986CD1D07946B008276DF /* Main.storyboard */; };
 		43A986D21D07946B008276DF /* MixFit.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 43A986D01D07946B008276DF /* MixFit.xcdatamodeld */; };
 		43A986D41D07946B008276DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43A986D31D07946B008276DF /* Assets.xcassets */; };
 		43A986D71D07946B008276DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43A986D51D07946B008276DF /* LaunchScreen.storyboard */; };
 		43A986E21D07946B008276DF /* MixFitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A986E11D07946B008276DF /* MixFitTests.swift */; };
 		43A986ED1D07946B008276DF /* MixFitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A986EC1D07946B008276DF /* MixFitUITests.swift */; };
+		43A986FB1D10BA2E008276DF /* MoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A986FA1D10BA2E008276DF /* MoreTableViewController.swift */; };
+		43A987021D10BF18008276DF /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A987011D10BF18008276DF /* HomeTableViewController.swift */; };
+		43A987041D10CB6C008276DF /* MixlistsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A987031D10CB6C008276DF /* MixlistsTableViewController.swift */; };
+		43A987061D10D484008276DF /* ExercisesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A987051D10D484008276DF /* ExercisesTableViewController.swift */; };
+		43A987081D10E131008276DF /* SubMuscleGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A987071D10E131008276DF /* SubMuscleGroupsTableViewController.swift */; };
+		43A9870A1D11FDA9008276DF /* ExercisePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A987091D11FDA9008276DF /* ExercisePageViewController.swift */; };
+		43A9870C1D11FDBC008276DF /* ExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A9870B1D11FDBC008276DF /* ExerciseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,9 +54,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4361B5DA1D19D2A800C8E8E8 /* MixlistDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MixlistDetailTableViewController.swift; sourceTree = "<group>"; };
+		4361B5DC1D19D83E00C8E8E8 /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		4361B5DE1D19E81B00C8E8E8 /* NotificationAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationAlertViewController.swift; sourceTree = "<group>"; };
+		4361B5E01D1B4F2200C8E8E8 /* CustomImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
+		4361B5E21D1B505100C8E8E8 /* MuscleGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MuscleGroupTableViewCell.swift; sourceTree = "<group>"; };
+		4361B5E41D21E91E00C8E8E8 /* TableSectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableSectionHeader.xib; sourceTree = "<group>"; };
+		4361B5E61D21EA2200C8E8E8 /* TableSectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableSectionHeader.swift; sourceTree = "<group>"; };
+		4361B5E81D237A9E00C8E8E8 /* RobotoCondensed-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Bold.ttf"; sourceTree = "<group>"; };
+		4361B5E91D237A9E00C8E8E8 /* RobotoCondensed-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Light.ttf"; sourceTree = "<group>"; };
+		4361B5EA1D237A9E00C8E8E8 /* RobotoCondensed-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Regular.ttf"; sourceTree = "<group>"; };
 		43A986C61D07946B008276DF /* MixFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MixFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43A986C91D07946B008276DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		43A986CB1D07946B008276DF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		43A986CE1D07946B008276DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		43A986D11D07946B008276DF /* MixFit.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MixFit.xcdatamodel; sourceTree = "<group>"; };
 		43A986D31D07946B008276DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +77,13 @@
 		43A986E81D07946B008276DF /* MixFitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MixFitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		43A986EC1D07946B008276DF /* MixFitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixFitUITests.swift; sourceTree = "<group>"; };
 		43A986EE1D07946B008276DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		43A986FA1D10BA2E008276DF /* MoreTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreTableViewController.swift; sourceTree = "<group>"; };
+		43A987011D10BF18008276DF /* HomeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
+		43A987031D10CB6C008276DF /* MixlistsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MixlistsTableViewController.swift; sourceTree = "<group>"; };
+		43A987051D10D484008276DF /* ExercisesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExercisesTableViewController.swift; sourceTree = "<group>"; };
+		43A987071D10E131008276DF /* SubMuscleGroupsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubMuscleGroupsTableViewController.swift; sourceTree = "<group>"; };
+		43A987091D11FDA9008276DF /* ExercisePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExercisePageViewController.swift; sourceTree = "<group>"; };
+		43A9870B1D11FDBC008276DF /* ExerciseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,13 +134,10 @@
 		43A986C81D07946B008276DF /* MixFit */ = {
 			isa = PBXGroup;
 			children = (
-				43A986C91D07946B008276DF /* AppDelegate.swift */,
-				43A986CB1D07946B008276DF /* ViewController.swift */,
-				43A986CD1D07946B008276DF /* Main.storyboard */,
-				43A986D31D07946B008276DF /* Assets.xcassets */,
-				43A986D51D07946B008276DF /* LaunchScreen.storyboard */,
-				43A986D81D07946B008276DF /* Info.plist */,
-				43A986D01D07946B008276DF /* MixFit.xcdatamodeld */,
+				43A986FC1D10BE54008276DF /* View */,
+				43A986FD1D10BE63008276DF /* Controllers */,
+				43A987001D10BECA008276DF /* Model */,
+				43A986FE1D10BE97008276DF /* Supporting Files */,
 			);
 			path = MixFit;
 			sourceTree = "<group>";
@@ -126,6 +158,57 @@
 				43A986EE1D07946B008276DF /* Info.plist */,
 			);
 			path = MixFitUITests;
+			sourceTree = "<group>";
+		};
+		43A986FC1D10BE54008276DF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				43A986CD1D07946B008276DF /* Main.storyboard */,
+				43A986D51D07946B008276DF /* LaunchScreen.storyboard */,
+				4361B5E21D1B505100C8E8E8 /* MuscleGroupTableViewCell.swift */,
+				4361B5E61D21EA2200C8E8E8 /* TableSectionHeader.swift */,
+				4361B5E41D21E91E00C8E8E8 /* TableSectionHeader.xib */,
+				4361B5DC1D19D83E00C8E8E8 /* CustomButton.swift */,
+				4361B5E01D1B4F2200C8E8E8 /* CustomImageView.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		43A986FD1D10BE63008276DF /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				43A987011D10BF18008276DF /* HomeTableViewController.swift */,
+				43A987071D10E131008276DF /* SubMuscleGroupsTableViewController.swift */,
+				43A987031D10CB6C008276DF /* MixlistsTableViewController.swift */,
+				4361B5DA1D19D2A800C8E8E8 /* MixlistDetailTableViewController.swift */,
+				43A987051D10D484008276DF /* ExercisesTableViewController.swift */,
+				43A986FA1D10BA2E008276DF /* MoreTableViewController.swift */,
+				43A987091D11FDA9008276DF /* ExercisePageViewController.swift */,
+				43A9870B1D11FDBC008276DF /* ExerciseViewController.swift */,
+				4361B5DE1D19E81B00C8E8E8 /* NotificationAlertViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		43A986FE1D10BE97008276DF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				43A986C91D07946B008276DF /* AppDelegate.swift */,
+				43A986D81D07946B008276DF /* Info.plist */,
+				43A986D31D07946B008276DF /* Assets.xcassets */,
+				4361B5E81D237A9E00C8E8E8 /* RobotoCondensed-Bold.ttf */,
+				4361B5E91D237A9E00C8E8E8 /* RobotoCondensed-Light.ttf */,
+				4361B5EA1D237A9E00C8E8E8 /* RobotoCondensed-Regular.ttf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		43A987001D10BECA008276DF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				43A986D01D07946B008276DF /* MixFit.xcdatamodeld */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,6 +279,7 @@
 				TargetAttributes = {
 					43A986C51D07946B008276DF = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 56GXWU92VJ;
 					};
 					43A986DC1D07946B008276DF = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -233,7 +317,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				43A986D71D07946B008276DF /* LaunchScreen.storyboard in Resources */,
+				4361B5EB1D237A9E00C8E8E8 /* RobotoCondensed-Bold.ttf in Resources */,
+				4361B5ED1D237A9E00C8E8E8 /* RobotoCondensed-Regular.ttf in Resources */,
+				4361B5E51D21E91E00C8E8E8 /* TableSectionHeader.xib in Resources */,
 				43A986D41D07946B008276DF /* Assets.xcassets in Resources */,
+				4361B5EC1D237A9E00C8E8E8 /* RobotoCondensed-Light.ttf in Resources */,
 				43A986CF1D07946B008276DF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -249,6 +337,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4361B5EE1D237C2A00C8E8E8 /* RobotoCondensed-Regular.ttf in Resources */,
+				4361B5EF1D237C2C00C8E8E8 /* RobotoCondensed-Light.ttf in Resources */,
+				4361B5F01D237C2F00C8E8E8 /* RobotoCondensed-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,9 +350,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43A986CC1D07946B008276DF /* ViewController.swift in Sources */,
+				43A987021D10BF18008276DF /* HomeTableViewController.swift in Sources */,
+				43A987081D10E131008276DF /* SubMuscleGroupsTableViewController.swift in Sources */,
+				43A987041D10CB6C008276DF /* MixlistsTableViewController.swift in Sources */,
 				43A986D21D07946B008276DF /* MixFit.xcdatamodeld in Sources */,
+				43A987061D10D484008276DF /* ExercisesTableViewController.swift in Sources */,
+				43A986FB1D10BA2E008276DF /* MoreTableViewController.swift in Sources */,
+				43A9870A1D11FDA9008276DF /* ExercisePageViewController.swift in Sources */,
+				4361B5DD1D19D83E00C8E8E8 /* CustomButton.swift in Sources */,
+				43A9870C1D11FDBC008276DF /* ExerciseViewController.swift in Sources */,
 				43A986CA1D07946B008276DF /* AppDelegate.swift in Sources */,
+				4361B5E31D1B505100C8E8E8 /* MuscleGroupTableViewCell.swift in Sources */,
+				4361B5DF1D19E81B00C8E8E8 /* NotificationAlertViewController.swift in Sources */,
+				4361B5DB1D19D2A800C8E8E8 /* MixlistDetailTableViewController.swift in Sources */,
+				4361B5E71D21EA2200C8E8E8 /* TableSectionHeader.swift in Sources */,
+				4361B5E11D1B4F2200C8E8E8 /* CustomImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,6 +506,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = MixFit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.jetpilot.MixFit;
@@ -414,6 +518,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = MixFit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.jetpilot.MixFit;
@@ -486,6 +591,7 @@
 				43A986F31D07946B008276DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		43A986F41D07946B008276DF /* Build configuration list for PBXNativeTarget "MixFitTests" */ = {
 			isa = XCConfigurationList;
@@ -494,6 +600,7 @@
 				43A986F61D07946B008276DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		43A986F71D07946B008276DF /* Build configuration list for PBXNativeTarget "MixFitUITests" */ = {
 			isa = XCConfigurationList;
@@ -502,6 +609,7 @@
 				43A986F91D07946B008276DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

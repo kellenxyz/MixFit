@@ -17,6 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+
+        if let font = UIFont(name: "RobotoCondensed-Bold", size: 16) {
+            UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: font]
+        }
+
+        UITabBar.appearance().tintColor = UIColor(colorLiteralRed: 25.0/255.0, green: 25.0/255.0, blue: 25.0/255.0, alpha: 1.0)
+
         return true
     }
 

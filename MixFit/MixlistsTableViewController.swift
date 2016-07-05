@@ -10,6 +10,8 @@ import UIKit
 
 class MixlistsTableViewController: UITableViewController {
 
+    var coreDataStack: CoreDataStack!
+
     var mixlists: [String] = []
     var favMuscleGroups: [String] = []
 

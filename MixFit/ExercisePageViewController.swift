@@ -10,6 +10,8 @@ import UIKit
 
 class ExercisePageViewController: UIPageViewController {
 
+    var coreDataStack: CoreDataStack!
+
     let pageCount = 5
 
     override func viewDidLoad() {

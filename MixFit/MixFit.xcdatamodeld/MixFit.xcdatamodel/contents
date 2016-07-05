@@ -1,4 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15F34" minimumToolsVersion="Automatic">
+    <entity name="DefaultExercise" representedClassName=".DefaultExercise" parentEntity="Exercise" syncable="YES">
+        <attribute name="exerciseID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imageName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Exercise" representedClassName=".Exercise" syncable="YES">
+        <attribute name="detailDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isFavorite" attributeType="Boolean" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="targetedMuscleGroups" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="muscleGroup" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MuscleGroup" inverseName="exercises" inverseEntity="MuscleGroup" syncable="YES"/>
+        <relationship name="userCreatedMixlists" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UserCreatedMixlist" inverseName="exercises" inverseEntity="UserCreatedMixlist" syncable="YES"/>
+    </entity>
+    <entity name="MFUser" representedClassName=".MFUser" syncable="YES">
+        <attribute name="firstName" attributeType="String" syncable="YES"/>
+        <attribute name="isMale" attributeType="Boolean" syncable="YES"/>
+        <attribute name="lastName" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Mixlist" representedClassName=".Mixlist" syncable="YES">
+        <attribute name="name" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="MuscleGroup" representedClassName=".MuscleGroup" parentEntity="Mixlist" syncable="YES">
+        <relationship name="exercises" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exercise" inverseName="muscleGroup" inverseEntity="Exercise" syncable="YES"/>
+        <relationship name="parentMuscleGroup" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MuscleGroup" inverseName="subMuscleGroups" inverseEntity="MuscleGroup" syncable="YES"/>
+        <relationship name="subMuscleGroups" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MuscleGroup" inverseName="parentMuscleGroup" inverseEntity="MuscleGroup" syncable="YES"/>
+    </entity>
+    <entity name="UserCreatedExercise" representedClassName=".UserCreatedExercise" parentEntity="Exercise" syncable="YES">
+        <attribute name="image" optional="YES" attributeType="Transformable" syncable="YES"/>
+    </entity>
+    <entity name="UserCreatedMixlist" representedClassName=".UserCreatedMixlist" parentEntity="Mixlist" syncable="YES">
+        <relationship name="exercises" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exercise" inverseName="userCreatedMixlists" inverseEntity="Exercise" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="DefaultExercise" positionX="-306" positionY="9" width="128" height="75"/>
+        <element name="Exercise" positionX="-171" positionY="-270" width="128" height="135"/>
+        <element name="MFUser" positionX="-108" positionY="-117" width="128" height="90"/>
+        <element name="Mixlist" positionX="9" positionY="30" width="128" height="60"/>
+        <element name="MuscleGroup" positionX="70" positionY="-108" width="128" height="90"/>
+        <element name="UserCreatedExercise" positionX="70" positionY="-231" width="128" height="60"/>
+        <element name="UserCreatedMixlist" positionX="-144" positionY="129" width="128" height="60"/>
+    </elements>
 </model>

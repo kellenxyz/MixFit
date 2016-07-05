@@ -10,6 +10,8 @@ import UIKit
 
 class EditMixlistTableViewController: UITableViewController {
 
+    var coreDataStack: CoreDataStack!
+
     var options: [String] = []
 
     override func viewDidLoad() {
@@ -24,11 +26,6 @@ class EditMixlistTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
 
         tableView.tableFooterView = UIView()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     // MARK: - Table view data source
@@ -65,7 +62,9 @@ class EditMixlistTableViewController: UITableViewController {
             let alertController = UIAlertController(title: "Delete mixlist?", message: "Are you sure you wish to delete this mixlist? This action cannot be undone.", preferredStyle: .Alert)
             let deleteAction = UIAlertAction(title: "Delete mixlist", style: .Destructive, handler: { (action) in
                 // Delete mixlist from data model
-//                self.performSegueWithIdentifier("UnwindToMixlists", sender: self)
+//                alertController.dismissViewControllerAnimated(true, completion: { 
+//                    self.performSegueWithIdentifier("UnwindToMixlists", sender: self)
+//                })
             })
             let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
             alertController.addAction(deleteAction)

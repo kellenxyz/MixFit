@@ -10,6 +10,8 @@ import UIKit
 
 class SubMuscleGroupsTableViewController: UITableViewController {
 
+    var coreDataStack: CoreDataStack!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

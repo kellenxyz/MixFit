@@ -9,6 +9,9 @@
 import UIKit
 
 class ExerciseViewController: UIViewController {
+
+    var coreDataStack: CoreDataStack!
+
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var exerciseNameLabel: UILabel!
     @IBOutlet weak var setsAndRepsLabel: UILabel!

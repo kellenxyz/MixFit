@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class HomeTableViewController: UITableViewController {
 
@@ -14,7 +15,8 @@ class HomeTableViewController: UITableViewController {
     let kTableHeaderHeight: CGFloat = 150.0
     var headerView: UIView!
     */
-    var muscleGroups: [String] = []
+    var coreDataStack: CoreDataStack!
+    var muscleGroups = [MuscleGroup]()
     var expansionPacks: [String] = []
 
 
@@ -32,7 +34,7 @@ class HomeTableViewController: UITableViewController {
         self.navigationItem.titleView = imageView
 
         // Dummy Data for tableView
-        muscleGroups = ["Back", "Chest", "Legs", "Arms", "Shoulders", "Core", "Full Body"]
+//        muscleGroups = ["Back", "Chest", "Legs", "Arms", "Shoulders", "Core", "Full Body"]
         expansionPacks = ["Kettlebell", "Bodyweight"]
 
         /*
@@ -55,6 +57,34 @@ class HomeTableViewController: UITableViewController {
         // Remove extra emtpy tableViewCell rows after last cell
         tableView.tableFooterView = UIView()
 
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        reloadData()
+    }
+
+    func reloadData() {
+        let fetchRequest = NSFetchRequest(entityName: "MuscleGroup")
+        let predicate = NSPredicate(format: "parentMuscleGroup == nil")
+        fetchRequest.predicate = predicate
+        fetchRequest.sortDescriptors = [
+            NSSortDescriptor(key: "name", ascending: true)
+        ]
+
+        do {
+            if let results = try coreDataStack.managedObjectContext.executeFetchRequest(fetchRequest) as? [MuscleGroup] {
+                muscleGroups = results
+                for muscleGroup in muscleGroups {
+                    print("\(muscleGroup.subMuscleGroups)")
+                }
+            }
+        } catch {
+            fatalError("Error fetching data! \(error)")
+        }
+
+        tableView.reloadData()
     }
 
     /*
@@ -100,17 +130,18 @@ class HomeTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> MuscleGroupTableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MuscleGroupCell", forIndexPath: indexPath) as! MuscleGroupTableViewCell
+        let muscleGroup = muscleGroups[indexPath.row]
 
         var cellTitle: String
         if indexPath.section == 0 {
-            cellTitle = muscleGroups[indexPath.row]
+            cellTitle = muscleGroup.name
             cell.mgCellTextLabel.text = cellTitle.uppercaseString
         } else {
             cellTitle = "Kettlebell Expansion"
             cell.mgCellTextLabel.text = cellTitle.uppercaseString
         }
 
-        if cellTitle == "Legs" || cellTitle == "Arms" {
+        if muscleGroup.subMuscleGroups?.count > 0 {
             cell.accessoryType = .DisclosureIndicator
         } else {
             cell.accessoryType = .None

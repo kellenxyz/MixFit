@@ -10,6 +10,8 @@ import UIKit
 
 class ExercisesTableViewController: UITableViewController {
 
+    var coreDataStack: CoreDataStack!
+
     var muscleGroups: [String] = []
     var chestExercises: [String] = []
 

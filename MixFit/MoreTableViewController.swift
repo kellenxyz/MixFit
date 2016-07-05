@@ -10,6 +10,8 @@ import UIKit
 
 class MoreTableViewController: UITableViewController {
 
+    var coreDataStack: CoreDataStack!
+
     var moreArray: [String] = []
 
     override func viewDidLoad() {

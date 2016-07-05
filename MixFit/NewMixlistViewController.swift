@@ -10,6 +10,8 @@ import UIKit
 
 class NewMixlistViewController: UIViewController {
 
+    var coreDataStack: CoreDataStack!
+
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var mixlistTitleTextField: UITextField!
 
@@ -31,13 +33,9 @@ class NewMixlistViewController: UIViewController {
         mixlistTitleTextField.becomeFirstResponder()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     @IBAction func onSaveButtonPressed(sender: UIBarButtonItem) {
-//        self.dismissViewControllerAnimated(true, completion: nil)
+        //Save mixlist into CoreData
+
         mixlistTitleTextField.resignFirstResponder()
         self.performSegueWithIdentifier("UnwindToMixlists", sender: self)
     }

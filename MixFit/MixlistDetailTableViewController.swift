@@ -10,6 +10,8 @@ import UIKit
 
 class MixlistDetailTableViewController: UITableViewController {
 
+    var coreDataStack: CoreDataStack!
+
     var exercises: [String] = []
 
     override func viewDidLoad() {
@@ -107,5 +109,9 @@ class MixlistDetailTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+
+    @IBAction func unwindToMixlistDetail(segue: UIStoryboardSegue) {
+        
+    }
 
 }

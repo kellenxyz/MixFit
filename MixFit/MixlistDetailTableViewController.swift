@@ -11,8 +11,9 @@ import UIKit
 class MixlistDetailTableViewController: UITableViewController {
 
     var coreDataStack: CoreDataStack!
-
     var exercises: [String] = []
+
+    @IBOutlet weak var startMixlistButton: CustomButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,15 +101,23 @@ class MixlistDetailTableViewController: UITableViewController {
     }
     */
 
-    /*
+    @IBAction func onStartMixlistButtonPressed(sender: UIButton) {
+        performSegueWithIdentifier("ShowExercisePageController", sender: self)
+    }
+
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "ShowExercisePageController" {
+            let navController = segue.destinationViewController as? UINavigationController
+            let destinationViewController = navController?.topViewController as? ExercisePageViewController
+            destinationViewController?.mixlistName = self.title!
+            destinationViewController?.coreDataStack = self.coreDataStack
+        }
     }
-    */
+
 
     @IBAction func unwindToMixlistDetail(segue: UIStoryboardSegue) {
         

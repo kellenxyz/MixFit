@@ -14,8 +14,9 @@ import CoreData
 
 extension MuscleGroup {
 
-    @NSManaged var exercises: Exercise?
+    @NSManaged var exercises: NSSet?
     @NSManaged var parentMuscleGroup: MuscleGroup?
     @NSManaged var subMuscleGroups: NSSet?
+    @NSManaged var orderTag: String?
 
 }

@@ -10,6 +10,8 @@ import UIKit
 
 class MuscleGroupTableViewCell: UITableViewCell {
 
+//    var muscleGroup = MuscleGroup()
+
 //    @IBOutlet weak var mgCellImageView: CustomImageView!
     @IBOutlet weak var mgCellTextLabel: UILabel!
     

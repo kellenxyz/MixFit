@@ -51,17 +51,40 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="concrete-cubes-background" translatesAutoresizingMaskIntoConstraints="NO" id="7ei-Ur-BVd">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
+                                </imageView>
+                                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hWS-0V-wrU">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
+                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="zPQ-qW-hTE">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kh5-xw-1Si">
+                                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="Wk5-QA-mwS">
+                                                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                </view>
+                                                <vibrancyEffect>
+                                                    <blurEffect style="light"/>
+                                                </vibrancyEffect>
+                                            </visualEffectView>
+                                        </subviews>
+                                    </view>
+                                    <blurEffect style="light"/>
+                                </visualEffectView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="PvT-0E-cmK">
                                     <rect key="frame" x="15" y="59" width="290" height="42"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="GOOD MORNING, KELLEN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eYF-ko-4KD">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="GOOD MORNING, KELLEN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eYF-ko-4KD">
                                             <rect key="frame" x="59" y="0.0" width="173" height="21"/>
                                             <fontDescription key="fontDescription" name="RobotoCondensed-Bold" family="Roboto Condensed" pointSize="17"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                             <size key="shadowOffset" width="0.0" height="1"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="You were born to do amazing things." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hab-cr-fR0">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="You were born to do amazing things." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hab-cr-fR0">
                                             <rect key="frame" x="30" y="23" width="230" height="19"/>
                                             <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="16"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -81,13 +104,21 @@
                             </subviews>
                             <color key="backgroundColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
+                                <constraint firstItem="7ei-Ur-BVd" firstAttribute="top" secondItem="uhF-3Q-iSh" secondAttribute="top" id="4XC-Ao-Pqe"/>
                                 <constraint firstItem="PvT-0E-cmK" firstAttribute="centerY" secondItem="uhF-3Q-iSh" secondAttribute="centerY" id="7Nj-hs-fso"/>
                                 <constraint firstItem="PvT-0E-cmK" firstAttribute="leading" secondItem="uhF-3Q-iSh" secondAttribute="leading" constant="15" id="99p-br-s1O"/>
+                                <constraint firstItem="hWS-0V-wrU" firstAttribute="top" secondItem="uhF-3Q-iSh" secondAttribute="top" id="Air-iw-2eM"/>
+                                <constraint firstItem="7ei-Ur-BVd" firstAttribute="leading" secondItem="uhF-3Q-iSh" secondAttribute="leading" id="BsO-dr-uoI"/>
+                                <constraint firstAttribute="bottom" secondItem="hWS-0V-wrU" secondAttribute="bottom" id="Dxt-NM-Dkl"/>
                                 <constraint firstItem="PvT-0E-cmK" firstAttribute="centerY" secondItem="uhF-3Q-iSh" secondAttribute="centerY" id="G0h-MR-5SK"/>
                                 <constraint firstItem="PvT-0E-cmK" firstAttribute="centerX" secondItem="uhF-3Q-iSh" secondAttribute="centerX" id="RUJ-A2-pGd"/>
                                 <constraint firstItem="PvT-0E-cmK" firstAttribute="centerY" secondItem="uhF-3Q-iSh" secondAttribute="centerY" id="VHj-rl-1mC"/>
                                 <constraint firstAttribute="trailing" secondItem="PvT-0E-cmK" secondAttribute="trailing" constant="15" id="cey-In-RxM"/>
+                                <constraint firstAttribute="trailing" secondItem="hWS-0V-wrU" secondAttribute="trailing" id="pf8-Ir-jq5"/>
+                                <constraint firstItem="hWS-0V-wrU" firstAttribute="leading" secondItem="uhF-3Q-iSh" secondAttribute="leading" id="r1A-Zb-slI"/>
                                 <constraint firstAttribute="trailing" secondItem="PvT-0E-cmK" secondAttribute="trailing" constant="15" id="rIE-cm-DxT"/>
+                                <constraint firstAttribute="bottom" secondItem="7ei-Ur-BVd" secondAttribute="bottom" id="s7F-lm-x0e"/>
+                                <constraint firstAttribute="trailing" secondItem="7ei-Ur-BVd" secondAttribute="trailing" id="wUk-gP-QDo"/>
                                 <constraint firstItem="PvT-0E-cmK" firstAttribute="leading" secondItem="uhF-3Q-iSh" secondAttribute="leading" constant="15" id="zIZ-IY-b1J"/>
                             </constraints>
                             <variation key="default">
@@ -620,7 +651,7 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                     <connections>
-                                        <segue destination="wdd-9h-2Zh" kind="presentation" id="BGU-zb-Smd"/>
+                                        <action selector="onStartMixlistButtonPressed:" destination="ZjL-NW-4lE" eventType="touchUpInside" id="9HL-2V-V8O"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -663,6 +694,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="startMixlistButton" destination="JcH-vw-z00" id="Vje-3l-egH"/>
+                        <segue destination="wdd-9h-2Zh" kind="presentation" identifier="ShowExercisePageController" id="ibd-38-uxv"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ewD-hd-Ner" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1149,6 +1184,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="concrete-cubes-background" width="1300" height="975"/>
         <image name="exercises-icon" width="23" height="22"/>
         <image name="home" width="22" height="22"/>
         <image name="home-selected" width="22" height="22"/>
@@ -1158,6 +1194,6 @@
         <image name="more-selected" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="BGU-zb-Smd"/>
+        <segue reference="ibd-38-uxv"/>
     </inferredMetricsTieBreakers>
 </document>

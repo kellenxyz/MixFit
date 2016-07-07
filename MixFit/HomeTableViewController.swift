@@ -65,20 +65,22 @@ class HomeTableViewController: UITableViewController {
         reloadData()
     }
 
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+    }
+
     func reloadData() {
         let fetchRequest = NSFetchRequest(entityName: "MuscleGroup")
         let predicate = NSPredicate(format: "parentMuscleGroup == nil")
         fetchRequest.predicate = predicate
         fetchRequest.sortDescriptors = [
-            NSSortDescriptor(key: "name", ascending: true)
+            NSSortDescriptor(key: "orderTag", ascending: true)
         ]
 
         do {
             if let results = try coreDataStack.managedObjectContext.executeFetchRequest(fetchRequest) as? [MuscleGroup] {
                 muscleGroups = results
-                for muscleGroup in muscleGroups {
-                    print("\(muscleGroup.subMuscleGroups)")
-                }
             }
         } catch {
             fatalError("Error fetching data! \(error)")
@@ -131,11 +133,11 @@ class HomeTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> MuscleGroupTableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MuscleGroupCell", forIndexPath: indexPath) as! MuscleGroupTableViewCell
         let muscleGroup = muscleGroups[indexPath.row]
+//        cell.muscleGroup = muscleGroup
 
         var cellTitle: String
         if indexPath.section == 0 {
-            cellTitle = muscleGroup.name
-            cell.mgCellTextLabel.text = cellTitle.uppercaseString
+            cell.mgCellTextLabel.text = muscleGroup.name.uppercaseString
         } else {
             cellTitle = "Kettlebell Expansion"
             cell.mgCellTextLabel.text = cellTitle.uppercaseString
@@ -153,12 +155,25 @@ class HomeTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? MuscleGroupTableViewCell {
-            if cell.mgCellTextLabel.text == "LEGS" || cell.mgCellTextLabel.text == "ARMS" {
-                performSegueWithIdentifier("ShowSubMuscleGroups", sender: self)
-            } else {
-                performSegueWithIdentifier("ShowExercisePageController", sender: self)
-            }
+        let muscleGroup = muscleGroups[indexPath.row]
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+
+        if muscleGroup.subMuscleGroups?.count > 0 {
+            performSegueWithIdentifier("ShowSubMuscleGroups", sender: cell)
+        } else {
+            performSegueWithIdentifier("ShowExercisePageController", sender: cell)
+        }
+
+        guard let exercises = muscleGroup.exercises,
+            let exercisesArray = Array(exercises) as? [DefaultExercise]
+            else {
+                fatalError("Oops!")
+        }
+
+        print("******************************\n\(muscleGroup.name): \(exercises.count) exercises\n")
+
+        for exercise in exercisesArray {
+            print("\(exercise.name)\n\(exercise.exerciseID)\n")
         }
 
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
@@ -219,14 +234,37 @@ class HomeTableViewController: UITableViewController {
     }
     */
 
-    /*
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        guard let selectedCell = sender as? MuscleGroupTableViewCell, let selectedRowIndex = tableView.indexPathForCell(selectedCell)?.row else {
+            fatalError("Sender is not a UITableViewCell or was not found in the tableView, or segue.identifier is not correct")
+        }
+        let muscleGroup = muscleGroups[selectedRowIndex]
+        if segue.identifier == "ShowExercisePageController" {
+            let navController = segue.destinationViewController as? UINavigationController
+            let destinationViewController = navController?.topViewController as? ExercisePageViewController
+            destinationViewController?.mixlistName = muscleGroup.name
+            destinationViewController?.coreDataStack = self.coreDataStack
+            if let exercises = muscleGroup.exercises {
+                destinationViewController?.pageCount = exercises.count
+                let exercisesArray = Array(exercises) as! [Exercise]
+                destinationViewController?.exercises = exercisesArray
+            }
+        } else {
+            // Segue to subMuscleGroup view controller
+        }
     }
-    */
 
 }
+
+
+
+
+
+
+
+
+

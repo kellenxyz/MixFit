@@ -11,11 +11,15 @@ import UIKit
 class ExercisePageViewController: UIPageViewController {
 
     var coreDataStack: CoreDataStack!
-
-    let pageCount = 5
+//    var muscleGroup: MuscleGroup!
+    var mixlistName = String()
+    var exercises = [Exercise]()
+    var pageCount = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        title = mixlistName.uppercaseString
 
         view.backgroundColor = UIColor.whiteColor()
 
@@ -27,6 +31,8 @@ class ExercisePageViewController: UIPageViewController {
         let exerciseVC = storyboard!.instantiateViewControllerWithIdentifier("ExerciseViewController") as! ExerciseViewController
         let page = min(max(0, inPage), pageCount - 1)
         exerciseVC.page = page
+        exerciseVC.exercise = exercises[page]
+        
 
         return exerciseVC
     }

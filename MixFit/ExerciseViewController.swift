@@ -22,7 +22,8 @@ class ExerciseViewController: UIViewController {
     @IBOutlet weak var trainersNotesLabel: UILabel!
 
     var page = 0
-    var isFavorite: Bool = false
+//    var isFavorite: Bool = false
+    var exercise: Exercise!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,30 +39,37 @@ class ExerciseViewController: UIViewController {
     }
 
     private func loadExerciseData() {
-        exerciseNameLabel.text = "BARBELL BENCH PRESS"
+        exerciseNameLabel.text = exercise.name
         setsAndRepsLabel.text = "5 sets of 5 reps"
         restTimeLabel.text = "90 seconds rest"
-        targetedMuscleGroupsLabel.text = "Chest, Triceps"
+        targetedMuscleGroupsLabel.text = exercise.targetedMuscleGroups
         trainersNotesLabel.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     }
 
     private func setFavoriteButtonTitle() {
-        if isFavorite {
+        if exercise.isFavorite.boolValue {
             addToFavoritesButton.setTitle("❤️ Favorite", forState: .Normal)
         } else {
             addToFavoritesButton.setTitle("+ Add to Favorites", forState: .Normal)
         }
     }
 
+    // TODO: There is no coreDataStack object so create a singleton and use that.
+
     @IBAction func onAddToFavoritesButtonPressed(sender: UIButton) {
-        if isFavorite == false {
-            print("Added to favorites!")
+        if exercise.isFavorite.boolValue == false {
+            exercise.setValue(!exercise.isFavorite.boolValue, forKey: "isFavorite")
+            coreDataStack.saveMainContext()
             notificationAlertWithTitle("Added to Favorites")
+            print(exercise.isFavorite.boolValue)
         } else {
-            print("Removed from favorites")
+//            print("Removed from favorites")
+            exercise.setValue(!exercise.isFavorite.boolValue, forKey: "isFavorite")
+            coreDataStack.saveMainContext()
             notificationAlertWithTitle("Removed from Favorites")
+            print(exercise.isFavorite.boolValue)
         }
-        isFavorite = !isFavorite
+//        isFavorite = !isFavorite
         setFavoriteButtonTitle()
 
     }

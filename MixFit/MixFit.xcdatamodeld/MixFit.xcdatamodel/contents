@@ -21,7 +21,8 @@
         <attribute name="name" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="MuscleGroup" representedClassName=".MuscleGroup" parentEntity="Mixlist" syncable="YES">
-        <relationship name="exercises" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exercise" inverseName="muscleGroup" inverseEntity="Exercise" syncable="YES"/>
+        <attribute name="orderTag" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="exercises" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Exercise" inverseName="muscleGroup" inverseEntity="Exercise" syncable="YES"/>
         <relationship name="parentMuscleGroup" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MuscleGroup" inverseName="subMuscleGroups" inverseEntity="MuscleGroup" syncable="YES"/>
         <relationship name="subMuscleGroups" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MuscleGroup" inverseName="parentMuscleGroup" inverseEntity="MuscleGroup" syncable="YES"/>
     </entity>
@@ -36,7 +37,7 @@
         <element name="Exercise" positionX="-171" positionY="-270" width="128" height="135"/>
         <element name="MFUser" positionX="-108" positionY="-117" width="128" height="90"/>
         <element name="Mixlist" positionX="9" positionY="30" width="128" height="60"/>
-        <element name="MuscleGroup" positionX="70" positionY="-108" width="128" height="90"/>
+        <element name="MuscleGroup" positionX="70" positionY="-108" width="128" height="105"/>
         <element name="UserCreatedExercise" positionX="70" positionY="-231" width="128" height="60"/>
         <element name="UserCreatedMixlist" positionX="-144" positionY="129" width="128" height="60"/>
     </elements>

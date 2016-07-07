@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4351FB4C1D2DBFFC007BAD9A /* exercises.json in Resources */ = {isa = PBXBuildFile; fileRef = 4351FB4B1D2DBFFC007BAD9A /* exercises.json */; };
 		43568A161D2C2540004F45D3 /* Exercise+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43568A081D2C2540004F45D3 /* Exercise+CoreDataProperties.swift */; };
 		43568A171D2C2540004F45D3 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43568A091D2C2540004F45D3 /* Exercise.swift */; };
 		43568A181D2C2540004F45D3 /* Mixlist+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43568A0A1D2C2540004F45D3 /* Mixlist+CoreDataProperties.swift */; };
@@ -21,6 +22,7 @@
 		43568A211D2C2540004F45D3 /* MuscleGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43568A131D2C2540004F45D3 /* MuscleGroup.swift */; };
 		43568A221D2C2540004F45D3 /* UserCreatedExercise+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43568A141D2C2540004F45D3 /* UserCreatedExercise+CoreDataProperties.swift */; };
 		43568A231D2C2540004F45D3 /* UserCreatedExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43568A151D2C2540004F45D3 /* UserCreatedExercise.swift */; };
+		43568A251D2D8A9E004F45D3 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43568A241D2D8A9E004F45D3 /* DataManager.swift */; };
 		4361B5DB1D19D2A800C8E8E8 /* MixlistDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4361B5DA1D19D2A800C8E8E8 /* MixlistDetailTableViewController.swift */; };
 		4361B5DD1D19D83E00C8E8E8 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4361B5DC1D19D83E00C8E8E8 /* CustomButton.swift */; };
 		4361B5DF1D19E81B00C8E8E8 /* NotificationAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4361B5DE1D19E81B00C8E8E8 /* NotificationAlertViewController.swift */; };
@@ -71,6 +73,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4351FB4B1D2DBFFC007BAD9A /* exercises.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = exercises.json; sourceTree = "<group>"; };
 		43568A081D2C2540004F45D3 /* Exercise+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Exercise+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		43568A091D2C2540004F45D3 /* Exercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		43568A0A1D2C2540004F45D3 /* Mixlist+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Mixlist+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -85,6 +88,7 @@
 		43568A131D2C2540004F45D3 /* MuscleGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MuscleGroup.swift; sourceTree = "<group>"; };
 		43568A141D2C2540004F45D3 /* UserCreatedExercise+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserCreatedExercise+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		43568A151D2C2540004F45D3 /* UserCreatedExercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCreatedExercise.swift; sourceTree = "<group>"; };
+		43568A241D2D8A9E004F45D3 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		4361B5DA1D19D2A800C8E8E8 /* MixlistDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MixlistDetailTableViewController.swift; sourceTree = "<group>"; };
 		4361B5DC1D19D83E00C8E8E8 /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		4361B5DE1D19E81B00C8E8E8 /* NotificationAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationAlertViewController.swift; sourceTree = "<group>"; };
@@ -232,6 +236,7 @@
 				43A986C91D07946B008276DF /* AppDelegate.swift */,
 				43A986D81D07946B008276DF /* Info.plist */,
 				43A986D31D07946B008276DF /* Assets.xcassets */,
+				4351FB4B1D2DBFFC007BAD9A /* exercises.json */,
 				4361B5E81D237A9E00C8E8E8 /* RobotoCondensed-Bold.ttf */,
 				4361B5E91D237A9E00C8E8E8 /* RobotoCondensed-Light.ttf */,
 				4361B5EA1D237A9E00C8E8E8 /* RobotoCondensed-Regular.ttf */,
@@ -258,6 +263,7 @@
 				43568A151D2C2540004F45D3 /* UserCreatedExercise.swift */,
 				43A986D01D07946B008276DF /* MixFit.xcdatamodeld */,
 				43DF130B1D2AC1D400599024 /* CoreDataStack.swift */,
+				43568A241D2D8A9E004F45D3 /* DataManager.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -368,6 +374,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				43A986D71D07946B008276DF /* LaunchScreen.storyboard in Resources */,
+				4351FB4C1D2DBFFC007BAD9A /* exercises.json in Resources */,
 				4361B5EB1D237A9E00C8E8E8 /* RobotoCondensed-Bold.ttf in Resources */,
 				4361B5ED1D237A9E00C8E8E8 /* RobotoCondensed-Regular.ttf in Resources */,
 				4361B5E51D21E91E00C8E8E8 /* TableSectionHeader.xib in Resources */,
@@ -420,6 +427,7 @@
 				43568A191D2C2540004F45D3 /* Mixlist.swift in Sources */,
 				43A9870C1D11FDBC008276DF /* ExerciseViewController.swift in Sources */,
 				43568A181D2C2540004F45D3 /* Mixlist+CoreDataProperties.swift in Sources */,
+				43568A251D2D8A9E004F45D3 /* DataManager.swift in Sources */,
 				43A986CA1D07946B008276DF /* AppDelegate.swift in Sources */,
 				43568A1A1D2C2540004F45D3 /* UserCreatedMixlist+CoreDataProperties.swift in Sources */,
 				4361B5E31D1B505100C8E8E8 /* MuscleGroupTableViewCell.swift in Sources */,

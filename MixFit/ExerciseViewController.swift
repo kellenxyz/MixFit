@@ -10,7 +10,7 @@ import UIKit
 
 class ExerciseViewController: UIViewController {
 
-    var coreDataStack: CoreDataStack!
+    var coreDataStack = CoreDataStack.sharedInstance
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var exerciseNameLabel: UILabel!
@@ -39,7 +39,7 @@ class ExerciseViewController: UIViewController {
     }
 
     private func loadExerciseData() {
-        exerciseNameLabel.text = exercise.name
+        exerciseNameLabel.text = exercise.name.uppercaseString
         setsAndRepsLabel.text = "5 sets of 5 reps"
         restTimeLabel.text = "90 seconds rest"
         targetedMuscleGroupsLabel.text = exercise.targetedMuscleGroups

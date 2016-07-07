@@ -7,20 +7,17 @@
 //
 
 import UIKit
+import CoreData
 
 class ExercisesTableViewController: UITableViewController {
 
-    var coreDataStack: CoreDataStack!
+    // #warning use fetchResultsController for this page
 
-    var muscleGroups: [String] = []
-    var chestExercises: [String] = []
+    var coreDataStack: CoreDataStack!
+    var muscleGroups = [MuscleGroup]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        muscleGroups = ["Back", "Chest", "Glutes", "Quads", "Hamstrings", "Calves", "Biceps", "Triceps", "Shoulders", "Core", "Full Body"]
-        chestExercises = ["Barbell Bench Press", "Incline Barbell Bench Press", "Dumbbell Chest Press"]
-        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -29,10 +26,35 @@ class ExercisesTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
 
         // Change color of cell separators
-        tableView.separatorColor = UIColor(colorLiteralRed: 0.92, green: 0.92, blue: 0.92, alpha: 1)
+        tableView.separatorColor = UIColor(colorLiteralRed: 0.88, green: 0.88, blue: 0.88, alpha: 1)
 
         let nib = UINib(nibName: "TableSectionHeader", bundle: nil)
         tableView.registerNib(nib, forHeaderFooterViewReuseIdentifier: "TableSectionHeader")
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        reloadData()
+    }
+
+    func reloadData() {
+        let fetchRequest = NSFetchRequest(entityName: "MuscleGroup")
+        let predicate = NSPredicate(format: "name != %@ && name != %@", "Arms", "Legs")
+        fetchRequest.predicate = predicate
+        fetchRequest.sortDescriptors = [
+            NSSortDescriptor(key: "name", ascending: true)
+        ]
+
+        do {
+            if let results = try coreDataStack.managedObjectContext.executeFetchRequest(fetchRequest) as? [MuscleGroup] {
+                muscleGroups = results
+            }
+        } catch {
+            fatalError("Error fetching data! \(error)")
+        }
+
+        tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -44,17 +66,41 @@ class ExercisesTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return chestExercises.count
+        let muscleGroup = muscleGroups[section]
+        if let count = muscleGroup.exercises?.count {
+            return count
+        } else {
+            return 0
+        }
+
     }
 
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return muscleGroups[section]
+        let muscleGroup = muscleGroups[section]
+        return muscleGroup.name
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ExerciseCell", forIndexPath: indexPath)
 
-        cell.textLabel?.text = chestExercises[indexPath.row]
+        let muscleGroup = muscleGroups[indexPath.section]
+
+        let fetchRequest = NSFetchRequest(entityName: "Exercise")
+        let predicate = NSPredicate(format: "muscleGroup == %@", muscleGroup)
+        fetchRequest.predicate = predicate
+        fetchRequest.sortDescriptors = [
+            NSSortDescriptor(key: "name", ascending: true)
+        ]
+
+        do {
+            if let results = try coreDataStack.managedObjectContext.executeFetchRequest(fetchRequest) as? [Exercise] {
+                let exercise = results[indexPath.row]
+                cell.textLabel?.text = exercise.name
+            }
+        } catch {
+            fatalError("Error fetching data! \(error)")
+        }
+
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
 
         return cell
@@ -62,11 +108,11 @@ class ExercisesTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 
-        let currSection: String = muscleGroups[section]
+        let muscleGroup = muscleGroups[section]
 
         let cell = self.tableView.dequeueReusableHeaderFooterViewWithIdentifier("TableSectionHeader")
         let header = cell as! TableSectionHeader
-        header.titleLabel.text = currSection.uppercaseString
+        header.titleLabel.text = muscleGroup.name.uppercaseString
 
         return cell
     }

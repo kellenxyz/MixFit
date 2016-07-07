@@ -10,6 +10,14 @@ import Foundation
 import CoreData
 
 class CoreDataStack: NSObject {
+
+    class var sharedInstance: CoreDataStack {
+        struct Singleton {
+            static let instance = CoreDataStack()
+        }
+        return Singleton.instance
+    }
+
     static let moduleName = "MixFit"
 
     func saveMainContext() {

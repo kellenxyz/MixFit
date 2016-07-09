@@ -10,7 +10,7 @@ import UIKit
 
 class ExercisePageViewController: UIPageViewController {
 
-    var coreDataStack: CoreDataStack!
+    var coreDataStack = CoreDataStack.sharedInstance
 //    var muscleGroup: MuscleGroup!
     var mixlistName = String()
     var exercises = [Exercise]()

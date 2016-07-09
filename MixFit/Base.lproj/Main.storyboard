@@ -18,14 +18,13 @@
             <string>RobotoCondensed-Bold</string>
             <string>RobotoCondensed-Bold</string>
             <string>RobotoCondensed-Bold</string>
+            <string>RobotoCondensed-Bold</string>
         </mutableArray>
         <mutableArray key="RobotoCondensed-Light.ttf">
             <string>RobotoCondensed-Light</string>
             <string>RobotoCondensed-Light</string>
         </mutableArray>
         <mutableArray key="RobotoCondensed-Regular.ttf">
-            <string>RobotoCondensed-Regular</string>
-            <string>RobotoCondensed-Regular</string>
             <string>RobotoCondensed-Regular</string>
             <string>RobotoCondensed-Regular</string>
             <string>RobotoCondensed-Regular</string>
@@ -438,7 +437,7 @@
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="1eX-NA-TUU"/>
                                                                 </constraints>
-                                                                <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="17"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                 <color key="textColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -467,7 +466,7 @@
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="etF-W9-jlO"/>
                                                                 </constraints>
-                                                                <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="17"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                 <color key="textColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -546,7 +545,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="barTintColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.79607843137254897" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="14"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -589,7 +588,7 @@
                                 <edgeInsets key="layoutMargins" top="8" left="0.0" bottom="8" right="8"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
-                                    <segue destination="ZjL-NW-4lE" kind="show" id="iNe-cE-lrl"/>
+                                    <segue destination="ZjL-NW-4lE" kind="show" identifier="ShowMixlistDetailSegue" id="iNe-cE-lrl"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -605,7 +604,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="mPh-Vq-XhG">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="Kwb-TH-mtZ" kind="presentation" id="dof-gn-VyM"/>
+                                <segue destination="Kwb-TH-mtZ" kind="presentation" identifier="NewMixlistSegue" id="dof-gn-VyM"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -621,49 +620,103 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" id="gfb-CP-aOE">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="sectionIndexBackgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="eJY-O2-RUA">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="168"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JcH-vw-z00" customClass="CustomButton" customModule="MixFit" customModuleProvider="target">
-                                    <rect key="frame" x="40" y="25" width="240" height="50"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="50" id="MxZ-Ot-AbT"/>
-                                        <constraint firstAttribute="width" constant="240" id="akF-c9-8HD"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" name="RobotoCondensed-Bold" family="Roboto Condensed" pointSize="16"/>
-                                    <state key="normal" title="START MIXLIST">
-                                        <color key="titleColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
-                                    </state>
-                                    <state key="highlighted">
-                                        <color key="titleColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    </state>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                            <real key="value" value="25"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                            <color key="value" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                            <real key="value" value="2"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                    <connections>
-                                        <action selector="onStartMixlistButtonPressed:" destination="ZjL-NW-4lE" eventType="touchUpInside" id="9HL-2V-V8O"/>
-                                    </connections>
-                                </button>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="concrete-cubes-background" translatesAutoresizingMaskIntoConstraints="NO" id="dBI-nA-qe5">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="168"/>
+                                </imageView>
+                                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nDh-U7-qrQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="168"/>
+                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="43I-gD-gOE">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="168"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ace-1k-JsF">
+                                                <rect key="frame" x="15" y="31" width="290" height="106"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" CRZY CHEST WORKOUT" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="R6T-a2-0aH">
+                                                        <rect key="frame" x="0.0" y="0.0" width="290" height="36"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="36" id="piF-KH-rbt"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="RobotoCondensed-Bold" family="Roboto Condensed" pointSize="30"/>
+                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JcH-vw-z00" customClass="CustomButton" customModule="MixFit" customModuleProvider="target">
+                                                        <rect key="frame" x="25" y="56" width="240" height="50"/>
+                                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.20323057432432431" colorSpace="calibratedRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="240" id="F5Q-ti-Eff"/>
+                                                            <constraint firstAttribute="width" constant="240" id="okT-bH-CxG"/>
+                                                            <constraint firstAttribute="height" constant="50" id="zDq-iB-lpm"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="RobotoCondensed-Bold" family="Roboto Condensed" pointSize="16"/>
+                                                        <state key="normal" title="START MIXLIST">
+                                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <state key="disabled">
+                                                            <color key="titleColor" red="1" green="1" blue="1" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <state key="highlighted">
+                                                            <color key="titleColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="5"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                <real key="value" value="2"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="okT-bH-CxG"/>
+                                                            </mask>
+                                                        </variation>
+                                                        <connections>
+                                                            <action selector="onStartMixlistButtonPressed:" destination="ZjL-NW-4lE" eventType="touchUpInside" id="9HL-2V-V8O"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="R6T-a2-0aH" firstAttribute="leading" secondItem="ace-1k-JsF" secondAttribute="leading" id="75O-Xb-cKJ"/>
+                                                    <constraint firstAttribute="trailing" secondItem="R6T-a2-0aH" secondAttribute="trailing" id="Uga-WL-LSq"/>
+                                                    <constraint firstItem="JcH-vw-z00" firstAttribute="centerX" secondItem="ace-1k-JsF" secondAttribute="centerX" id="jFk-YY-0cP"/>
+                                                </constraints>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="ace-1k-JsF" secondAttribute="trailing" constant="15" id="FDV-8S-4Xg"/>
+                                            <constraint firstItem="ace-1k-JsF" firstAttribute="centerY" secondItem="43I-gD-gOE" secondAttribute="centerY" id="Kdw-qc-hTc"/>
+                                            <constraint firstItem="ace-1k-JsF" firstAttribute="leading" secondItem="43I-gD-gOE" secondAttribute="leading" constant="15" id="zPR-tl-fcW"/>
+                                        </constraints>
+                                    </view>
+                                    <blurEffect style="dark"/>
+                                </visualEffectView>
                             </subviews>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstItem="JcH-vw-z00" firstAttribute="centerX" secondItem="eJY-O2-RUA" secondAttribute="centerX" id="mzz-SK-hE7"/>
-                                <constraint firstItem="JcH-vw-z00" firstAttribute="centerY" secondItem="eJY-O2-RUA" secondAttribute="centerY" id="yoV-KU-T0S"/>
+                                <constraint firstItem="dBI-nA-qe5" firstAttribute="leading" secondItem="eJY-O2-RUA" secondAttribute="leading" id="8Vg-yl-rD1"/>
+                                <constraint firstAttribute="bottom" secondItem="dBI-nA-qe5" secondAttribute="bottom" id="Ab1-Zi-xXE"/>
+                                <constraint firstAttribute="bottom" secondItem="nDh-U7-qrQ" secondAttribute="bottom" id="KVK-s8-MMt"/>
+                                <constraint firstAttribute="trailing" secondItem="nDh-U7-qrQ" secondAttribute="trailing" id="SUD-MU-yDD"/>
+                                <constraint firstAttribute="trailing" secondItem="dBI-nA-qe5" secondAttribute="trailing" id="Y2h-BN-4Hu"/>
+                                <constraint firstItem="dBI-nA-qe5" firstAttribute="top" secondItem="eJY-O2-RUA" secondAttribute="top" id="Zrd-2z-Z8q"/>
+                                <constraint firstItem="nDh-U7-qrQ" firstAttribute="leading" secondItem="eJY-O2-RUA" secondAttribute="leading" id="hBX-Dc-wja"/>
+                                <constraint firstItem="nDh-U7-qrQ" firstAttribute="top" secondItem="eJY-O2-RUA" secondAttribute="top" id="mdV-Xu-TZB"/>
                             </constraints>
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ExerciseCell" textLabel="slI-fW-MHe" rowHeight="60" style="IBUITableViewCellStyleDefault" id="ayy-2Y-Z3s">
-                                <rect key="frame" x="0.0" y="128" width="320" height="60"/>
+                                <rect key="frame" x="0.0" y="196" width="320" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ayy-2Y-Z3s" id="Owo-wc-9lZ">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="59.5"/>
@@ -695,6 +748,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="mixlistNameLabel" destination="R6T-a2-0aH" id="Dxa-jB-Jcj"/>
                         <outlet property="startMixlistButton" destination="JcH-vw-z00" id="Vje-3l-egH"/>
                         <segue destination="wdd-9h-2Zh" kind="presentation" identifier="ShowExercisePageController" id="ibd-38-uxv"/>
                     </connections>
@@ -1007,7 +1061,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="barTintColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.79607843137254897" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>

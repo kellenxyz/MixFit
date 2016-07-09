@@ -49,7 +49,8 @@ class HomeTableViewController: UITableViewController {
         updateHeaderView()
         */
 
-        tableView.separatorColor = UIColor(colorLiteralRed: 0.92, green: 0.92, blue: 0.92, alpha: 1)
+        // Set color of tableViewCell separators
+        tableView.separatorColor = UIColor(colorLiteralRed: 0.88, green: 0.88, blue: 0.88, alpha: 1)
 
         let nib = UINib(nibName: "TableSectionHeader", bundle: nil)
         tableView.registerNib(nib, forHeaderFooterViewReuseIdentifier: "TableSectionHeader")
@@ -247,7 +248,7 @@ class HomeTableViewController: UITableViewController {
             let navController = segue.destinationViewController as? UINavigationController
             let destinationViewController = navController?.topViewController as? ExercisePageViewController
             destinationViewController?.mixlistName = muscleGroup.name
-            destinationViewController?.coreDataStack = self.coreDataStack
+//            destinationViewController?.coreDataStack = self.coreDataStack
             if let exercises = muscleGroup.exercises {
                 destinationViewController?.pageCount = exercises.count
                 let exercisesArray = Array(exercises) as! [Exercise]

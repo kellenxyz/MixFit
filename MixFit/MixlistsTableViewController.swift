@@ -7,32 +7,68 @@
 //
 
 import UIKit
+import CoreData
 
 class MixlistsTableViewController: UITableViewController {
 
     var coreDataStack: CoreDataStack!
 
-    var mixlists: [String] = []
-    var favMuscleGroups: [String] = []
+    var mixlists: [UserCreatedMixlist] = [UserCreatedMixlist]()
+    var favMuscleGroups: [MuscleGroup] = [MuscleGroup]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        mixlists = ["Crazy Chest Workout", "Trap Burner", "Bodyweight Legs"]
-        favMuscleGroups = ["Back", "Chest", "Legs", "Arms", "Shoulders", "Core", "Full Body"]
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
 
         tableView.separatorColor = UIColor(colorLiteralRed: 0.92, green: 0.92, blue: 0.92, alpha: 1)
 
         let nib = UINib(nibName: "TableSectionHeader", bundle: nil)
         tableView.registerNib(nib, forHeaderFooterViewReuseIdentifier: "TableSectionHeader")
 
+//        loadFavoritesData()
+
         tableView.tableFooterView = UIView()
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if let font = UIFont(name: "RobotoCondensed-Bold", size: 16) {
+            self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.whiteColor()]
+        }
+
+        reloadData()
+    }
+
+    func reloadData() {
+        let fetchRequest = NSFetchRequest(entityName: "UserCreatedMixlist")
+        fetchRequest.sortDescriptors = [
+            NSSortDescriptor(key: "name", ascending: true)
+        ]
+
+        do {
+            if let results = try coreDataStack.managedObjectContext.executeFetchRequest(fetchRequest) as? [UserCreatedMixlist] {
+                mixlists = results
+            }
+        } catch {
+            fatalError("Error fetching data! \(error)")
+        }
+
+        tableView.reloadData()
+    }
+
+    func loadFavoritesData() {
+        let fetchRequest = NSFetchRequest(entityName: "MuscleGroup")
+        fetchRequest.sortDescriptors = [
+            NSSortDescriptor(key: "name", ascending: true)
+        ]
+
+        do {
+            if let results = try coreDataStack.managedObjectContext.executeFetchRequest(fetchRequest) as? [MuscleGroup] {
+                favMuscleGroups = results
+            }
+        } catch {
+            fatalError("Error fetching muscle groups data! \(error)")
+        }
     }
 
     // MARK: - Table view data source
@@ -51,7 +87,7 @@ class MixlistsTableViewController: UITableViewController {
                 return mixlists.count
             }
         default:
-            return favMuscleGroups.count
+            return 1
         }
 
     }
@@ -64,12 +100,14 @@ class MixlistsTableViewController: UITableViewController {
             if mixlists.count == 0 {
                 cell.textLabel?.text = "You have not created any mixlists"
             } else {
-                let cellTitle: String = mixlists[indexPath.row]
+                let mixlist = mixlists[indexPath.row]
+                let cellTitle: String = mixlist.name
                 cell.textLabel?.text = cellTitle.uppercaseString
                 cell.accessoryType = .DisclosureIndicator
             }
         default:
-            let cellTitle: String = favMuscleGroups[indexPath.row]
+//            let muscleGroup = favMuscleGroups[indexPath.row]
+            let cellTitle: String = "Favorites"
             cell.textLabel?.text = cellTitle.uppercaseString
             cell.accessoryType = .DisclosureIndicator
         }
@@ -137,18 +175,33 @@ class MixlistsTableViewController: UITableViewController {
     }
     */
 
-    /*
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if let selectedCell = sender as? UITableViewCell, let selectedRowIndexPath = tableView.indexPathForCell(selectedCell) {
+            let destinationViewController = segue.destinationViewController as? MixlistDetailTableViewController
+
+            if selectedRowIndexPath.section == 0 {
+                let mixlist = mixlists[selectedRowIndexPath.row]
+                destinationViewController?.mixlist = mixlist
+                destinationViewController?.mixlistName = mixlist.name
+                destinationViewController?.isFavoritesMixlist = false
+            } else {
+//                let muscleGroup = favMuscleGroups[selectedRowIndexPath.row]
+//                destinationViewController?.muscleGroup = muscleGroup
+                destinationViewController?.isFavoritesMixlist = true
+                destinationViewController?.mixlistName = "FAVORITES"
+            }
+        }
+
+
     }
-    */
+
 
     @IBAction func unwindToMixlists(segue: UIStoryboardSegue) {
-
+        self.reloadData()
     }
 
 }

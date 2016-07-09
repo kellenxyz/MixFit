@@ -54,8 +54,6 @@ class ExerciseViewController: UIViewController {
         }
     }
 
-    // TODO: There is no coreDataStack object so create a singleton and use that.
-
     @IBAction func onAddToFavoritesButtonPressed(sender: UIButton) {
         if exercise.isFavorite.boolValue == false {
             exercise.setValue(!exercise.isFavorite.boolValue, forKey: "isFavorite")

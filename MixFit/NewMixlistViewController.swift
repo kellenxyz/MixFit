@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import CoreData
 
 class NewMixlistViewController: UIViewController {
 
-    var coreDataStack: CoreDataStack!
+    var coreDataStack = CoreDataStack.sharedInstance
 
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var mixlistTitleTextField: UITextField!
@@ -34,7 +35,16 @@ class NewMixlistViewController: UIViewController {
     }
 
     @IBAction func onSaveButtonPressed(sender: UIBarButtonItem) {
-        //Save mixlist into CoreData
+        guard let entity = NSEntityDescription.entityForName("UserCreatedMixlist", inManagedObjectContext: coreDataStack.managedObjectContext) else {
+            fatalError("Could not find entity descriptions!")
+        }
+
+        let mixlist = UserCreatedMixlist(entity: entity, insertIntoManagedObjectContext: coreDataStack.managedObjectContext)
+        if let name = self.mixlistTitleTextField.text {
+            mixlist.name = name
+        }
+
+        coreDataStack.saveMainContext()
 
         mixlistTitleTextField.resignFirstResponder()
         self.performSegueWithIdentifier("UnwindToMixlists", sender: self)
@@ -65,4 +75,21 @@ extension NewMixlistViewController: UITextFieldDelegate {
             saveButton.enabled = true
         }
     }
+
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        let maxLength = 20
+        return (mixlistTitleTextField?.text?.utf16.count ?? 0) + string.utf16.count - range.length <= maxLength
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+

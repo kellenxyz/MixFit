@@ -252,7 +252,7 @@ class HomeTableViewController: UITableViewController {
             if let exercises = muscleGroup.exercises {
                 destinationViewController?.pageCount = exercises.count
                 let exercisesArray = Array(exercises) as! [Exercise]
-                destinationViewController?.exercises = exercisesArray
+                destinationViewController?.exercises = exercisesArray.shuffle()
             }
         } else {
             // Segue to subMuscleGroup view controller

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		434C20641D341A6D00724E76 /* CollectionType+Shuffle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434C20631D341A6D00724E76 /* CollectionType+Shuffle.swift */; };
 		4351FB4C1D2DBFFC007BAD9A /* exercises.json in Resources */ = {isa = PBXBuildFile; fileRef = 4351FB4B1D2DBFFC007BAD9A /* exercises.json */; };
 		43568A161D2C2540004F45D3 /* Exercise+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43568A081D2C2540004F45D3 /* Exercise+CoreDataProperties.swift */; };
 		43568A171D2C2540004F45D3 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43568A091D2C2540004F45D3 /* Exercise.swift */; };
@@ -73,6 +74,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		434C20631D341A6D00724E76 /* CollectionType+Shuffle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionType+Shuffle.swift"; sourceTree = "<group>"; };
 		4351FB4B1D2DBFFC007BAD9A /* exercises.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = exercises.json; sourceTree = "<group>"; };
 		43568A081D2C2540004F45D3 /* Exercise+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Exercise+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		43568A091D2C2540004F45D3 /* Exercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				43A986D01D07946B008276DF /* MixFit.xcdatamodeld */,
 				43DF130B1D2AC1D400599024 /* CoreDataStack.swift */,
 				43568A241D2D8A9E004F45D3 /* DataManager.swift */,
+				434C20631D341A6D00724E76 /* CollectionType+Shuffle.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -431,6 +434,7 @@
 				43A986CA1D07946B008276DF /* AppDelegate.swift in Sources */,
 				43568A1A1D2C2540004F45D3 /* UserCreatedMixlist+CoreDataProperties.swift in Sources */,
 				4361B5E31D1B505100C8E8E8 /* MuscleGroupTableViewCell.swift in Sources */,
+				434C20641D341A6D00724E76 /* CollectionType+Shuffle.swift in Sources */,
 				43B447001D24853D0019F897 /* EditMixlistTableViewController.swift in Sources */,
 				4361B5DF1D19E81B00C8E8E8 /* NotificationAlertViewController.swift in Sources */,
 				4361B5F21D24533600C8E8E8 /* NewMixlistViewController.swift in Sources */,

@@ -277,7 +277,7 @@ class MixlistDetailTableViewController: UITableViewController {
             destinationViewController?.mixlistName = self.mixlistName
             destinationViewController?.coreDataStack = self.coreDataStack
             destinationViewController?.pageCount = self.exercises.count
-            destinationViewController?.exercises = self.exercises
+            destinationViewController?.exercises = self.exercises.shuffle()
         }
     }
 

@@ -262,10 +262,42 @@ class MixlistDetailTableViewController: UITableViewController {
     }
     */
 
+    // MARK: - IBActions
+
     @IBAction func onStartMixlistButtonPressed(sender: UIButton) {
         performSegueWithIdentifier("ShowExercisePageController", sender: self)
     }
 
+    @IBAction func onOptionsButtonPressed(sender: UIBarButtonItem) {
+        let actionSheet = UIAlertController(title: "Mixlist Options", message: nil, preferredStyle: .ActionSheet)
+        let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        let rename = UIAlertAction(title: "Rename", style: .Default) { (action) in
+            // present rename view controller
+        }
+        let addExercises = UIAlertAction(title: "Add Exercises", style: .Default) { (action) in
+            // present add exercises view controller
+        }
+        let deleteMixlist = UIAlertAction(title: "Delete Mixlist", style: .Destructive) { (action) in
+            let alertController = UIAlertController(title: "Delete \"\(self.mixlistName)\"?", message: "Are you sure you wish to delete this mixlist? This action cannot be undone.", preferredStyle: .Alert)
+            let cancelDelete = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+            let delete = UIAlertAction(title: "Delete", style: .Destructive, handler: { (action) in
+                // delete mixlist
+                self.performSegueWithIdentifier("DeleteMixlistFromDataSource", sender: self)
+            })
+            alertController.addAction(cancelDelete)
+            alertController.addAction(delete)
+            self.presentViewController(alertController, animated: true, completion: { 
+                // take any further actions required here
+            })
+        }
+        actionSheet.addAction(rename)
+        actionSheet.addAction(addExercises)
+        actionSheet.addAction(deleteMixlist)
+        actionSheet.addAction(cancel)
+        self.presentViewController(actionSheet, animated: true) { 
+            // take any further actions required
+        }
+    }
 
     // MARK: - Navigation
 

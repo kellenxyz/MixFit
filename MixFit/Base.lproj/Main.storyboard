@@ -626,92 +626,88 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="168"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="concrete-cubes-background" translatesAutoresizingMaskIntoConstraints="NO" id="dBI-nA-qe5">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="concrete-cubes-background" translatesAutoresizingMaskIntoConstraints="NO" id="dBI-nA-qe5">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="168"/>
                                 </imageView>
-                                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nDh-U7-qrQ">
+                                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Apw-xU-7wl">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="168"/>
-                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="43I-gD-gOE">
+                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="UC2-uG-ESE">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="168"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ace-1k-JsF">
-                                                <rect key="frame" x="15" y="31" width="290" height="106"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" CRZY CHEST WORKOUT" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="R6T-a2-0aH">
-                                                        <rect key="frame" x="0.0" y="0.0" width="290" height="36"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="36" id="piF-KH-rbt"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" name="RobotoCondensed-Bold" family="Roboto Condensed" pointSize="30"/>
-                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JcH-vw-z00" customClass="CustomButton" customModule="MixFit" customModuleProvider="target">
-                                                        <rect key="frame" x="25" y="56" width="240" height="50"/>
-                                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.20323057432432431" colorSpace="calibratedRGB"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="240" id="F5Q-ti-Eff"/>
-                                                            <constraint firstAttribute="width" constant="240" id="okT-bH-CxG"/>
-                                                            <constraint firstAttribute="height" constant="50" id="zDq-iB-lpm"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" name="RobotoCondensed-Bold" family="Roboto Condensed" pointSize="16"/>
-                                                        <state key="normal" title="START MIXLIST">
-                                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                        </state>
-                                                        <state key="disabled">
-                                                            <color key="titleColor" red="1" green="1" blue="1" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
-                                                        </state>
-                                                        <state key="highlighted">
-                                                            <color key="titleColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                        </state>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                <real key="value" value="5"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                <real key="value" value="2"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
-                                                        <variation key="default">
-                                                            <mask key="constraints">
-                                                                <exclude reference="okT-bH-CxG"/>
-                                                            </mask>
-                                                        </variation>
-                                                        <connections>
-                                                            <action selector="onStartMixlistButtonPressed:" destination="ZjL-NW-4lE" eventType="touchUpInside" id="9HL-2V-V8O"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                                <constraints>
-                                                    <constraint firstItem="R6T-a2-0aH" firstAttribute="leading" secondItem="ace-1k-JsF" secondAttribute="leading" id="75O-Xb-cKJ"/>
-                                                    <constraint firstAttribute="trailing" secondItem="R6T-a2-0aH" secondAttribute="trailing" id="Uga-WL-LSq"/>
-                                                    <constraint firstItem="JcH-vw-z00" firstAttribute="centerX" secondItem="ace-1k-JsF" secondAttribute="centerX" id="jFk-YY-0cP"/>
-                                                </constraints>
-                                            </stackView>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="ace-1k-JsF" secondAttribute="trailing" constant="15" id="FDV-8S-4Xg"/>
-                                            <constraint firstItem="ace-1k-JsF" firstAttribute="centerY" secondItem="43I-gD-gOE" secondAttribute="centerY" id="Kdw-qc-hTc"/>
-                                            <constraint firstItem="ace-1k-JsF" firstAttribute="leading" secondItem="43I-gD-gOE" secondAttribute="leading" constant="15" id="zPR-tl-fcW"/>
-                                        </constraints>
                                     </view>
                                     <blurEffect style="dark"/>
                                 </visualEffectView>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ace-1k-JsF">
+                                    <rect key="frame" x="15" y="31" width="290" height="106"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" CRZY CHEST WORKOUT" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="R6T-a2-0aH">
+                                            <rect key="frame" x="0.0" y="0.0" width="290" height="36"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="36" id="piF-KH-rbt"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="RobotoCondensed-Bold" family="Roboto Condensed" pointSize="30"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JcH-vw-z00" customClass="CustomButton" customModule="MixFit" customModuleProvider="target">
+                                            <rect key="frame" x="25" y="56" width="240" height="50"/>
+                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.20323057432432431" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="240" id="F5Q-ti-Eff"/>
+                                                <constraint firstAttribute="width" constant="240" id="okT-bH-CxG"/>
+                                                <constraint firstAttribute="height" constant="50" id="zDq-iB-lpm"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="RobotoCondensed-Bold" family="Roboto Condensed" pointSize="16"/>
+                                            <state key="normal" title="START MIXLIST">
+                                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                            <state key="disabled">
+                                                <color key="titleColor" red="1" green="1" blue="1" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
+                                            </state>
+                                            <state key="highlighted">
+                                                <color key="titleColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="5"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                    <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                    <real key="value" value="2"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="okT-bH-CxG"/>
+                                                </mask>
+                                            </variation>
+                                            <connections>
+                                                <action selector="onStartMixlistButtonPressed:" destination="ZjL-NW-4lE" eventType="touchUpInside" id="9HL-2V-V8O"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="R6T-a2-0aH" firstAttribute="leading" secondItem="ace-1k-JsF" secondAttribute="leading" id="75O-Xb-cKJ"/>
+                                        <constraint firstAttribute="trailing" secondItem="R6T-a2-0aH" secondAttribute="trailing" id="Uga-WL-LSq"/>
+                                        <constraint firstItem="JcH-vw-z00" firstAttribute="centerX" secondItem="ace-1k-JsF" secondAttribute="centerX" id="jFk-YY-0cP"/>
+                                    </constraints>
+                                </stackView>
                             </subviews>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
+                                <constraint firstItem="ace-1k-JsF" firstAttribute="leading" secondItem="eJY-O2-RUA" secondAttribute="leading" constant="15" id="0l5-aS-aix"/>
+                                <constraint firstAttribute="bottom" secondItem="Apw-xU-7wl" secondAttribute="bottom" id="68X-DU-cl3"/>
                                 <constraint firstItem="dBI-nA-qe5" firstAttribute="leading" secondItem="eJY-O2-RUA" secondAttribute="leading" id="8Vg-yl-rD1"/>
                                 <constraint firstAttribute="bottom" secondItem="dBI-nA-qe5" secondAttribute="bottom" id="Ab1-Zi-xXE"/>
-                                <constraint firstAttribute="bottom" secondItem="nDh-U7-qrQ" secondAttribute="bottom" id="KVK-s8-MMt"/>
-                                <constraint firstAttribute="trailing" secondItem="nDh-U7-qrQ" secondAttribute="trailing" id="SUD-MU-yDD"/>
+                                <constraint firstItem="ace-1k-JsF" firstAttribute="centerY" secondItem="eJY-O2-RUA" secondAttribute="centerY" id="M8y-5q-LGN"/>
+                                <constraint firstItem="Apw-xU-7wl" firstAttribute="leading" secondItem="eJY-O2-RUA" secondAttribute="leading" id="QMu-Fp-Bgm"/>
                                 <constraint firstAttribute="trailing" secondItem="dBI-nA-qe5" secondAttribute="trailing" id="Y2h-BN-4Hu"/>
                                 <constraint firstItem="dBI-nA-qe5" firstAttribute="top" secondItem="eJY-O2-RUA" secondAttribute="top" id="Zrd-2z-Z8q"/>
-                                <constraint firstItem="nDh-U7-qrQ" firstAttribute="leading" secondItem="eJY-O2-RUA" secondAttribute="leading" id="hBX-Dc-wja"/>
-                                <constraint firstItem="nDh-U7-qrQ" firstAttribute="top" secondItem="eJY-O2-RUA" secondAttribute="top" id="mdV-Xu-TZB"/>
+                                <constraint firstAttribute="trailing" secondItem="Apw-xU-7wl" secondAttribute="trailing" id="oGr-o4-TnW"/>
+                                <constraint firstAttribute="trailing" secondItem="ace-1k-JsF" secondAttribute="trailing" constant="15" id="sge-cX-mN6"/>
+                                <constraint firstItem="Apw-xU-7wl" firstAttribute="top" secondItem="eJY-O2-RUA" secondAttribute="top" id="zHV-UR-8Yu"/>
                             </constraints>
                         </view>
                         <prototypes>
@@ -743,7 +739,7 @@
                     <navigationItem key="navigationItem" id="OFh-sg-BhT">
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="jSP-0Q-7sT">
                             <connections>
-                                <segue destination="H6S-TO-SVR" kind="presentation" id="kPf-Ao-L1N"/>
+                                <action selector="onOptionsButtonPressed:" destination="ZjL-NW-4lE" id="Fyd-je-yVq"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -751,9 +747,11 @@
                         <outlet property="mixlistNameLabel" destination="R6T-a2-0aH" id="Dxa-jB-Jcj"/>
                         <outlet property="startMixlistButton" destination="JcH-vw-z00" id="Vje-3l-egH"/>
                         <segue destination="wdd-9h-2Zh" kind="presentation" identifier="ShowExercisePageController" id="ibd-38-uxv"/>
+                        <segue destination="pLb-f7-Mep" kind="unwind" identifier="DeleteMixlistFromDataSource" unwindAction="deleteMixlistFromDataSource:" id="Zdc-5m-cZy"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ewD-hd-Ner" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="pLb-f7-Mep" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1833" y="686"/>
         </scene>
@@ -1064,7 +1062,7 @@
                         <color key="barTintColor" red="0.79607843137254897" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
-                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>

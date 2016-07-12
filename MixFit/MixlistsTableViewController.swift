@@ -19,6 +19,8 @@ class MixlistsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.title = "MIXLISTS"
+
         tableView.separatorColor = UIColor(colorLiteralRed: 0.92, green: 0.92, blue: 0.92, alpha: 1)
 
         let nib = UINib(nibName: "TableSectionHeader", bundle: nil)
@@ -175,6 +177,44 @@ class MixlistsTableViewController: UITableViewController {
     }
     */
 
+    // MARK: - Notification Alert
+
+    func notificationAlertWithTitle(title: String) {
+        let notificationAlert = storyboard!.instantiateViewControllerWithIdentifier("NotificationAlert") as! NotificationAlertViewController
+
+        // Get height of status bar + nav bar (only if translucent navbar)
+        //        let topInset = CGRectGetHeight(navigationController!.navigationBar.frame) + CGRectGetHeight(UIApplication.sharedApplication().statusBarFrame)
+
+        // Create notification view
+        let notificationFrameView = UIView(frame: CGRectMake(0, -50, view.frame.width, 50))
+
+        // Specify frame for notification alert vc view
+        notificationAlert.view.frame = CGRectMake(0, 0, notificationFrameView.frame.width, notificationFrameView.frame.height)
+
+        // Set title text for notification alert view
+        notificationAlert.notificationTitleLabel.text = title.uppercaseString
+
+        // Add notification alert vc to current vc
+        addChildViewController(notificationAlert)
+        notificationFrameView.addSubview(notificationAlert.view)
+        notificationAlert.didMoveToParentViewController(self)
+
+        // Add the notification view to the main view
+        view.addSubview(notificationFrameView)
+
+        // And finally animate the notification bar down...
+        UIView.animateWithDuration(0.2, animations: {
+            notificationFrameView.frame.origin.y =  -1
+        }) { (Bool) in
+            // ...and back up after a slight delay
+            UIView.animateWithDuration(0.4, delay: 1.8, options: [], animations: {
+                notificationFrameView.frame.origin.y = -70
+                }, completion: { (Bool) in
+                    notificationFrameView.removeFromSuperview()
+            })
+        }
+    }
+
 
     // MARK: - Navigation
 
@@ -202,6 +242,26 @@ class MixlistsTableViewController: UITableViewController {
 
     @IBAction func unwindToMixlists(segue: UIStoryboardSegue) {
         self.reloadData()
+    }
+
+    @IBAction func deleteMixlistFromDataSource(segue: UIStoryboardSegue) {
+        if let sourceVC = segue.sourceViewController as? MixlistDetailTableViewController,
+        let mixlist = sourceVC.mixlist {
+            let mixlistName = mixlist.name
+            guard let index = mixlists.indexOf(mixlist)
+                else {
+                    fatalError("Could not find index for mixlist!")
+            }
+//            let indexPath = NSIndexPath(forRow: index, inSection: 0)
+            self.mixlists.removeAtIndex(index)
+//            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            self.coreDataStack.managedObjectContext.deleteObject(mixlist)
+            self.coreDataStack.saveMainContext()
+
+            self.reloadData()
+
+            self.notificationAlertWithTitle("Deleted \"\(mixlistName)\"")
+        }
     }
 
 }

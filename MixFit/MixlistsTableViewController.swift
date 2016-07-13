@@ -19,14 +19,10 @@ class MixlistsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "MIXLISTS"
-
         tableView.separatorColor = UIColor(colorLiteralRed: 0.92, green: 0.92, blue: 0.92, alpha: 1)
 
         let nib = UINib(nibName: "TableSectionHeader", bundle: nil)
         tableView.registerNib(nib, forHeaderFooterViewReuseIdentifier: "TableSectionHeader")
-
-//        loadFavoritesData()
 
         tableView.tableFooterView = UIView()
     }
@@ -108,7 +104,6 @@ class MixlistsTableViewController: UITableViewController {
                 cell.accessoryType = .DisclosureIndicator
             }
         default:
-//            let muscleGroup = favMuscleGroups[indexPath.row]
             let cellTitle: String = "Favorites"
             cell.textLabel?.text = cellTitle.uppercaseString
             cell.accessoryType = .DisclosureIndicator
@@ -235,7 +230,6 @@ class MixlistsTableViewController: UITableViewController {
                 destinationViewController?.mixlistName = "FAVORITES"
             }
         }
-
 
     }
 

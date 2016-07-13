@@ -16,6 +16,7 @@ class MixlistDetailTableViewController: UITableViewController {
     var mixlist: UserCreatedMixlist?
     var mixlistName: String!
     var isFavoritesMixlist: Bool = false
+    var fetchedResultsController: NSFetchedResultsController!
 
     let kTableHeaderHeight: CGFloat = 180.0
     var headerView: UIView!
@@ -42,7 +43,6 @@ class MixlistDetailTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
 
-
         // Assign storyboard headerView to headerView property
         headerView = tableView.tableHeaderView
         tableView.tableHeaderView = nil
@@ -63,20 +63,42 @@ class MixlistDetailTableViewController: UITableViewController {
 
         if isFavoritesMixlist {
             reloadFavoritesData()
+        } else {
+            reloadMixlistData()
         }
 
         instantiateViewForNoExercises()
-
         updateStartMixlistButton()
     }
 
+    func reloadMixlistData() {
+
+        if let exercises = self.mixlist?.exercises  {
+            let fetchRequest = NSFetchRequest(entityName: "Exercise")
+            fetchRequest.sortDescriptors = [
+                NSSortDescriptor(key: "name", ascending: true)
+            ]
+            fetchRequest.predicate = NSPredicate(format: "SELF IN %@", exercises)
+
+            do {
+                if let results = try coreDataStack.managedObjectContext.executeFetchRequest(fetchRequest) as? [Exercise] {
+                    self.exercises = results
+                }
+            } catch {
+                fatalError("Error fetching exercises data for mixlist \(error)")
+            }
+        }
+
+        tableView.reloadData()
+    }
+
     func reloadFavoritesData() {
+
         let fetchRequest = NSFetchRequest(entityName: "Exercise")
-        let predicate = NSPredicate(format: "isFavorite == true")
-        fetchRequest.predicate = predicate
         fetchRequest.sortDescriptors = [
             NSSortDescriptor(key: "name", ascending: true)
         ]
+        fetchRequest.predicate = NSPredicate(format: "isFavorite == true")
 
         do {
             if let results = try coreDataStack.managedObjectContext.executeFetchRequest(fetchRequest) as? [Exercise] {
@@ -230,8 +252,14 @@ class MixlistDetailTableViewController: UITableViewController {
                 let alertController = UIAlertController(title: "Remove exercise?", message: "Are you sure you wish to remove this exercise from this mixlist?", preferredStyle: .Alert)
                 let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
                 let removeAction = UIAlertAction(title: "Remove", style: .Destructive, handler: { (action) in
+                    let exercise = self.exercises[indexPath.row]
+                    let exercisesRelation = self.mixlist?.mutableSetValueForKey("exercises")
+                    exercisesRelation?.removeObject(exercise)
                     self.exercises.removeAtIndex(indexPath.row)
+                    self.updateStartMixlistButton()
+                    self.instantiateViewForNoExercises()
                     tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                    self.coreDataStack.saveMainContext()
                 })
                 alertController.addAction(cancelAction)
                 alertController.addAction(removeAction)
@@ -273,6 +301,7 @@ class MixlistDetailTableViewController: UITableViewController {
         let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
         let rename = UIAlertAction(title: "Rename", style: .Default) { (action) in
             // present rename view controller
+            self.performSegueWithIdentifier("RenameMixlistSegue", sender: self)
         }
         let addExercises = UIAlertAction(title: "Add Exercises", style: .Default) { (action) in
             // present add exercises view controller
@@ -310,12 +339,21 @@ class MixlistDetailTableViewController: UITableViewController {
             destinationViewController?.coreDataStack = self.coreDataStack
             destinationViewController?.pageCount = self.exercises.count
             destinationViewController?.exercises = self.exercises.shuffle()
+        } else if segue.identifier == "RenameMixlistSegue" {
+            let navController = segue.destinationViewController as? UINavigationController
+            let destinationViewController = navController?.topViewController as? NewMixlistViewController
+            destinationViewController?.mixlist = self.mixlist
+            destinationViewController?.newTitle = "RENAME MIXLIST"
         }
     }
 
 
     @IBAction func unwindToMixlistDetail(segue: UIStoryboardSegue) {
-        
+        if let sourceVC = segue.sourceViewController as? NewMixlistViewController,
+            let mixlist = sourceVC.mixlist {
+            self.mixlistName = mixlist.name
+            self.mixlistNameLabel.text = self.mixlistName.uppercaseString
+        }
     }
 
 }

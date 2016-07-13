@@ -14,7 +14,8 @@ class ExercisesTableViewController: UITableViewController {
     // #warning use fetchResultsController for this page
 
     var coreDataStack: CoreDataStack!
-    var muscleGroups = [MuscleGroup]()
+    var fetchedResultsController: NSFetchedResultsController!
+//    var muscleGroups = [MuscleGroup]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,17 @@ class ExercisesTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+
+        let fetchRequest = NSFetchRequest(entityName: "Exercise")
+        fetchRequest.sortDescriptors = [
+            NSSortDescriptor(key: "muscleGroup.name", ascending: true),
+            NSSortDescriptor(key: "name", ascending: true)
+        ]
+
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                              managedObjectContext: coreDataStack.managedObjectContext,
+                                                              sectionNameKeyPath: "muscleGroup.name",
+                                                              cacheName: nil)
 
         // Change color of cell separators
         tableView.separatorColor = UIColor(colorLiteralRed: 0.88, green: 0.88, blue: 0.88, alpha: 1)
@@ -39,17 +51,10 @@ class ExercisesTableViewController: UITableViewController {
     }
 
     func reloadData() {
-        let fetchRequest = NSFetchRequest(entityName: "MuscleGroup")
-        let predicate = NSPredicate(format: "name != %@ && name != %@", "Arms", "Legs")
-        fetchRequest.predicate = predicate
-        fetchRequest.sortDescriptors = [
-            NSSortDescriptor(key: "name", ascending: true)
-        ]
+        fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "name != %@ && name != %@", "Arms", "Legs")
 
         do {
-            if let results = try coreDataStack.managedObjectContext.executeFetchRequest(fetchRequest) as? [MuscleGroup] {
-                muscleGroups = results
-            }
+            try fetchedResultsController.performFetch()
         } catch {
             fatalError("Error fetching data! \(error)")
         }
@@ -61,45 +66,24 @@ class ExercisesTableViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return muscleGroups.count
+        return fetchedResultsController.sections?.count ?? 0
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        let muscleGroup = muscleGroups[section]
-        if let count = muscleGroup.exercises?.count {
-            return count
-        } else {
-            return 0
-        }
+        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
 
     }
 
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let muscleGroup = muscleGroups[section]
-        return muscleGroup.name
+        return fetchedResultsController.sections?[section].name
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ExerciseCell", forIndexPath: indexPath)
 
-        let muscleGroup = muscleGroups[indexPath.section]
-
-        let fetchRequest = NSFetchRequest(entityName: "Exercise")
-        let predicate = NSPredicate(format: "muscleGroup == %@", muscleGroup)
-        fetchRequest.predicate = predicate
-        fetchRequest.sortDescriptors = [
-            NSSortDescriptor(key: "name", ascending: true)
-        ]
-
-        do {
-            if let results = try coreDataStack.managedObjectContext.executeFetchRequest(fetchRequest) as? [Exercise] {
-                let exercise = results[indexPath.row]
-                cell.textLabel?.text = exercise.name
-            }
-        } catch {
-            fatalError("Error fetching data! \(error)")
-        }
+        let exercise = fetchedResultsController.objectAtIndexPath(indexPath) as! Exercise
+        cell.textLabel?.text = exercise.name
 
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
 
@@ -108,11 +92,11 @@ class ExercisesTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 
-        let muscleGroup = muscleGroups[section]
+//        let muscleGroup = muscleGroups[section]
 
         let cell = self.tableView.dequeueReusableHeaderFooterViewWithIdentifier("TableSectionHeader")
         let header = cell as! TableSectionHeader
-        header.titleLabel.text = muscleGroup.name.uppercaseString
+        header.titleLabel.text = fetchedResultsController.sections?[section].name.uppercaseString
 
         return cell
     }

@@ -14,6 +14,6 @@ import CoreData
 
 extension UserCreatedMixlist {
 
-    @NSManaged var exercises: Exercise?
+    @NSManaged var exercises: NSSet?
 
 }

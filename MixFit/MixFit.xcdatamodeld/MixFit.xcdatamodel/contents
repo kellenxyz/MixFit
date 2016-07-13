@@ -30,7 +30,7 @@
         <attribute name="image" optional="YES" attributeType="Transformable" syncable="YES"/>
     </entity>
     <entity name="UserCreatedMixlist" representedClassName=".UserCreatedMixlist" parentEntity="Mixlist" syncable="YES">
-        <relationship name="exercises" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exercise" inverseName="userCreatedMixlists" inverseEntity="Exercise" syncable="YES"/>
+        <relationship name="exercises" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Exercise" inverseName="userCreatedMixlists" inverseEntity="Exercise" syncable="YES"/>
     </entity>
     <elements>
         <element name="DefaultExercise" positionX="-306" positionY="9" width="128" height="75"/>

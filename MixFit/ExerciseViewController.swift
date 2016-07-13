@@ -74,6 +74,7 @@ class ExerciseViewController: UIViewController {
 
     @IBAction func onAddToMixlistButtonPressed(sender: UIButton) {
         print("Add to a mixlist!")
+        self.performSegueWithIdentifier("ShowMixlistsSegue", sender: self)
     }
 
     func notificationAlertWithTitle(title: String) {
@@ -127,14 +128,23 @@ class ExerciseViewController: UIViewController {
         layer.beginTime = timeSincePause
     }
 
-    /*
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "ShowMixlistsSegue" {
+            let navController = segue.destinationViewController as? UINavigationController
+            let destinationViewController = navController?.topViewController as? AddToMixlistTableViewController
+            destinationViewController?.exercise = self.exercise
+        }
     }
-    */
+
+    @IBAction func unwindToExerciseViewController(segue: UIStoryboardSegue) {
+        
+    }
+    
 
 }

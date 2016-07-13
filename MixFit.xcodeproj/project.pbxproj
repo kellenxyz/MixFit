@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		434C20641D341A6D00724E76 /* CollectionType+Shuffle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434C20631D341A6D00724E76 /* CollectionType+Shuffle.swift */; };
+		434C20661D36C57F00724E76 /* AddToMixlistTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434C20651D36C57F00724E76 /* AddToMixlistTableViewController.swift */; };
 		4351FB4C1D2DBFFC007BAD9A /* exercises.json in Resources */ = {isa = PBXBuildFile; fileRef = 4351FB4B1D2DBFFC007BAD9A /* exercises.json */; };
 		43568A161D2C2540004F45D3 /* Exercise+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43568A081D2C2540004F45D3 /* Exercise+CoreDataProperties.swift */; };
 		43568A171D2C2540004F45D3 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43568A091D2C2540004F45D3 /* Exercise.swift */; };
@@ -75,6 +76,7 @@
 
 /* Begin PBXFileReference section */
 		434C20631D341A6D00724E76 /* CollectionType+Shuffle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionType+Shuffle.swift"; sourceTree = "<group>"; };
+		434C20651D36C57F00724E76 /* AddToMixlistTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddToMixlistTableViewController.swift; sourceTree = "<group>"; };
 		4351FB4B1D2DBFFC007BAD9A /* exercises.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = exercises.json; sourceTree = "<group>"; };
 		43568A081D2C2540004F45D3 /* Exercise+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Exercise+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		43568A091D2C2540004F45D3 /* Exercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 				4361B5DE1D19E81B00C8E8E8 /* NotificationAlertViewController.swift */,
 				4361B5F11D24533600C8E8E8 /* NewMixlistViewController.swift */,
 				43B446FF1D24853D0019F897 /* EditMixlistTableViewController.swift */,
+				434C20651D36C57F00724E76 /* AddToMixlistTableViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -429,6 +432,7 @@
 				4361B5DD1D19D83E00C8E8E8 /* CustomButton.swift in Sources */,
 				43568A191D2C2540004F45D3 /* Mixlist.swift in Sources */,
 				43A9870C1D11FDBC008276DF /* ExerciseViewController.swift in Sources */,
+				434C20661D36C57F00724E76 /* AddToMixlistTableViewController.swift in Sources */,
 				43568A181D2C2540004F45D3 /* Mixlist+CoreDataProperties.swift in Sources */,
 				43568A251D2D8A9E004F45D3 /* DataManager.swift in Sources */,
 				43A986CA1D07946B008276DF /* AppDelegate.swift in Sources */,

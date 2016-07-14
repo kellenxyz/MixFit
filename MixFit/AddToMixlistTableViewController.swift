@@ -9,11 +9,19 @@
 import UIKit
 import CoreData
 
+protocol AddToMixlistDelegate {
+    func exerciseAddedToMixlist(mixlistName: String)
+}
+
 class AddToMixlistTableViewController: UITableViewController {
 
     var coreDataStack = CoreDataStack.sharedInstance
     var exercise: Exercise!
     var fetchedResultsController: NSFetchedResultsController!
+    var delegate: AddToMixlistDelegate?
+
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +41,9 @@ class AddToMixlistTableViewController: UITableViewController {
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                               managedObjectContext: coreDataStack.managedObjectContext,
                                                               sectionNameKeyPath: nil, cacheName: nil)
+        // A little tableView UI setup
+        tableView.separatorColor = UIColor(colorLiteralRed: 0.88, green: 0.88, blue: 0.88, alpha: 1)
+        tableView.tableFooterView = UIView()
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -70,7 +81,23 @@ class AddToMixlistTableViewController: UITableViewController {
 
         let mixlist = fetchedResultsController.objectAtIndexPath(indexPath) as! UserCreatedMixlist
 
-        cell.textLabel?.text = mixlist.name
+        let cellTitle: String = mixlist.name
+        cell.textLabel?.text = cellTitle.uppercaseString
+
+        if let exercises = mixlist.exercises {
+            if exercises.containsObject(self.exercise) {
+                cell.accessoryType = .Checkmark
+                cell.tintColor = UIColor(colorLiteralRed: 203.0/255.0, green: 51.0/255.0, blue: 0.0, alpha: 1.0)
+                cell.userInteractionEnabled = false
+                cell.backgroundColor = UIColor(colorLiteralRed: 0.96, green: 0.96, blue: 0.96, alpha: 1.0)
+                cell.textLabel?.textColor = UIColor(colorLiteralRed: 0.4, green: 0.4, blue: 0.4, alpha: 1.0)
+            }
+        } else {
+            cell.accessoryType = .None
+            cell.userInteractionEnabled = true
+            cell.backgroundColor = UIColor.whiteColor()
+            cell.textLabel?.textColor = UIColor(colorLiteralRed: 0.098, green: 0.098, blue: 0.098, alpha: 1.0)
+        }
 
         return cell
     }
@@ -84,8 +111,17 @@ class AddToMixlistTableViewController: UITableViewController {
 
         coreDataStack.saveMainContext()
 
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismissViewControllerAnimated(true) { 
+            self.delegate?.exerciseAddedToMixlist(mixlist.name)
+        }
+//        self.performSegueWithIdentifier("UnwindToExerciseViewController", sender: self)
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+
+    // MARK: - IBActions
+    
+    @IBAction func onCancelButtonPressed(sender: UIBarButtonItem) {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 
     /*

@@ -165,17 +165,17 @@ class HomeTableViewController: UITableViewController {
             performSegueWithIdentifier("ShowExercisePageController", sender: cell)
         }
 
-        guard let exercises = muscleGroup.exercises,
-            let exercisesArray = Array(exercises) as? [DefaultExercise]
-            else {
-                fatalError("Oops!")
-        }
-
-        print("******************************\n\(muscleGroup.name): \(exercises.count) exercises\n")
-
-        for exercise in exercisesArray {
-            print("\(exercise.name)\n\(exercise.exerciseID)\n")
-        }
+//        guard let exercises = muscleGroup.exercises,
+//            let exercisesArray = Array(exercises) as? [DefaultExercise]
+//            else {
+//                fatalError("Oops!")
+//        }
+//
+//        print("******************************\n\(muscleGroup.name): \(exercises.count) exercises\n")
+//
+//        for exercise in exercisesArray {
+//            print("\(exercise.name)\n\(exercise.exerciseID)\n")
+//        }
 
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }

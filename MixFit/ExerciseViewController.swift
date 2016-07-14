@@ -59,21 +59,19 @@ class ExerciseViewController: UIViewController {
             exercise.setValue(!exercise.isFavorite.boolValue, forKey: "isFavorite")
             coreDataStack.saveMainContext()
             notificationAlertWithTitle("Added to Favorites")
-            print(exercise.isFavorite.boolValue)
+//            print(exercise.isFavorite.boolValue)
         } else {
-//            print("Removed from favorites")
             exercise.setValue(!exercise.isFavorite.boolValue, forKey: "isFavorite")
             coreDataStack.saveMainContext()
             notificationAlertWithTitle("Removed from Favorites")
-            print(exercise.isFavorite.boolValue)
+//            print(exercise.isFavorite.boolValue)
         }
-//        isFavorite = !isFavorite
-        setFavoriteButtonTitle()
 
+        setFavoriteButtonTitle()
     }
 
     @IBAction func onAddToMixlistButtonPressed(sender: UIButton) {
-        print("Add to a mixlist!")
+//        print("Add to a mixlist!")
         self.performSegueWithIdentifier("ShowMixlistsSegue", sender: self)
     }
 
@@ -139,12 +137,31 @@ class ExerciseViewController: UIViewController {
             let navController = segue.destinationViewController as? UINavigationController
             let destinationViewController = navController?.topViewController as? AddToMixlistTableViewController
             destinationViewController?.exercise = self.exercise
+            destinationViewController?.delegate = self
         }
     }
 
     @IBAction func unwindToExerciseViewController(segue: UIStoryboardSegue) {
-        
+
     }
     
 
 }
+
+extension ExerciseViewController: AddToMixlistDelegate {
+
+    func exerciseAddedToMixlist(mixlistName: String) {
+        let alertTitle = "Added to \"\(mixlistName)\""
+//        print("\(alertTitle.uppercaseString)")
+        self.notificationAlertWithTitle(alertTitle.uppercaseString)
+    }
+
+}
+
+
+
+
+
+
+
+

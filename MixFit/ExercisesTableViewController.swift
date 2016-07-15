@@ -23,7 +23,7 @@ class ExercisesTableViewController: UITableViewController {
 
         fetchedResultsController = getFRC()
 
-        configureSearchController()
+//        configureSearchController()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -47,13 +47,22 @@ class ExercisesTableViewController: UITableViewController {
     func configureSearchController() {
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
-        definesPresentationContext = true
+        self.definesPresentationContext = true
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search exercises"
         searchController.searchBar.tintColor = UIColor.whiteColor()
+        UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).textColor = UIColor.whiteColor()
+        UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).backgroundColor = UIColor(colorLiteralRed: 0.0, green: 0.0, blue: 0.0, alpha: 0.2)
+//        searchController.searchBar.searchBarStyle = .Minimal
         searchController.searchBar.delegate = self
         searchController.searchBar.sizeToFit()
-        self.tableView.tableHeaderView = searchController.searchBar
+
+        navigationItem.leftBarButtonItem = nil
+
+        navigationItem.titleView = searchController.searchBar
+        searchController.hidesNavigationBarDuringPresentation = false
+
+        searchController.searchBar.becomeFirstResponder()
     }
 
 
@@ -164,6 +173,16 @@ class ExercisesTableViewController: UITableViewController {
     }
     */
 
+    // MARK: - IBActions
+
+    @IBAction func onSearchButtonPressed(sender: UIBarButtonItem) {
+        configureSearchController()
+    }
+
+    func onSearchBarButtonPressed() {
+        configureSearchController()
+    }
+
     /*
     // MARK: - Navigation
 
@@ -178,6 +197,7 @@ class ExercisesTableViewController: UITableViewController {
 
 extension ExercisesTableViewController: UISearchResultsUpdating, UISearchBarDelegate {
     func updateSearchResultsForSearchController(searchController: UISearchController) {
+
         // Process the search string, remove leading and trailing spaces
         let searchText = searchController.searchBar.text!
         let trimmedSearchString = searchText.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
@@ -194,6 +214,13 @@ extension ExercisesTableViewController: UISearchResultsUpdating, UISearchBarDele
         }
 
         reloadData()
+    }
+
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        navigationItem.titleView = nil
+        let searchItem = UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: #selector(ExercisesTableViewController.onSearchBarButtonPressed))
+        searchItem.tintColor = UIColor.whiteColor()
+        navigationItem.leftBarButtonItem = searchItem
     }
 }
 

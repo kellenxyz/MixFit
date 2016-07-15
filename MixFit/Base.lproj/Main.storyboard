@@ -238,6 +238,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="EXERCISES" id="UGc-Td-n8c">
+                        <barButtonItem key="leftBarButtonItem" systemItem="search" id="nkL-5H-v17">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="onSearchButtonPressed:" destination="G0y-b8-MUG" id="4ar-Vb-f8H"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="VkJ-UB-egg">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
@@ -986,7 +992,7 @@
         <!--Exercises-->
         <scene sceneID="zPK-cd-w8j">
             <objects>
-                <navigationController id="kBv-RW-iwy" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kBv-RW-iwy" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Exercises" image="exercises-icon" selectedImage="exercises-icon" id="WFD-eV-gHg">
                         <inset key="imageInsets" minX="0.0" minY="1" maxX="0.0" maxY="-1"/>
                     </tabBarItem>

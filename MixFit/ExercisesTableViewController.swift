@@ -16,26 +16,20 @@ class ExercisesTableViewController: UITableViewController {
     var coreDataStack: CoreDataStack!
     var fetchedResultsController: NSFetchedResultsController!
 //    var muscleGroups = [MuscleGroup]()
+    var searchController: UISearchController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        fetchedResultsController = getFRC()
+
+        configureSearchController()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-
-        let fetchRequest = NSFetchRequest(entityName: "Exercise")
-        fetchRequest.sortDescriptors = [
-            NSSortDescriptor(key: "muscleGroup.name", ascending: true),
-            NSSortDescriptor(key: "name", ascending: true)
-        ]
-
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                              managedObjectContext: coreDataStack.managedObjectContext,
-                                                              sectionNameKeyPath: "muscleGroup.name",
-                                                              cacheName: nil)
 
         // Change color of cell separators
         tableView.separatorColor = UIColor(colorLiteralRed: 0.88, green: 0.88, blue: 0.88, alpha: 1)
@@ -50,8 +44,36 @@ class ExercisesTableViewController: UITableViewController {
         reloadData()
     }
 
+    func configureSearchController() {
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        definesPresentationContext = true
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search exercises"
+        searchController.searchBar.tintColor = UIColor.whiteColor()
+        searchController.searchBar.delegate = self
+        searchController.searchBar.sizeToFit()
+        self.tableView.tableHeaderView = searchController.searchBar
+    }
+
+
+    func getFRC() -> NSFetchedResultsController {
+        let fetchRequest = NSFetchRequest(entityName: "Exercise")
+        fetchRequest.sortDescriptors = [
+            NSSortDescriptor(key: "muscleGroup.name", ascending: true),
+            NSSortDescriptor(key: "name", ascending: true)
+        ]
+
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                              managedObjectContext: coreDataStack.managedObjectContext,
+                                                              sectionNameKeyPath: "muscleGroup.name",
+                                                              cacheName: nil)
+        return fetchedResultsController
+    }
+
+
     func reloadData() {
-        fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "name != %@ && name != %@", "Arms", "Legs")
+//        fetchedResultsController.fetchRequest.predicate = predicate
 
         do {
             try fetchedResultsController.performFetch()
@@ -91,8 +113,6 @@ class ExercisesTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-
-//        let muscleGroup = muscleGroups[section]
 
         let cell = self.tableView.dequeueReusableHeaderFooterViewWithIdentifier("TableSectionHeader")
         let header = cell as! TableSectionHeader
@@ -155,3 +175,25 @@ class ExercisesTableViewController: UITableViewController {
     */
 
 }
+
+extension ExercisesTableViewController: UISearchResultsUpdating, UISearchBarDelegate {
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        // Process the search string, remove leading and trailing spaces
+        let searchText = searchController.searchBar.text!
+        let trimmedSearchString = searchText.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+
+        // If search string is not blank
+        if trimmedSearchString != "" {
+            // Form the search format
+            let predicate = NSPredicate(format: "name contains [c] %@", trimmedSearchString)
+
+            // Add the search filter
+            fetchedResultsController.fetchRequest.predicate = predicate
+        } else {
+            getFRC()
+        }
+
+        reloadData()
+    }
+}
+

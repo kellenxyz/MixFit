@@ -31,6 +31,15 @@ class DataManager {
         }
     }
 
+    class func getTrainingZonesDataFromFileWithSuccess(success: ((dict: NSDictionary) -> Void)) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            let filePath = NSBundle.mainBundle().pathForResource("ExerciseVolume", ofType: "plist")
+            let dict = NSDictionary(contentsOfFile: filePath!) as! [String: AnyObject]
+
+            success(dict: dict)
+        }
+    }
+
 }
 
 

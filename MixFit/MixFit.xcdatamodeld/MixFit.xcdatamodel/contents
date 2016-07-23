@@ -12,6 +12,12 @@
         <relationship name="muscleGroup" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MuscleGroup" inverseName="exercises" inverseEntity="MuscleGroup" syncable="YES"/>
         <relationship name="userCreatedMixlists" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UserCreatedMixlist" inverseName="exercises" inverseEntity="UserCreatedMixlist" syncable="YES"/>
     </entity>
+    <entity name="ExerciseVolume" representedClassName=".ExerciseVolume" syncable="YES">
+        <attribute name="reps" attributeType="String" syncable="YES"/>
+        <attribute name="restTime" attributeType="String" syncable="YES"/>
+        <attribute name="sets" attributeType="String" syncable="YES"/>
+        <relationship name="trainingZone" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TrainingZone" inverseName="exerciseVolumes" inverseEntity="TrainingZone" syncable="YES"/>
+    </entity>
     <entity name="MFUser" representedClassName=".MFUser" syncable="YES">
         <attribute name="firstName" attributeType="String" syncable="YES"/>
         <attribute name="isMale" attributeType="Boolean" syncable="YES"/>
@@ -25,6 +31,11 @@
         <relationship name="exercises" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Exercise" inverseName="muscleGroup" inverseEntity="Exercise" syncable="YES"/>
         <relationship name="parentMuscleGroup" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MuscleGroup" inverseName="subMuscleGroups" inverseEntity="MuscleGroup" syncable="YES"/>
         <relationship name="subMuscleGroups" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MuscleGroup" inverseName="parentMuscleGroup" inverseEntity="MuscleGroup" syncable="YES"/>
+    </entity>
+    <entity name="TrainingZone" representedClassName=".TrainingZone" syncable="YES">
+        <attribute name="isActive" attributeType="Boolean" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <relationship name="exerciseVolumes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExerciseVolume" inverseName="trainingZone" inverseEntity="ExerciseVolume" syncable="YES"/>
     </entity>
     <entity name="UserCreatedExercise" representedClassName=".UserCreatedExercise" parentEntity="Exercise" syncable="YES">
         <attribute name="image" optional="YES" attributeType="Transformable" syncable="YES"/>
@@ -40,5 +51,7 @@
         <element name="MuscleGroup" positionX="70" positionY="-108" width="128" height="105"/>
         <element name="UserCreatedExercise" positionX="70" positionY="-231" width="128" height="60"/>
         <element name="UserCreatedMixlist" positionX="-144" positionY="129" width="128" height="60"/>
+        <element name="TrainingZone" positionX="-108" positionY="-117" width="128" height="90"/>
+        <element name="ExerciseVolume" positionX="-99" positionY="-108" width="128" height="105"/>
     </elements>
 </model>

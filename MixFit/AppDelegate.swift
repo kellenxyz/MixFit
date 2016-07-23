@@ -35,6 +35,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             fatalError("Error fetching data!")
         }
 
+        let fetchRequestForTrainingZones = NSFetchRequest(entityName: "TrainingZone")
+        do {
+            let results = try coreDataStack.managedObjectContext.executeFetchRequest(fetchRequestForTrainingZones)
+            if results.count == 0 {
+                addDefaultData()
+            }
+        } catch {
+            fatalError("Error fetching training zone data!")
+        }
+
         if let tab = window?.rootViewController as? UITabBarController {
             for child in tab.viewControllers ?? [] {
                 if let child = child as? UINavigationController, top = child.topViewController {
@@ -49,7 +59,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func addDefaultData() {
-        // Add default exercise and mixlist data
+        let preloadDataManager = PreloadDataManager()
+        preloadDataManager.loadTrainingZonesWithCoreDataStack(coreDataStack)
     }
 
     func preloadData() {

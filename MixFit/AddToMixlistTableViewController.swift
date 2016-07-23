@@ -28,12 +28,7 @@ class AddToMixlistTableViewController: UITableViewController {
 
         title = "Add to mixlist".uppercaseString
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-
+        // Instantiate the fetchedResultsController
         let fetchRequest = NSFetchRequest(entityName: "UserCreatedMixlist")
         fetchRequest.sortDescriptors = [
             NSSortDescriptor(key: "name", ascending: true)

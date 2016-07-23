@@ -53,11 +53,12 @@ class ExercisesTableViewController: UITableViewController {
         searchController.searchBar.tintColor = UIColor.whiteColor()
         UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).textColor = UIColor.whiteColor()
         UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).backgroundColor = UIColor(colorLiteralRed: 0.0, green: 0.0, blue: 0.0, alpha: 0.2)
-//        searchController.searchBar.searchBarStyle = .Minimal
+
         searchController.searchBar.delegate = self
         searchController.searchBar.sizeToFit()
 
         navigationItem.leftBarButtonItem = nil
+        navigationItem.rightBarButtonItem = nil
 
         navigationItem.titleView = searchController.searchBar
         searchController.hidesNavigationBarDuringPresentation = false
@@ -180,7 +181,14 @@ class ExercisesTableViewController: UITableViewController {
     }
 
     func onSearchBarButtonPressed() {
-        configureSearchController()
+        navigationItem.leftBarButtonItem = nil
+        navigationItem.rightBarButtonItem = nil
+        navigationItem.titleView = searchController.searchBar
+        searchController.searchBar.becomeFirstResponder()
+    }
+
+    func onAddExerciseBarButtonPressed() {
+//        print("Add exercise here!")
     }
 
     /*
@@ -217,10 +225,17 @@ extension ExercisesTableViewController: UISearchResultsUpdating, UISearchBarDele
     }
 
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        // Remove search bar from nav bar and display left and right bar button items
         navigationItem.titleView = nil
+
         let searchItem = UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: #selector(ExercisesTableViewController.onSearchBarButtonPressed))
         searchItem.tintColor = UIColor.whiteColor()
+
+        let addItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(ExercisesTableViewController.onAddExerciseBarButtonPressed))
+        addItem.tintColor = UIColor.whiteColor()
+
         navigationItem.leftBarButtonItem = searchItem
+        navigationItem.rightBarButtonItem = addItem
     }
 }
 

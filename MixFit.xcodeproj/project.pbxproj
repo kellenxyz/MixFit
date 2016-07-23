@@ -54,6 +54,12 @@
 		43A9870A1D11FDA9008276DF /* ExercisePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A987091D11FDA9008276DF /* ExercisePageViewController.swift */; };
 		43A9870C1D11FDBC008276DF /* ExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A9870B1D11FDBC008276DF /* ExerciseViewController.swift */; };
 		43B447001D24853D0019F897 /* EditMixlistTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B446FF1D24853D0019F897 /* EditMixlistTableViewController.swift */; };
+		43D891B91D3EC3EC00A71A50 /* ExerciseVolume.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43D891B81D3EC3EC00A71A50 /* ExerciseVolume.plist */; };
+		43D891BE1D43E24700A71A50 /* ExerciseVolume+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D891BA1D43E24700A71A50 /* ExerciseVolume+CoreDataProperties.swift */; };
+		43D891BF1D43E24700A71A50 /* ExerciseVolume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D891BB1D43E24700A71A50 /* ExerciseVolume.swift */; };
+		43D891C01D43E24700A71A50 /* TrainingZone+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D891BC1D43E24700A71A50 /* TrainingZone+CoreDataProperties.swift */; };
+		43D891C11D43E24700A71A50 /* TrainingZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D891BD1D43E24700A71A50 /* TrainingZone.swift */; };
+		43D891C41D43EFBC00A71A50 /* PreloadDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D891C31D43EFBC00A71A50 /* PreloadDataManager.swift */; };
 		43DF130C1D2AC1D400599024 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DF130B1D2AC1D400599024 /* CoreDataStack.swift */; };
 /* End PBXBuildFile section */
 
@@ -125,6 +131,12 @@
 		43A987091D11FDA9008276DF /* ExercisePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExercisePageViewController.swift; sourceTree = "<group>"; };
 		43A9870B1D11FDBC008276DF /* ExerciseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseViewController.swift; sourceTree = "<group>"; };
 		43B446FF1D24853D0019F897 /* EditMixlistTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditMixlistTableViewController.swift; sourceTree = "<group>"; };
+		43D891B81D3EC3EC00A71A50 /* ExerciseVolume.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ExerciseVolume.plist; sourceTree = "<group>"; };
+		43D891BA1D43E24700A71A50 /* ExerciseVolume+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ExerciseVolume+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		43D891BB1D43E24700A71A50 /* ExerciseVolume.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseVolume.swift; sourceTree = "<group>"; };
+		43D891BC1D43E24700A71A50 /* TrainingZone+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TrainingZone+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		43D891BD1D43E24700A71A50 /* TrainingZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainingZone.swift; sourceTree = "<group>"; };
+		43D891C31D43EFBC00A71A50 /* PreloadDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreloadDataManager.swift; sourceTree = "<group>"; };
 		43DF130B1D2AC1D400599024 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -252,6 +264,24 @@
 		43A987001D10BECA008276DF /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				43D891C21D43E26300A71A50 /* MO Subclasses */,
+				43A986D01D07946B008276DF /* MixFit.xcdatamodeld */,
+				43DF130B1D2AC1D400599024 /* CoreDataStack.swift */,
+				43568A241D2D8A9E004F45D3 /* DataManager.swift */,
+				43D891C31D43EFBC00A71A50 /* PreloadDataManager.swift */,
+				434C20631D341A6D00724E76 /* CollectionType+Shuffle.swift */,
+				43D891B81D3EC3EC00A71A50 /* ExerciseVolume.plist */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		43D891C21D43E26300A71A50 /* MO Subclasses */ = {
+			isa = PBXGroup;
+			children = (
+				43D891BA1D43E24700A71A50 /* ExerciseVolume+CoreDataProperties.swift */,
+				43D891BB1D43E24700A71A50 /* ExerciseVolume.swift */,
+				43D891BC1D43E24700A71A50 /* TrainingZone+CoreDataProperties.swift */,
+				43D891BD1D43E24700A71A50 /* TrainingZone.swift */,
 				43568A081D2C2540004F45D3 /* Exercise+CoreDataProperties.swift */,
 				43568A091D2C2540004F45D3 /* Exercise.swift */,
 				43568A0A1D2C2540004F45D3 /* Mixlist+CoreDataProperties.swift */,
@@ -266,12 +296,8 @@
 				43568A131D2C2540004F45D3 /* MuscleGroup.swift */,
 				43568A141D2C2540004F45D3 /* UserCreatedExercise+CoreDataProperties.swift */,
 				43568A151D2C2540004F45D3 /* UserCreatedExercise.swift */,
-				43A986D01D07946B008276DF /* MixFit.xcdatamodeld */,
-				43DF130B1D2AC1D400599024 /* CoreDataStack.swift */,
-				43568A241D2D8A9E004F45D3 /* DataManager.swift */,
-				434C20631D341A6D00724E76 /* CollectionType+Shuffle.swift */,
 			);
-			name = Model;
+			name = "MO Subclasses";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -384,6 +410,7 @@
 				4361B5EB1D237A9E00C8E8E8 /* RobotoCondensed-Bold.ttf in Resources */,
 				4361B5ED1D237A9E00C8E8E8 /* RobotoCondensed-Regular.ttf in Resources */,
 				4361B5E51D21E91E00C8E8E8 /* TableSectionHeader.xib in Resources */,
+				43D891B91D3EC3EC00A71A50 /* ExerciseVolume.plist in Resources */,
 				43A986D41D07946B008276DF /* Assets.xcassets in Resources */,
 				4361B5EC1D237A9E00C8E8E8 /* RobotoCondensed-Light.ttf in Resources */,
 				43A986CF1D07946B008276DF /* Main.storyboard in Resources */,
@@ -415,6 +442,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				43A987021D10BF18008276DF /* HomeTableViewController.swift in Sources */,
+				43D891C01D43E24700A71A50 /* TrainingZone+CoreDataProperties.swift in Sources */,
+				43D891BF1D43E24700A71A50 /* ExerciseVolume.swift in Sources */,
 				43A987081D10E131008276DF /* SubMuscleGroupsTableViewController.swift in Sources */,
 				43568A1E1D2C2540004F45D3 /* MFUser+CoreDataProperties.swift in Sources */,
 				43568A231D2C2540004F45D3 /* UserCreatedExercise.swift in Sources */,
@@ -427,6 +456,7 @@
 				43568A1C1D2C2540004F45D3 /* DefaultExercise+CoreDataProperties.swift in Sources */,
 				43A987061D10D484008276DF /* ExercisesTableViewController.swift in Sources */,
 				43A986FB1D10BA2E008276DF /* MoreTableViewController.swift in Sources */,
+				43D891C41D43EFBC00A71A50 /* PreloadDataManager.swift in Sources */,
 				43568A221D2C2540004F45D3 /* UserCreatedExercise+CoreDataProperties.swift in Sources */,
 				43A9870A1D11FDA9008276DF /* ExercisePageViewController.swift in Sources */,
 				4361B5DD1D19D83E00C8E8E8 /* CustomButton.swift in Sources */,
@@ -443,9 +473,11 @@
 				4361B5DF1D19E81B00C8E8E8 /* NotificationAlertViewController.swift in Sources */,
 				4361B5F21D24533600C8E8E8 /* NewMixlistViewController.swift in Sources */,
 				4361B5DB1D19D2A800C8E8E8 /* MixlistDetailTableViewController.swift in Sources */,
+				43D891BE1D43E24700A71A50 /* ExerciseVolume+CoreDataProperties.swift in Sources */,
 				43568A161D2C2540004F45D3 /* Exercise+CoreDataProperties.swift in Sources */,
 				4361B5E71D21EA2200C8E8E8 /* TableSectionHeader.swift in Sources */,
 				43568A1F1D2C2540004F45D3 /* MFUser.swift in Sources */,
+				43D891C11D43E24700A71A50 /* TrainingZone.swift in Sources */,
 				4361B5E11D1B4F2200C8E8E8 /* CustomImageView.swift in Sources */,
 				43568A1D1D2C2540004F45D3 /* DefaultExercise.swift in Sources */,
 				43568A201D2C2540004F45D3 /* MuscleGroup+CoreDataProperties.swift in Sources */,

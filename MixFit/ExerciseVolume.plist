@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>hypertrophy</key>
+	<array>
+		<dict>
+			<key>sets</key>
+			<string>4</string>
+			<key>reps</key>
+			<string>12</string>
+			<key>restTime</key>
+			<string>45 - 60 seconds</string>
+		</dict>
+		<dict>
+			<key>sets</key>
+			<string>3</string>
+			<key>reps</key>
+			<string>10</string>
+			<key>restTime</key>
+			<string>45 seconds</string>
+		</dict>
+		<dict>
+			<key>sets</key>
+			<string>3</string>
+			<key>reps</key>
+			<string>12</string>
+			<key>restTime</key>
+			<string>45 seconds</string>
+		</dict>
+	</array>
+	<key>power</key>
+	<array>
+		<dict>
+			<key>sets</key>
+			<string>4</string>
+			<key>reps</key>
+			<string>1</string>
+			<key>restTime</key>
+			<string>2 minutes</string>
+		</dict>
+		<dict>
+			<key>sets</key>
+			<string>2</string>
+			<key>reps</key>
+			<string>3</string>
+			<key>restTime</key>
+			<string>2 - 3 minutes</string>
+		</dict>
+		<dict>
+			<key>sets</key>
+			<string>3</string>
+			<key>reps</key>
+			<string>2</string>
+			<key>restTime</key>
+			<string>2 minutes</string>
+		</dict>
+	</array>
+	<key>strength</key>
+	<array>
+		<dict>
+			<key>sets</key>
+			<string>4</string>
+			<key>reps</key>
+			<string>8</string>
+			<key>restTime</key>
+			<string>90 - 120 seconds</string>
+		</dict>
+		<dict>
+			<key>sets</key>
+			<string>5</string>
+			<key>reps</key>
+			<string>5</string>
+			<key>restTime</key>
+			<string>90 seconds</string>
+		</dict>
+		<dict>
+			<key>sets</key>
+			<string>5</string>
+			<key>reps</key>
+			<string>6</string>
+			<key>restTime</key>
+			<string>2 minutes</string>
+		</dict>
+	</array>
+	<key>endurance</key>
+	<array>
+		<dict>
+			<key>sets</key>
+			<string>2</string>
+			<key>reps</key>
+			<string>20</string>
+			<key>restTime</key>
+			<string>30 seconds</string>
+		</dict>
+		<dict>
+			<key>sets</key>
+			<string>1</string>
+			<key>reps</key>
+			<string>30</string>
+			<key>restTime</key>
+			<string>30 seconds</string>
+		</dict>
+		<dict>
+			<key>sets</key>
+			<string>3</string>
+			<key>reps</key>
+			<string>15</string>
+			<key>restTime</key>
+			<string>30 seconds</string>
+		</dict>
+	</array>
+</dict>
+</plist>

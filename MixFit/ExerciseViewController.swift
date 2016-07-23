@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ExerciseViewController: UIViewController {
 
@@ -24,6 +25,7 @@ class ExerciseViewController: UIViewController {
     var page = 0
 //    var isFavorite: Bool = false
     var exercise: Exercise!
+    var exerciseVolumes = [ExerciseVolume]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,11 +41,23 @@ class ExerciseViewController: UIViewController {
     }
 
     private func loadExerciseData() {
+        let fetchRequest = NSFetchRequest(entityName: "ExerciseVolume")
+        do {
+            if let results = try coreDataStack.managedObjectContext.executeFetchRequest(fetchRequest) as? [ExerciseVolume] {
+                exerciseVolumes = results
+            }
+        } catch {
+            fatalError("Error fetching data!")
+        }
+
+        let randomNumber = Int(arc4random_uniform(UInt32(exerciseVolumes.count)))
+        let exerciseVolume = exerciseVolumes[randomNumber]
         exerciseNameLabel.text = exercise.name.uppercaseString
-        setsAndRepsLabel.text = "5 sets of 5 reps"
-        restTimeLabel.text = "90 seconds rest"
+        setsAndRepsLabel.text = exerciseVolume.setsAndReps
+        restTimeLabel.text = "\(exerciseVolume.restTime) rest"
         targetedMuscleGroupsLabel.text = exercise.targetedMuscleGroups
         trainersNotesLabel.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+//        trainersNotesLabel.text = exercise.detailDescription
     }
 
     private func setFavoriteButtonTitle() {
@@ -111,21 +125,6 @@ class ExerciseViewController: UIViewController {
         }
     }
 
-    func pauseLayer(layer: CALayer) {
-        let pausedTime = layer.convertTime(CACurrentMediaTime(), fromLayer: nil)
-        layer.speed = 0.0
-        layer.timeOffset = pausedTime
-    }
-
-    func resumeLayer(layer: CALayer) {
-        let pausedTime = layer.timeOffset
-        layer.speed = 1.0
-        layer.timeOffset = 0.0
-        layer.beginTime = 0.0
-        let timeSincePause = layer.convertTime(CACurrentMediaTime(), fromLayer: nil) - pausedTime
-        layer.beginTime = timeSincePause
-    }
-
 
     // MARK: - Navigation
 
@@ -152,7 +151,6 @@ extension ExerciseViewController: AddToMixlistDelegate {
 
     func exerciseAddedToMixlist(mixlistName: String) {
         let alertTitle = "Added to \"\(mixlistName)\""
-//        print("\(alertTitle.uppercaseString)")
         self.notificationAlertWithTitle(alertTitle.uppercaseString)
     }
 

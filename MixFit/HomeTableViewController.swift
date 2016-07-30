@@ -19,12 +19,18 @@ class HomeTableViewController: UITableViewController {
     var muscleGroups = [MuscleGroup]()
     var expansionPacks: [String] = []
 
+    @IBOutlet weak var hudGreetingLabel: UILabel!
+    @IBOutlet weak var hudQuoteLabel: UILabel!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         navigationController?.navigationBar.shadowImage = UIImage()
+
+        self.hudGreetingLabel.text = HUDGreeting.displayGreetingForTimeOfDay()
+        self.hudQuoteLabel.text = HUDGreeting.getQuoteForGreeting()
 
         // Set MixFit logo in navbar
         let logo = UIImage(named: "mixfit-title-logo")
@@ -254,8 +260,10 @@ class HomeTableViewController: UITableViewController {
                 let exercisesArray = Array(exercises) as! [Exercise]
                 destinationViewController?.exercises = exercisesArray.shuffle()
             }
-        } else {
+        } else if segue.identifier == "ShowSubMuscleGroups" {
             // Segue to subMuscleGroup view controller
+            let destinationViewController = segue.destinationViewController as? SubMuscleGroupsTableViewController
+            destinationViewController?.muscleGroup = muscleGroup
         }
     }
 

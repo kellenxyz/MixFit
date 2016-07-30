@@ -39,6 +39,7 @@
 		4361B5EF1D237C2C00C8E8E8 /* RobotoCondensed-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4361B5E91D237A9E00C8E8E8 /* RobotoCondensed-Light.ttf */; };
 		4361B5F01D237C2F00C8E8E8 /* RobotoCondensed-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4361B5E81D237A9E00C8E8E8 /* RobotoCondensed-Bold.ttf */; };
 		4361B5F21D24533600C8E8E8 /* NewMixlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4361B5F11D24533600C8E8E8 /* NewMixlistViewController.swift */; };
+		438424BE1D4D15EA0021B0CB /* HUDGreeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438424BD1D4D15EA0021B0CB /* HUDGreeting.swift */; };
 		43A986CA1D07946B008276DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A986C91D07946B008276DF /* AppDelegate.swift */; };
 		43A986CF1D07946B008276DF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43A986CD1D07946B008276DF /* Main.storyboard */; };
 		43A986D21D07946B008276DF /* MixFit.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 43A986D01D07946B008276DF /* MixFit.xcdatamodeld */; };
@@ -110,6 +111,7 @@
 		4361B5E91D237A9E00C8E8E8 /* RobotoCondensed-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Light.ttf"; sourceTree = "<group>"; };
 		4361B5EA1D237A9E00C8E8E8 /* RobotoCondensed-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Regular.ttf"; sourceTree = "<group>"; };
 		4361B5F11D24533600C8E8E8 /* NewMixlistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMixlistViewController.swift; sourceTree = "<group>"; };
+		438424BD1D4D15EA0021B0CB /* HUDGreeting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUDGreeting.swift; sourceTree = "<group>"; };
 		43A986C61D07946B008276DF /* MixFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MixFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43A986C91D07946B008276DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		43A986CE1D07946B008276DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 				43D891C21D43E26300A71A50 /* MO Subclasses */,
 				43A986D01D07946B008276DF /* MixFit.xcdatamodeld */,
 				43DF130B1D2AC1D400599024 /* CoreDataStack.swift */,
+				438424BD1D4D15EA0021B0CB /* HUDGreeting.swift */,
 				43568A241D2D8A9E004F45D3 /* DataManager.swift */,
 				43D891C31D43EFBC00A71A50 /* PreloadDataManager.swift */,
 				434C20631D341A6D00724E76 /* CollectionType+Shuffle.swift */,
@@ -481,6 +484,7 @@
 				4361B5E11D1B4F2200C8E8E8 /* CustomImageView.swift in Sources */,
 				43568A1D1D2C2540004F45D3 /* DefaultExercise.swift in Sources */,
 				43568A201D2C2540004F45D3 /* MuscleGroup+CoreDataProperties.swift in Sources */,
+				438424BE1D4D15EA0021B0CB /* HUDGreeting.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

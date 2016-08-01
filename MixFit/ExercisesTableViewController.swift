@@ -191,15 +191,23 @@ class ExercisesTableViewController: UITableViewController {
 //        print("Add exercise here!")
     }
 
-    /*
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        guard let selectedCell = sender as? UITableViewCell, let selectedRowIndexPath = tableView.indexPathForCell(selectedCell) else {
+            fatalError("Sender is not a UITableViewCell or was not found in the tableView, or segue.identifier is not correct")
+        }
+
+        let exercise = fetchedResultsController.objectAtIndexPath(selectedRowIndexPath) as! Exercise
+        if segue.identifier == "ShowExerciseDetailSegue" {
+            let destinationVC = segue.destinationViewController as? ExerciseDetailViewController
+            destinationVC?.exercise = exercise
+        }
+
     }
-    */
+
 
 }
 
@@ -217,6 +225,8 @@ extension ExercisesTableViewController: UISearchResultsUpdating, UISearchBarDele
 
             // Add the search filter
             fetchedResultsController.fetchRequest.predicate = predicate
+
+            tableView.tableFooterView = UIView()
         } else {
             getFRC()
         }

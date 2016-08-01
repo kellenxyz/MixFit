@@ -332,6 +332,7 @@ class MixlistDetailTableViewController: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+
         if segue.identifier == "ShowExercisePageController" {
             let navController = segue.destinationViewController as? UINavigationController
             let destinationViewController = navController?.topViewController as? ExercisePageViewController
@@ -344,6 +345,15 @@ class MixlistDetailTableViewController: UITableViewController {
             let destinationViewController = navController?.topViewController as? NewMixlistViewController
             destinationViewController?.mixlist = self.mixlist
             destinationViewController?.newTitle = "RENAME MIXLIST"
+        } else if segue.identifier == "ShowExerciseDetailSegue" {
+            guard let selectedCell = sender as? UITableViewCell, let selectedRowIndexPath = tableView.indexPathForCell(selectedCell) else {
+                fatalError("Sender is not a UITableViewCell or was not found in the tableView, or segue.identifier is not correct")
+            }
+
+            let exercise = exercises[selectedRowIndexPath.row]
+
+            let destinationViewController = segue.destinationViewController as? ExerciseDetailViewController
+            destinationViewController?.exercise = exercise
         }
     }
 

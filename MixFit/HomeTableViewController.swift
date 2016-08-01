@@ -29,7 +29,6 @@ class HomeTableViewController: UITableViewController {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         navigationController?.navigationBar.shadowImage = UIImage()
 
-        self.hudGreetingLabel.text = HUDGreeting.displayGreetingForTimeOfDay()
         self.hudQuoteLabel.text = HUDGreeting.getQuoteForGreeting()
 
         // Set MixFit logo in navbar
@@ -69,6 +68,7 @@ class HomeTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
+        self.hudGreetingLabel.text = HUDGreeting.displayGreetingForTimeOfDay()
         reloadData()
     }
 

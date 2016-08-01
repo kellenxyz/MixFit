@@ -20,6 +20,9 @@
             <string>RobotoCondensed-Bold</string>
             <string>RobotoCondensed-Bold</string>
             <string>RobotoCondensed-Bold</string>
+            <string>RobotoCondensed-Bold</string>
+            <string>RobotoCondensed-Bold</string>
+            <string>RobotoCondensed-Bold</string>
         </mutableArray>
         <mutableArray key="RobotoCondensed-Light.ttf">
             <string>RobotoCondensed-Light</string>
@@ -212,7 +215,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" id="3Xf-8a-m0m">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ExerciseCell" textLabel="qkc-o7-06H" rowHeight="60" style="IBUITableViewCellStyleDefault" id="asW-qf-UOL">
                                 <rect key="frame" x="0.0" y="92" width="320" height="60"/>
@@ -232,6 +235,9 @@
                                 </tableViewCellContentView>
                                 <edgeInsets key="layoutMargins" top="8" left="0.0" bottom="8" right="8"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <connections>
+                                    <segue destination="c4C-bs-hoU" kind="show" identifier="ShowExerciseDetailSegue" id="ne0-Wv-daq"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -240,6 +246,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="EXERCISES" id="UGc-Td-n8c">
+                        <barButtonItem key="backBarButtonItem" title=" " id="kVs-rZ-vmh"/>
                         <barButtonItem key="leftBarButtonItem" systemItem="search" id="nkL-5H-v17">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
@@ -254,6 +261,139 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JI5-G6-Lvh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1255" y="1467"/>
+        </scene>
+        <!--Exercise Detail View Controller-->
+        <scene sceneID="wHd-ZL-ZLW">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="c4C-bs-hoU" customClass="ExerciseDetailViewController" customModule="MixFit" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PYm-pL-8aE"/>
+                        <viewControllerLayoutGuide type="bottom" id="2Bu-u9-dnd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0CM-aJ-5qG">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OeP-x9-EaB">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nuB-CK-rqQ" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="1Uk-gD-ekg">
+                                                <rect key="frame" x="15" y="20" width="290" height="385"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="fCN-sR-fFK">
+                                                        <rect key="frame" x="0.0" y="0.0" width="290" height="46"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;exerciseName&gt;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P7i-Wa-s4m">
+                                                                <rect key="frame" x="0.0" y="0.0" width="290" height="46"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="46" id="z43-pT-NGP"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="RobotoCondensed-Bold" family="Roboto Condensed" pointSize="38"/>
+                                                                <color key="textColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Rot-e6-6eD">
+                                                        <rect key="frame" x="0.0" y="66" width="290" height="195"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QW3-2L-piL">
+                                                                <rect key="frame" x="0.0" y="0.0" width="290" height="195"/>
+                                                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" secondItem="QW3-2L-piL" secondAttribute="height" multiplier="261:175" id="9NT-kJ-cON"/>
+                                                                </constraints>
+                                                            </view>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="wUD-ZF-r6F">
+                                                        <rect key="frame" x="0.0" y="281" width="290" height="42"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MUSCLE GROUPS TARGETED" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Wl-Mc-gmP">
+                                                                <rect key="frame" x="0.0" y="0.0" width="290" height="21"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="21" id="1gC-Sl-NQF"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="RobotoCondensed-Bold" family="Roboto Condensed" pointSize="16"/>
+                                                                <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;muscleGroupsTargeted&gt;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JVv-eD-pKU">
+                                                                <rect key="frame" x="0.0" y="21" width="290" height="21"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="F7U-rK-Acb"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                                <color key="textColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="EZu-lY-HO2">
+                                                        <rect key="frame" x="0.0" y="343" width="290" height="42"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TRAINER'S NOTES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7qJ-Ho-62P">
+                                                                <rect key="frame" x="0.0" y="0.0" width="290" height="21"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="21" id="nSq-Z5-3KJ"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="RobotoCondensed-Bold" family="Roboto Condensed" pointSize="16"/>
+                                                                <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;trainersNotes&gt;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="daP-8w-Y3k">
+                                                                <rect key="frame" x="0.0" y="21" width="290" height="21"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="Djc-5l-lkk"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                                <color key="textColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="1Uk-gD-ekg" secondAttribute="bottom" constant="60" id="DJS-Mv-qgQ"/>
+                                            <constraint firstItem="1Uk-gD-ekg" firstAttribute="centerX" secondItem="nuB-CK-rqQ" secondAttribute="centerX" id="HFM-Zo-3c7"/>
+                                            <constraint firstItem="1Uk-gD-ekg" firstAttribute="top" secondItem="nuB-CK-rqQ" secondAttribute="top" constant="20" id="ahp-TZ-0ma"/>
+                                            <constraint firstItem="1Uk-gD-ekg" firstAttribute="leading" secondItem="nuB-CK-rqQ" secondAttribute="leading" constant="15" id="bRn-aZ-xUo"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="nuB-CK-rqQ" secondAttribute="bottom" id="Kng-wy-xeQ"/>
+                                    <constraint firstItem="nuB-CK-rqQ" firstAttribute="top" secondItem="OeP-x9-EaB" secondAttribute="top" id="TcO-iL-zbG"/>
+                                    <constraint firstItem="nuB-CK-rqQ" firstAttribute="centerX" secondItem="OeP-x9-EaB" secondAttribute="centerX" id="Z9o-Gm-YTf"/>
+                                    <constraint firstAttribute="trailing" secondItem="nuB-CK-rqQ" secondAttribute="trailing" id="fbT-UO-wI8"/>
+                                    <constraint firstItem="nuB-CK-rqQ" firstAttribute="leading" secondItem="OeP-x9-EaB" secondAttribute="leading" id="xGf-yC-zKt"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="OeP-x9-EaB" firstAttribute="top" secondItem="PYm-pL-8aE" secondAttribute="bottom" id="Boj-0b-yJo"/>
+                            <constraint firstAttribute="trailing" secondItem="OeP-x9-EaB" secondAttribute="trailing" id="Cdp-XW-QFS"/>
+                            <constraint firstItem="2Bu-u9-dnd" firstAttribute="top" secondItem="OeP-x9-EaB" secondAttribute="bottom" id="J3E-Ga-wMh"/>
+                            <constraint firstItem="OeP-x9-EaB" firstAttribute="leading" secondItem="0CM-aJ-5qG" secondAttribute="leading" id="dto-zv-c2k"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="exerciseNameLabel" destination="P7i-Wa-s4m" id="8wR-HE-jFG"/>
+                        <outlet property="muscleGroupsTargetedLabel" destination="JVv-eD-pKU" id="43b-R7-Rue"/>
+                        <outlet property="scrollView" destination="OeP-x9-EaB" id="YmL-Si-tUv"/>
+                        <outlet property="trainersNotesLabel" destination="daP-8w-Y3k" id="Ygb-iK-5UX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pzz-UX-gat" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1833" y="1467"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="FPR-M7-bbV">
@@ -365,7 +505,7 @@
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RPI-5X-XVa">
                                                                 <rect key="frame" x="0.0" y="0.0" width="290" height="186"/>
-                                                                <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="RPI-5X-XVa" secondAttribute="height" multiplier="145:93" id="HYS-4y-ZnW"/>
                                                                 </constraints>
@@ -568,7 +708,8 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" id="Y9u-Im-sgR">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="sectionIndexBackgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MixlistCell" textLabel="NWr-cV-mFS" rowHeight="80" style="IBUITableViewCellStyleDefault" id="D0Z-OV-Ec8">
                                 <rect key="frame" x="0.0" y="28" width="320" height="80"/>
@@ -730,6 +871,9 @@
                                 </tableViewCellContentView>
                                 <edgeInsets key="layoutMargins" top="8" left="0.0" bottom="8" right="8"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <connections>
+                                    <segue destination="c4C-bs-hoU" kind="show" identifier="ShowExerciseDetailSegue" id="bEq-RY-Vgp"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -738,6 +882,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="OFh-sg-BhT">
+                        <barButtonItem key="backBarButtonItem" title=" " id="Mho-4r-7iS"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="jSP-0Q-7sT">
                             <connections>
                                 <action selector="onOptionsButtonPressed:" destination="ZjL-NW-4lE" id="Fyd-je-yVq"/>
@@ -886,7 +1031,8 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="28" id="kr4-vQ-DE8">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="sectionIndexBackgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SubMuscleGroupCell" textLabel="8hT-xt-KME" rowHeight="90" style="IBUITableViewCellStyleDefault" id="B60-gY-al9">
                                 <rect key="frame" x="0.0" y="28" width="320" height="90"/>
@@ -1007,6 +1153,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="7J8-q2-hnO">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="barTintColor" red="0.79607843137254897" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
@@ -1029,7 +1176,8 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" id="aqg-nZ-B3B">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="sectionIndexBackgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="iYN-Ol-zOh" rowHeight="60" style="IBUITableViewCellStyleDefault" id="BbH-YK-10j">
                                 <rect key="frame" x="0.0" y="28" width="320" height="60"/>
@@ -1167,7 +1315,8 @@
         <image name="more-selected" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ESB-1D-1Qa"/>
-        <segue reference="4Sj-0F-ddt"/>
+        <segue reference="dof-gn-VyM"/>
+        <segue reference="ibd-38-uxv"/>
+        <segue reference="ne0-Wv-daq"/>
     </inferredMetricsTieBreakers>
 </document>

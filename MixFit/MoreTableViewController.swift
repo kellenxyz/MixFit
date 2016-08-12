@@ -10,7 +10,7 @@ import UIKit
 
 class MoreTableViewController: UITableViewController {
 
-    var coreDataStack: CoreDataStack!
+    var coreDataStack = CoreDataStack.sharedInstance
 
     var moreArray: [String] = []
 

@@ -15,7 +15,7 @@ class HomeTableViewController: UITableViewController {
     let kTableHeaderHeight: CGFloat = 150.0
     var headerView: UIView!
     */
-    var coreDataStack: CoreDataStack!
+    var coreDataStack = CoreDataStack.sharedInstance
     var muscleGroups = [MuscleGroup]()
     var expansionPacks: [String] = []
 
@@ -38,8 +38,7 @@ class HomeTableViewController: UITableViewController {
         imageView.contentMode = .ScaleAspectFit
         self.navigationItem.titleView = imageView
 
-        // Dummy Data for tableView
-//        muscleGroups = ["Back", "Chest", "Legs", "Arms", "Shoulders", "Core", "Full Body"]
+        // Dummy data
         expansionPacks = ["Kettlebell", "Bodyweight"]
 
         /*

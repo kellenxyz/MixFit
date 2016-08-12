@@ -10,7 +10,7 @@ import UIKit
 
 class EditMixlistTableViewController: UITableViewController {
 
-    var coreDataStack: CoreDataStack!
+    var coreDataStack = CoreDataStack.sharedInstance
 
     var options: [String] = []
 

@@ -62,6 +62,9 @@
 		43D891C01D43E24700A71A50 /* TrainingZone+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D891BC1D43E24700A71A50 /* TrainingZone+CoreDataProperties.swift */; };
 		43D891C11D43E24700A71A50 /* TrainingZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D891BD1D43E24700A71A50 /* TrainingZone.swift */; };
 		43D891C41D43EFBC00A71A50 /* PreloadDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D891C31D43EFBC00A71A50 /* PreloadDataManager.swift */; };
+		43DCD3281D56822B00AA615A /* ExerciseNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DCD3271D56822B00AA615A /* ExerciseNameViewController.swift */; };
+		43DCD32A1D56823C00AA615A /* ExerciseMuscleGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DCD3291D56823C00AA615A /* ExerciseMuscleGroupViewController.swift */; };
+		43DCD32C1D56825A00AA615A /* ExerciseImageSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DCD32B1D56825A00AA615A /* ExerciseImageSelectViewController.swift */; };
 		43DF130C1D2AC1D400599024 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DF130B1D2AC1D400599024 /* CoreDataStack.swift */; };
 /* End PBXBuildFile section */
 
@@ -141,6 +144,9 @@
 		43D891BC1D43E24700A71A50 /* TrainingZone+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TrainingZone+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		43D891BD1D43E24700A71A50 /* TrainingZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainingZone.swift; sourceTree = "<group>"; };
 		43D891C31D43EFBC00A71A50 /* PreloadDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreloadDataManager.swift; sourceTree = "<group>"; };
+		43DCD3271D56822B00AA615A /* ExerciseNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseNameViewController.swift; sourceTree = "<group>"; };
+		43DCD3291D56823C00AA615A /* ExerciseMuscleGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseMuscleGroupViewController.swift; sourceTree = "<group>"; };
+		43DCD32B1D56825A00AA615A /* ExerciseImageSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseImageSelectViewController.swift; sourceTree = "<group>"; };
 		43DF130B1D2AC1D400599024 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -248,6 +254,9 @@
 				4361B5F11D24533600C8E8E8 /* NewMixlistViewController.swift */,
 				43B446FF1D24853D0019F897 /* EditMixlistTableViewController.swift */,
 				434C20651D36C57F00724E76 /* AddToMixlistTableViewController.swift */,
+				43DCD3271D56822B00AA615A /* ExerciseNameViewController.swift */,
+				43DCD3291D56823C00AA615A /* ExerciseMuscleGroupViewController.swift */,
+				43DCD32B1D56825A00AA615A /* ExerciseImageSelectViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -459,6 +468,7 @@
 				43A986D21D07946B008276DF /* MixFit.xcdatamodeld in Sources */,
 				43568A171D2C2540004F45D3 /* Exercise.swift in Sources */,
 				43568A211D2C2540004F45D3 /* MuscleGroup.swift in Sources */,
+				43DCD3281D56822B00AA615A /* ExerciseNameViewController.swift in Sources */,
 				43568A1C1D2C2540004F45D3 /* DefaultExercise+CoreDataProperties.swift in Sources */,
 				43A987061D10D484008276DF /* ExercisesTableViewController.swift in Sources */,
 				43A986FB1D10BA2E008276DF /* MoreTableViewController.swift in Sources */,
@@ -468,11 +478,13 @@
 				4361B5DD1D19D83E00C8E8E8 /* CustomButton.swift in Sources */,
 				43568A191D2C2540004F45D3 /* Mixlist.swift in Sources */,
 				43A9870C1D11FDBC008276DF /* ExerciseViewController.swift in Sources */,
+				43DCD32C1D56825A00AA615A /* ExerciseImageSelectViewController.swift in Sources */,
 				434C20661D36C57F00724E76 /* AddToMixlistTableViewController.swift in Sources */,
 				43568A181D2C2540004F45D3 /* Mixlist+CoreDataProperties.swift in Sources */,
 				43568A251D2D8A9E004F45D3 /* DataManager.swift in Sources */,
 				43A986CA1D07946B008276DF /* AppDelegate.swift in Sources */,
 				43568A1A1D2C2540004F45D3 /* UserCreatedMixlist+CoreDataProperties.swift in Sources */,
+				43DCD32A1D56823C00AA615A /* ExerciseMuscleGroupViewController.swift in Sources */,
 				4361B5E31D1B505100C8E8E8 /* MuscleGroupTableViewCell.swift in Sources */,
 				434C20641D341A6D00724E76 /* CollectionType+Shuffle.swift in Sources */,
 				43B447001D24853D0019F897 /* EditMixlistTableViewController.swift in Sources */,

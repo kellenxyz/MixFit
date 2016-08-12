@@ -14,4 +14,12 @@ class Exercise: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
 
+    var targetedMuscles: String {
+        if self.targetedMuscleGroups == nil {
+            return "None specified for this exercise."
+        } else {
+            return self.targetedMuscleGroups!
+        }
+    }
+
 }

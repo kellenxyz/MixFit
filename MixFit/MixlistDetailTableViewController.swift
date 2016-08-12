@@ -169,24 +169,24 @@ class MixlistDetailTableViewController: UITableViewController {
     func updateNavBarTitle() {
 
         let fadeInStart = CGFloat(-130.0)
-        let fadeInEnd = CGFloat(-110)
+//        let fadeInEnd = CGFloat(-110)
 
         if tableView.contentOffset.y >= fadeInStart {
 
-            var alphaValue: Float
-            if tableView.contentOffset.y <= fadeInEnd {
-                let x = tableView.contentOffset.y - fadeInStart
-                let diff = (fadeInEnd - fadeInStart)
-                alphaValue = Float(x / diff)
-            } else {
-                alphaValue = 1.0
-            }
-
-            let titleColor = UIColor(colorLiteralRed: 1.0, green: 1.0, blue: 1.0, alpha: alphaValue)
-
-            if let font = UIFont(name: "RobotoCondensed-Bold", size: 16) {
-                self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: font, NSForegroundColorAttributeName: titleColor]
-            }
+//            var alphaValue: Float
+//            if tableView.contentOffset.y <= fadeInEnd {
+//                let x = tableView.contentOffset.y - fadeInStart
+//                let diff = (fadeInEnd - fadeInStart)
+//                alphaValue = Float(x / diff)
+//            } else {
+//                alphaValue = 1.0
+//            }
+//
+//            let titleColor = UIColor(colorLiteralRed: 1.0, green: 1.0, blue: 1.0, alpha: alphaValue)
+//
+//            if let font = UIFont(name: "RobotoCondensed-Bold", size: 16) {
+//                self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: font, NSForegroundColorAttributeName: titleColor]
+//            }
 
             self.title = self.mixlistName.uppercaseString
 

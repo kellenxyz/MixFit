@@ -13,7 +13,7 @@ class ExercisesTableViewController: UITableViewController {
 
     // #warning use fetchResultsController for this page
 
-    var coreDataStack: CoreDataStack!
+    var coreDataStack = CoreDataStack.sharedInstance
     var fetchedResultsController: NSFetchedResultsController!
 //    var muscleGroups = [MuscleGroup]()
     var searchController: UISearchController!
@@ -115,7 +115,12 @@ class ExercisesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("ExerciseCell", forIndexPath: indexPath)
 
         let exercise = fetchedResultsController.objectAtIndexPath(indexPath) as! Exercise
-        cell.textLabel?.text = exercise.name
+
+        if exercise.isFavorite == true {
+            cell.textLabel?.text = exercise.name + " ❤️"
+        } else {
+            cell.textLabel?.text = exercise.name
+        }
 
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
 
@@ -189,6 +194,46 @@ class ExercisesTableViewController: UITableViewController {
 
     func onAddExerciseBarButtonPressed() {
 //        print("Add exercise here!")
+        performSegueWithIdentifier("NewExerciseSegue", sender: self)
+    }
+
+
+    // MARK: - Notification Alert
+
+    func notificationAlertWithTitle(title: String) {
+        let notificationAlert = storyboard!.instantiateViewControllerWithIdentifier("NotificationAlert") as! NotificationAlertViewController
+
+         // Get height of status bar + nav bar (only if translucent navbar)
+//        let topInset = CGRectGetHeight(navigationController!.navigationBar.frame) + CGRectGetHeight(UIApplication.sharedApplication().statusBarFrame)
+
+        // Create notification view
+        let notificationFrameView = UIView(frame: CGRectMake(0, -50, view.frame.width, 50))
+
+        // Specify frame for notification alert vc view
+        notificationAlert.view.frame = CGRectMake(0, 0, notificationFrameView.frame.width, notificationFrameView.frame.height)
+
+        // Set title text for notification alert view
+        notificationAlert.notificationTitleLabel.text = title.uppercaseString
+
+        // Add notification alert vc to current vc
+        addChildViewController(notificationAlert)
+        notificationFrameView.addSubview(notificationAlert.view)
+        notificationAlert.didMoveToParentViewController(self)
+
+        // Add the notification view to the main view
+        view.addSubview(notificationFrameView)
+
+        // And finally animate the notification bar down...
+        UIView.animateWithDuration(0.2, animations: {
+            notificationFrameView.frame.origin.y =  -1
+        }) { (Bool) in
+            // ...and back up after a slight delay
+            UIView.animateWithDuration(0.4, delay: 1.8, options: [], animations: {
+                notificationFrameView.frame.origin.y = -70
+                }, completion: { (Bool) in
+                    notificationFrameView.removeFromSuperview()
+            })
+        }
     }
 
 
@@ -196,16 +241,31 @@ class ExercisesTableViewController: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        guard let selectedCell = sender as? UITableViewCell, let selectedRowIndexPath = tableView.indexPathForCell(selectedCell) else {
-            fatalError("Sender is not a UITableViewCell or was not found in the tableView, or segue.identifier is not correct")
-        }
 
-        let exercise = fetchedResultsController.objectAtIndexPath(selectedRowIndexPath) as! Exercise
         if segue.identifier == "ShowExerciseDetailSegue" {
+            guard let selectedCell = sender as? UITableViewCell, let selectedRowIndexPath = tableView.indexPathForCell(selectedCell) else {
+                fatalError("Sender is not a UITableViewCell or was not found in the tableView, or segue.identifier is not correct")
+            }
+
+            let exercise = fetchedResultsController.objectAtIndexPath(selectedRowIndexPath) as! Exercise
             let destinationVC = segue.destinationViewController as? ExerciseDetailViewController
             destinationVC?.exercise = exercise
         }
 
+    }
+
+    @IBAction func deleteExerciseFromDataSource(segue: UIStoryboardSegue) {
+        if let sourceVC = segue.sourceViewController as? ExerciseDetailViewController,
+        let exercise = sourceVC.exercise {
+            let exerciseName: String = exercise.name
+
+            self.coreDataStack.managedObjectContext.deleteObject(exercise)
+            self.coreDataStack.saveMainContext()
+
+            reloadData()
+
+            self.notificationAlertWithTitle("Deleted \"\(exerciseName)\"")
+        }
     }
 
 
@@ -248,4 +308,15 @@ extension ExercisesTableViewController: UISearchResultsUpdating, UISearchBarDele
         navigationItem.rightBarButtonItem = addItem
     }
 }
+
+
+
+
+
+
+
+
+
+
+
 

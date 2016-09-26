@@ -13,30 +13,30 @@ typealias Payload = [String:AnyObject]
 
 class DataManager {
 
-    class func getExercisesDataFromFileWithSuccess(success: ((data: NSData) -> Void)) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            let filePath = NSBundle.mainBundle().pathForResource("exercises", ofType:"json")
-            let data = try! NSData(contentsOfFile:filePath!,
-                options: NSDataReadingOptions.DataReadingUncached)
-            success(data: data)
+    class func getExercisesDataFromFileWithSuccess(_ success: @escaping ((_ data: Data) -> Void)) {
+        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: {
+            let filePath = Bundle.main.path(forResource: "exercises", ofType:"json")
+            let data = try! Data(contentsOf: URL(fileURLWithPath: filePath!),
+                options: NSData.ReadingOptions.uncached)
+            success(data)
         })
     }
 
-    func getMuscleGroupsDataFromFileWithSuccess(success: ((data: NSData) -> Void)) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-            let filePath = NSBundle.mainBundle().pathForResource("muscle-groups", ofType: "json")
-            let data = try! NSData(contentsOfFile: filePath!,
-                                   options: NSDataReadingOptions.DataReadingUncached)
-            success(data: data)
+    func getMuscleGroupsDataFromFileWithSuccess(_ success: @escaping ((_ data: Data) -> Void)) {
+        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async {
+            let filePath = Bundle.main.path(forResource: "muscle-groups", ofType: "json")
+            let data = try! Data(contentsOf: URL(fileURLWithPath: filePath!),
+                                   options: NSData.ReadingOptions.uncached)
+            success(data)
         }
     }
 
-    class func getTrainingZonesDataFromFileWithSuccess(success: ((dict: NSDictionary) -> Void)) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-            let filePath = NSBundle.mainBundle().pathForResource("ExerciseVolume", ofType: "plist")
+    class func getTrainingZonesDataFromFileWithSuccess(_ success: @escaping ((_ dict: NSDictionary) -> Void)) {
+        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async {
+            let filePath = Bundle.main.path(forResource: "ExerciseVolume", ofType: "plist")
             let dict = NSDictionary(contentsOfFile: filePath!) as! [String: AnyObject]
 
-            success(dict: dict)
+            success(dict as NSDictionary)
         }
     }
 

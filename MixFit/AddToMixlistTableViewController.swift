@@ -10,14 +10,14 @@ import UIKit
 import CoreData
 
 protocol AddToMixlistDelegate {
-    func exerciseAddedToMixlist(mixlistName: String)
+    func exerciseAddedToMixlist(_ mixlistName: String)
 }
 
 class AddToMixlistTableViewController: UITableViewController {
 
     var coreDataStack = CoreDataStack.sharedInstance
     var exercise: Exercise!
-    var fetchedResultsController: NSFetchedResultsController!
+    var fetchedResultsController: NSFetchedResultsController<UserCreatedMixlist>!
     var delegate: AddToMixlistDelegate?
 
     @IBOutlet weak var cancelButton: UIBarButtonItem!
@@ -26,10 +26,10 @@ class AddToMixlistTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "Add to mixlist".uppercaseString
+        title = "Add to mixlist".uppercased()
 
         // Instantiate the fetchedResultsController
-        let fetchRequest = NSFetchRequest(entityName: "UserCreatedMixlist")
+        let fetchRequest = NSFetchRequest<UserCreatedMixlist>(entityName: "UserCreatedMixlist")
         fetchRequest.sortDescriptors = [
             NSSortDescriptor(key: "name", ascending: true)
         ]
@@ -41,7 +41,7 @@ class AddToMixlistTableViewController: UITableViewController {
         tableView.tableFooterView = UIView()
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         reloadData()
@@ -60,63 +60,63 @@ class AddToMixlistTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return fetchedResultsController.sections?.count ?? 0
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
 
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("MixlistCell", forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MixlistCell", for: indexPath)
 
-        let mixlist = fetchedResultsController.objectAtIndexPath(indexPath) as! UserCreatedMixlist
+        let mixlist = fetchedResultsController.object(at: indexPath)
 
         let cellTitle: String = mixlist.name
-        cell.textLabel?.text = cellTitle.uppercaseString
+        cell.textLabel?.text = cellTitle.uppercased()
 
         if let exercises = mixlist.exercises {
-            if exercises.containsObject(self.exercise) {
-                cell.accessoryType = .Checkmark
+            if exercises.contains(self.exercise) {
+                cell.accessoryType = .checkmark
                 cell.tintColor = UIColor(colorLiteralRed: 203.0/255.0, green: 51.0/255.0, blue: 0.0, alpha: 1.0)
-                cell.userInteractionEnabled = false
+                cell.isUserInteractionEnabled = false
                 cell.backgroundColor = UIColor(colorLiteralRed: 0.96, green: 0.96, blue: 0.96, alpha: 1.0)
                 cell.textLabel?.textColor = UIColor(colorLiteralRed: 0.4, green: 0.4, blue: 0.4, alpha: 1.0)
             }
         } else {
-            cell.accessoryType = .None
-            cell.userInteractionEnabled = true
-            cell.backgroundColor = UIColor.whiteColor()
+            cell.accessoryType = .none
+            cell.isUserInteractionEnabled = true
+            cell.backgroundColor = UIColor.white
             cell.textLabel?.textColor = UIColor(colorLiteralRed: 0.098, green: 0.098, blue: 0.098, alpha: 1.0)
         }
 
         return cell
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        let mixlist = fetchedResultsController.objectAtIndexPath(indexPath) as! UserCreatedMixlist
+        let mixlist = fetchedResultsController.object(at: indexPath)
 
-        let exercisesRelation = mixlist.mutableSetValueForKey("exercises")
-        exercisesRelation.addObject(self.exercise)
+        let exercisesRelation = mixlist.mutableSetValue(forKey: "exercises")
+        exercisesRelation.add(self.exercise)
 
         coreDataStack.saveMainContext()
 
-        self.dismissViewControllerAnimated(true) { 
+        self.dismiss(animated: true) { 
             self.delegate?.exerciseAddedToMixlist(mixlist.name)
         }
 //        self.performSegueWithIdentifier("UnwindToExerciseViewController", sender: self)
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
     // MARK: - IBActions
     
-    @IBAction func onCancelButtonPressed(sender: UIBarButtonItem) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func onCancelButtonPressed(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
     }
 
     /*

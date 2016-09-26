@@ -14,14 +14,14 @@ class ExercisesTableViewController: UITableViewController {
     // #warning use fetchResultsController for this page
 
     var coreDataStack = CoreDataStack.sharedInstance
-    var fetchedResultsController: NSFetchedResultsController!
+    var fetchedResultsController: NSFetchedResultsController<Exercise>!
 //    var muscleGroups = [MuscleGroup]()
     var searchController: UISearchController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        fetchedResultsController = getFRC()
+        initializeFetchedResultsController(nil)
 
 //        configureSearchController()
 
@@ -35,13 +35,38 @@ class ExercisesTableViewController: UITableViewController {
         tableView.separatorColor = UIColor(colorLiteralRed: 0.88, green: 0.88, blue: 0.88, alpha: 1)
 
         let nib = UINib(nibName: "TableSectionHeader", bundle: nil)
-        tableView.registerNib(nib, forHeaderFooterViewReuseIdentifier: "TableSectionHeader")
+        tableView.register(nib, forHeaderFooterViewReuseIdentifier: "TableSectionHeader")
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         reloadData()
+    }
+
+    func initializeFetchedResultsController(_ predicate: NSPredicate?) {
+        let request = NSFetchRequest<Exercise>(entityName: "Exercise")
+
+        if let predicate = predicate {
+            request.predicate = predicate
+        }
+
+        let muscleGroupSort = NSSortDescriptor(key: "muscleGroup.name", ascending: true)
+        let exerciseNameSort = NSSortDescriptor(key: "name", ascending: true)
+        request.sortDescriptors = [muscleGroupSort, exerciseNameSort]
+
+        let moc = self.coreDataStack.managedObjectContext
+
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: moc, sectionNameKeyPath: "muscleGroup.name", cacheName: nil)
+//        fetchedResultsController.delegate = self
+
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            fatalError("Failed to initialize FetchedResultsController: \(error)")
+        }
+
+        tableView.reloadData()
     }
 
     func configureSearchController() {
@@ -50,9 +75,9 @@ class ExercisesTableViewController: UITableViewController {
         self.definesPresentationContext = true
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search exercises"
-        searchController.searchBar.tintColor = UIColor.whiteColor()
-        UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).textColor = UIColor.whiteColor()
-        UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).backgroundColor = UIColor(colorLiteralRed: 0.0, green: 0.0, blue: 0.0, alpha: 0.2)
+        searchController.searchBar.tintColor = UIColor.white
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).textColor = UIColor.white
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).backgroundColor = UIColor(colorLiteralRed: 0.0, green: 0.0, blue: 0.0, alpha: 0.2)
 
         searchController.searchBar.delegate = self
         searchController.searchBar.sizeToFit()
@@ -67,28 +92,12 @@ class ExercisesTableViewController: UITableViewController {
     }
 
 
-    func getFRC() -> NSFetchedResultsController {
-        let fetchRequest = NSFetchRequest(entityName: "Exercise")
-        fetchRequest.sortDescriptors = [
-            NSSortDescriptor(key: "muscleGroup.name", ascending: true),
-            NSSortDescriptor(key: "name", ascending: true)
-        ]
-
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                              managedObjectContext: coreDataStack.managedObjectContext,
-                                                              sectionNameKeyPath: "muscleGroup.name",
-                                                              cacheName: nil)
-        return fetchedResultsController
-    }
-
-
     func reloadData() {
-//        fetchedResultsController.fetchRequest.predicate = predicate
 
         do {
             try fetchedResultsController.performFetch()
         } catch {
-            fatalError("Error fetching data! \(error)")
+            fatalError("Failed to initialize FetchedResultsController: \(error)")
         }
 
         tableView.reloadData()
@@ -96,52 +105,60 @@ class ExercisesTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return fetchedResultsController.sections?.count ?? 0
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return fetchedResultsController.sections?[section].numberOfObjects ?? 0
 
     }
 
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return fetchedResultsController.sections?[section].name
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ExerciseCell", forIndexPath: indexPath)
+    func configureCell(_ cell: UITableViewCell, indexPath: IndexPath) {
+        let exercise = fetchedResultsController.object(at: indexPath)
 
-        let exercise = fetchedResultsController.objectAtIndexPath(indexPath) as! Exercise
-
-        if exercise.isFavorite == true {
+        if exercise.isFavorite == true && exercise == exercise as? UserCreatedExercise {
+            cell.textLabel?.text = exercise.name + " ❤️" + " 💪🏼"
+        } else if exercise.isFavorite == true {
             cell.textLabel?.text = exercise.name + " ❤️"
+        } else if exercise == exercise as? UserCreatedExercise {
+            cell.textLabel?.text = exercise.name + " 💪🏼"
         } else {
             cell.textLabel?.text = exercise.name
         }
 
-        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ExerciseCell", for: indexPath)
+
+        configureCell(cell, indexPath: indexPath)
 
         return cell
     }
 
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 
-        let cell = self.tableView.dequeueReusableHeaderFooterViewWithIdentifier("TableSectionHeader")
+        let cell = self.tableView.dequeueReusableHeaderFooterView(withIdentifier: "TableSectionHeader")
         let header = cell as! TableSectionHeader
-        header.titleLabel.text = fetchedResultsController.sections?[section].name.uppercaseString
+        header.titleLabel.text = fetchedResultsController.sections?[section].name.uppercased()
 
         return cell
     }
 
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40.0
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
     /*
@@ -181,7 +198,7 @@ class ExercisesTableViewController: UITableViewController {
 
     // MARK: - IBActions
 
-    @IBAction func onSearchButtonPressed(sender: UIBarButtonItem) {
+    @IBAction func onSearchButtonPressed(_ sender: UIBarButtonItem) {
         configureSearchController()
     }
 
@@ -194,89 +211,92 @@ class ExercisesTableViewController: UITableViewController {
 
     func onAddExerciseBarButtonPressed() {
 //        print("Add exercise here!")
-        performSegueWithIdentifier("NewExerciseSegue", sender: self)
+        performSegue(withIdentifier: "NewExerciseSegue", sender: self)
     }
 
 
     // MARK: - Notification Alert
 
-    func notificationAlertWithTitle(title: String) {
-        let notificationAlert = storyboard!.instantiateViewControllerWithIdentifier("NotificationAlert") as! NotificationAlertViewController
-
-         // Get height of status bar + nav bar (only if translucent navbar)
-//        let topInset = CGRectGetHeight(navigationController!.navigationBar.frame) + CGRectGetHeight(UIApplication.sharedApplication().statusBarFrame)
-
-        // Create notification view
-        let notificationFrameView = UIView(frame: CGRectMake(0, -50, view.frame.width, 50))
-
-        // Specify frame for notification alert vc view
-        notificationAlert.view.frame = CGRectMake(0, 0, notificationFrameView.frame.width, notificationFrameView.frame.height)
-
-        // Set title text for notification alert view
-        notificationAlert.notificationTitleLabel.text = title.uppercaseString
-
-        // Add notification alert vc to current vc
-        addChildViewController(notificationAlert)
-        notificationFrameView.addSubview(notificationAlert.view)
-        notificationAlert.didMoveToParentViewController(self)
-
-        // Add the notification view to the main view
-        view.addSubview(notificationFrameView)
-
-        // And finally animate the notification bar down...
-        UIView.animateWithDuration(0.2, animations: {
-            notificationFrameView.frame.origin.y =  -1
-        }) { (Bool) in
-            // ...and back up after a slight delay
-            UIView.animateWithDuration(0.4, delay: 1.8, options: [], animations: {
-                notificationFrameView.frame.origin.y = -70
-                }, completion: { (Bool) in
-                    notificationFrameView.removeFromSuperview()
-            })
-        }
-    }
-
 
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
         if segue.identifier == "ShowExerciseDetailSegue" {
-            guard let selectedCell = sender as? UITableViewCell, let selectedRowIndexPath = tableView.indexPathForCell(selectedCell) else {
+            guard let selectedCell = sender as? UITableViewCell, let selectedRowIndexPath = tableView.indexPath(for: selectedCell) else {
                 fatalError("Sender is not a UITableViewCell or was not found in the tableView, or segue.identifier is not correct")
             }
 
-            let exercise = fetchedResultsController.objectAtIndexPath(selectedRowIndexPath) as! Exercise
-            let destinationVC = segue.destinationViewController as? ExerciseDetailViewController
+            let exercise = fetchedResultsController.object(at: selectedRowIndexPath)
+            let destinationVC = segue.destination as? ExerciseDetailViewController
             destinationVC?.exercise = exercise
         }
 
     }
 
-    @IBAction func deleteExerciseFromDataSource(segue: UIStoryboardSegue) {
-        if let sourceVC = segue.sourceViewController as? ExerciseDetailViewController,
+    @IBAction func deleteExerciseFromDataSource(_ segue: UIStoryboardSegue) {
+        if let sourceVC = segue.source as? ExerciseDetailViewController,
         let exercise = sourceVC.exercise {
-            let exerciseName: String = exercise.name
+//            let exerciseName: String = exercise.name
 
-            self.coreDataStack.managedObjectContext.deleteObject(exercise)
+            self.coreDataStack.managedObjectContext.delete(exercise)
             self.coreDataStack.saveMainContext()
 
-            reloadData()
+            
 
-            self.notificationAlertWithTitle("Deleted \"\(exerciseName)\"")
+//            self.notificationAlertWithTitle("Deleted \"\(exerciseName)\"")
         }
     }
 
 
 }
 
+/*
+extension ExercisesTableViewController: NSFetchedResultsControllerDelegate {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        switch type {
+        case .insert:
+            tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
+        case .delete:
+            tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
+        case .move:
+            break
+        case .update:
+            break
+        }
+    }
+
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .delete:
+            tableView.deleteRows(at: [indexPath!], with: .fade)
+        case .insert:
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
+        case .update:
+            configureCell(self.tableView.cellForRow(at: indexPath!)!, indexPath: indexPath!)
+        case .move:
+            tableView.deleteRows(at: [indexPath!], with: .fade)
+            tableView.insertRows(at: [indexPath!], with: .fade)
+        }
+    }
+
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
+}
+*/
+
 extension ExercisesTableViewController: UISearchResultsUpdating, UISearchBarDelegate {
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
+    func updateSearchResults(for searchController: UISearchController) {
 
         // Process the search string, remove leading and trailing spaces
         let searchText = searchController.searchBar.text!
-        let trimmedSearchString = searchText.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        let trimmedSearchString = searchText.trimmingCharacters(in: CharacterSet.whitespaces)
 
         // If search string is not blank
         if trimmedSearchString != "" {
@@ -284,28 +304,29 @@ extension ExercisesTableViewController: UISearchResultsUpdating, UISearchBarDele
             let predicate = NSPredicate(format: "name contains [c] %@", trimmedSearchString)
 
             // Add the search filter
-            fetchedResultsController.fetchRequest.predicate = predicate
+            initializeFetchedResultsController(predicate)
 
             tableView.tableFooterView = UIView()
         } else {
-            getFRC()
+            initializeFetchedResultsController(nil)
         }
 
-        reloadData()
+//        reloadData()
     }
 
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         // Remove search bar from nav bar and display left and right bar button items
         navigationItem.titleView = nil
 
-        let searchItem = UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: #selector(ExercisesTableViewController.onSearchBarButtonPressed))
-        searchItem.tintColor = UIColor.whiteColor()
+        let searchItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(ExercisesTableViewController.onSearchBarButtonPressed))
+        searchItem.tintColor = UIColor.white
 
-        let addItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(ExercisesTableViewController.onAddExerciseBarButtonPressed))
-        addItem.tintColor = UIColor.whiteColor()
+        let addItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(ExercisesTableViewController.onAddExerciseBarButtonPressed))
+        addItem.tintColor = UIColor.white
 
         navigationItem.leftBarButtonItem = searchItem
         navigationItem.rightBarButtonItem = addItem
+
     }
 }
 

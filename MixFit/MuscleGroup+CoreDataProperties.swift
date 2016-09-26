@@ -20,3 +20,11 @@ extension MuscleGroup {
     @NSManaged var orderTag: String?
 
 }
+
+extension MuscleGroup {
+    @nonobjc class func fetchRequest() -> NSFetchRequest<MuscleGroup> {
+        return NSFetchRequest<MuscleGroup>(entityName: "MuscleGroup");
+    }
+
+    @NSManaged var timeStamp: NSDate?
+}

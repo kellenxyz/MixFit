@@ -32,15 +32,15 @@ class NewMixlistViewController: UIViewController {
         mixlistTitleTextField.delegate = self
 
         if mixlistTitleTextField.text == "" {
-            saveButton.enabled = false
+            saveButton.isEnabled = false
         } else {
-            saveButton.enabled = true
+            saveButton.isEnabled = true
         }
 
         mixlistTitleTextField.becomeFirstResponder()
     }
 
-    @IBAction func onSaveButtonPressed(sender: UIBarButtonItem) {
+    @IBAction func onSaveButtonPressed(_ sender: UIBarButtonItem) {
 
         if mixlist != nil {
             mixlist?.setValue(self.mixlistTitleTextField.text, forKey: "name")
@@ -48,13 +48,13 @@ class NewMixlistViewController: UIViewController {
             coreDataStack.saveMainContext()
 
             mixlistTitleTextField.resignFirstResponder()
-            self.performSegueWithIdentifier("UnwindToMixlistDetail", sender: self)
+            self.performSegue(withIdentifier: "UnwindToMixlistDetail", sender: self)
         } else {
-            guard let entity = NSEntityDescription.entityForName("UserCreatedMixlist", inManagedObjectContext: coreDataStack.managedObjectContext) else {
+            guard let entity = NSEntityDescription.entity(forEntityName: "UserCreatedMixlist", in: coreDataStack.managedObjectContext) else {
                 fatalError("Could not find entity descriptions!")
             }
 
-            let newMixlist = UserCreatedMixlist(entity: entity, insertIntoManagedObjectContext: coreDataStack.managedObjectContext)
+            let newMixlist = UserCreatedMixlist(entity: entity, insertInto: coreDataStack.managedObjectContext)
             if let name = self.mixlistTitleTextField.text {
                 newMixlist.name = name
             }
@@ -62,13 +62,13 @@ class NewMixlistViewController: UIViewController {
             coreDataStack.saveMainContext()
 
             mixlistTitleTextField.resignFirstResponder()
-            self.performSegueWithIdentifier("UnwindToMixlists", sender: self)
+            self.performSegue(withIdentifier: "UnwindToMixlists", sender: self)
         }
     }
 
-    @IBAction func onCancelButtonPressed(sender: UIBarButtonItem) {
+    @IBAction func onCancelButtonPressed(_ sender: UIBarButtonItem) {
         mixlistTitleTextField.resignFirstResponder()
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 
     /*
@@ -84,15 +84,15 @@ class NewMixlistViewController: UIViewController {
 }
 
 extension NewMixlistViewController: UITextFieldDelegate {
-    @IBAction func onTextFieldEditingChanged(sender: UITextField) {
+    @IBAction func onTextFieldEditingChanged(_ sender: UITextField) {
         if mixlistTitleTextField.text == "" {
-            saveButton.enabled = false
+            saveButton.isEnabled = false
         } else {
-            saveButton.enabled = true
+            saveButton.isEnabled = true
         }
     }
 
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let maxLength = 20
         return (mixlistTitleTextField?.text?.utf16.count ?? 0) + string.utf16.count - range.length <= maxLength
     }

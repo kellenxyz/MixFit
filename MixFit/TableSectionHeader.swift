@@ -13,7 +13,7 @@ class TableSectionHeader: UITableViewHeaderFooterView {
     @IBOutlet weak var titleLabel: UILabel!
 
     override func awakeFromNib() {
-        self.contentView.backgroundColor = UIColor.whiteColor()
+        self.contentView.backgroundColor = UIColor.white
 //
 //        let bottomBorder = CALayer()
 //        bottomBorder.backgroundColor = UIColor.blueColor().CGColor

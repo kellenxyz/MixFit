@@ -39,6 +39,7 @@
 		4361B5EF1D237C2C00C8E8E8 /* RobotoCondensed-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4361B5E91D237A9E00C8E8E8 /* RobotoCondensed-Light.ttf */; };
 		4361B5F01D237C2F00C8E8E8 /* RobotoCondensed-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4361B5E81D237A9E00C8E8E8 /* RobotoCondensed-Bold.ttf */; };
 		4361B5F21D24533600C8E8E8 /* NewMixlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4361B5F11D24533600C8E8E8 /* NewMixlistViewController.swift */; };
+		438103601D931BFE00933D26 /* ColorWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4381035F1D931BFE00933D26 /* ColorWheel.swift */; };
 		438424BE1D4D15EA0021B0CB /* HUDGreeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438424BD1D4D15EA0021B0CB /* HUDGreeting.swift */; };
 		438424C01D4FC1A20021B0CB /* ExerciseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438424BF1D4FC1A20021B0CB /* ExerciseDetailViewController.swift */; };
 		43A986CA1D07946B008276DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A986C91D07946B008276DF /* AppDelegate.swift */; };
@@ -115,6 +116,7 @@
 		4361B5E91D237A9E00C8E8E8 /* RobotoCondensed-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Light.ttf"; sourceTree = "<group>"; };
 		4361B5EA1D237A9E00C8E8E8 /* RobotoCondensed-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Regular.ttf"; sourceTree = "<group>"; };
 		4361B5F11D24533600C8E8E8 /* NewMixlistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMixlistViewController.swift; sourceTree = "<group>"; };
+		4381035F1D931BFE00933D26 /* ColorWheel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorWheel.swift; sourceTree = "<group>"; };
 		438424BD1D4D15EA0021B0CB /* HUDGreeting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUDGreeting.swift; sourceTree = "<group>"; };
 		438424BF1D4FC1A20021B0CB /* ExerciseDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseDetailViewController.swift; sourceTree = "<group>"; };
 		43A986C61D07946B008276DF /* MixFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MixFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -234,6 +236,7 @@
 				4361B5E41D21E91E00C8E8E8 /* TableSectionHeader.xib */,
 				4361B5DC1D19D83E00C8E8E8 /* CustomButton.swift */,
 				4361B5E01D1B4F2200C8E8E8 /* CustomImageView.swift */,
+				4381035F1D931BFE00933D26 /* ColorWheel.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -378,19 +381,23 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = Jetpilot;
 				TargetAttributes = {
 					43A986C51D07946B008276DF = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 56GXWU92VJ;
+						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 					};
 					43A986DC1D07946B008276DF = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = 43A986C51D07946B008276DF;
 					};
 					43A986E71D07946B008276DF = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = 43A986C51D07946B008276DF;
 					};
 				};
@@ -483,6 +490,7 @@
 				43568A181D2C2540004F45D3 /* Mixlist+CoreDataProperties.swift in Sources */,
 				43568A251D2D8A9E004F45D3 /* DataManager.swift in Sources */,
 				43A986CA1D07946B008276DF /* AppDelegate.swift in Sources */,
+				438103601D931BFE00933D26 /* ColorWheel.swift in Sources */,
 				43568A1A1D2C2540004F45D3 /* UserCreatedMixlist+CoreDataProperties.swift in Sources */,
 				43DCD32A1D56823C00AA615A /* ExerciseMuscleGroupViewController.swift in Sources */,
 				4361B5E31D1B505100C8E8E8 /* MuscleGroupTableViewCell.swift in Sources */,
@@ -569,8 +577,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -614,8 +624,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -634,6 +646,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -643,10 +656,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 56GXWU92VJ;
 				INFOPLIST_FILE = MixFit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.jetpilot.MixFit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -655,10 +671,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 56GXWU92VJ;
 				INFOPLIST_FILE = MixFit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.jetpilot.MixFit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -670,6 +689,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.jetpilot.MixFitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MixFit.app/MixFit";
 			};
 			name = Debug;
@@ -682,6 +702,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.jetpilot.MixFitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MixFit.app/MixFit";
 			};
 			name = Release;
@@ -693,6 +714,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.jetpilot.MixFitUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = MixFit;
 			};
 			name = Debug;
@@ -704,6 +726,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.jetpilot.MixFitUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = MixFit;
 			};
 			name = Release;

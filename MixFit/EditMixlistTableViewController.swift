@@ -30,58 +30,58 @@ class EditMixlistTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 2
     }
 
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        if indexPath.row == 1 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("DeleteCell", forIndexPath: indexPath)
+        if (indexPath as NSIndexPath).row == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DeleteCell", for: indexPath)
             cell.textLabel?.text = "Delete mixlist"
             return cell
         } else {
-            let cell = tableView.dequeueReusableCellWithIdentifier("OptionCell", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "OptionCell", for: indexPath)
 
-            let cellTitle: String = options[indexPath.row]
+            let cellTitle: String = options[(indexPath as NSIndexPath).row]
             cell.textLabel?.text = cellTitle
 
             return cell
         }
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        if indexPath.row == 1 {
-            let alertController = UIAlertController(title: "Delete mixlist?", message: "Are you sure you wish to delete this mixlist? This action cannot be undone.", preferredStyle: .Alert)
-            let deleteAction = UIAlertAction(title: "Delete mixlist", style: .Destructive, handler: { (action) in
+        if (indexPath as NSIndexPath).row == 1 {
+            let alertController = UIAlertController(title: "Delete mixlist?", message: "Are you sure you wish to delete this mixlist? This action cannot be undone.", preferredStyle: .alert)
+            let deleteAction = UIAlertAction(title: "Delete mixlist", style: .destructive, handler: { (action) in
                 // Delete mixlist from data model
 //                alertController.dismissViewControllerAnimated(true, completion: { 
 //                    self.performSegueWithIdentifier("UnwindToMixlists", sender: self)
 //                })
             })
-            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             alertController.addAction(deleteAction)
             alertController.addAction(cancelAction)
-            self.presentViewController(alertController, animated: true, completion: nil)
+            self.present(alertController, animated: true, completion: nil)
 
         }
 
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    @IBAction func onCancelButtonPressed(sender: UIBarButtonItem) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func onCancelButtonPressed(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
     }
 
-    @IBAction func onSaveButtonPressed(sender: UIBarButtonItem) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func onSaveButtonPressed(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
     }
 
     /*

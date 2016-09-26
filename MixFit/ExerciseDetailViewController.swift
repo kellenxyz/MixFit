@@ -25,13 +25,13 @@ class ExerciseDetailViewController: UIViewController {
         title = "EXERCISE"
 
         if (exercise == exercise as? UserCreatedExercise) {
-            let editItem = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: #selector(ExerciseDetailViewController.onOptionsButtonPressed))
-            editItem.tintColor = UIColor.whiteColor()
+            let editItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(ExerciseDetailViewController.onOptionsButtonPressed))
+            editItem.tintColor = UIColor.white
             navigationItem.rightBarButtonItem = editItem
         }
 
         // Set labels
-        exerciseNameLabel.text = exercise.name.uppercaseString
+        exerciseNameLabel.text = exercise.name.uppercased()
         muscleGroupsTargetedLabel.text = exercise.targetedMuscles
         trainersNotesLabel.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
@@ -46,30 +46,39 @@ class ExerciseDetailViewController: UIViewController {
 
 
     func onOptionsButtonPressed() {
-        let actionSheet = UIAlertController(title: "Exercise Options", message: nil, preferredStyle: .ActionSheet)
+        let actionSheet = UIAlertController(title: "Exercise Options", message: nil, preferredStyle: .actionSheet)
 
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-        let deleteAction = UIAlertAction(title: "Delete Exercise", style: .Destructive) { (action) in
-            let alertController = UIAlertController(title: "Delete \"\(self.exercise.name)\"?", message: "Are you sure you wish to delete this exercise? This action cannot be undone.", preferredStyle: .Alert)
-            let cancelDelete = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-            let delete = UIAlertAction(title: "Delete", style: .Destructive, handler: { (action) in
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let deleteAction = UIAlertAction(title: "Delete Exercise", style: .destructive) { (action) in
+            let alertController = UIAlertController(title: "Delete \"\(self.exercise.name)\"?", message: "Are you sure you wish to delete this exercise? This action cannot be undone.", preferredStyle: .alert)
+            let cancelDelete = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            let delete = UIAlertAction(title: "Delete", style: .destructive, handler: { (action) in
                 // delete mixlist
-                self.performSegueWithIdentifier("DeleteExerciseFromDataSource", sender: self)
+                self.performSegue(withIdentifier: "DeleteExerciseFromDataSource", sender: self)
             })
             alertController.addAction(cancelDelete)
             alertController.addAction(delete)
-            self.presentViewController(alertController, animated: true, completion: {
+            self.present(alertController, animated: true, completion: {
                 // take any further actions required here
             })
         }
-        let renameAction = UIAlertAction(title: "Rename", style: .Default) { (action) in
+        let renameAction = UIAlertAction(title: "Rename", style: .default) { (action) in
             // Rename view controller
         }
-        let editImageAction = UIAlertAction(title: "Edit Exercise Image", style: .Default) { (action) in
+        let editImageAction = UIAlertAction(title: "Edit Exercise Image", style: .default) { (action) in
             // Choose new image
         }
-        let changeMuscleGroupAction = UIAlertAction(title: "Change Muscle Group", style: .Default) { (action) in
-            // Change muscle group
+        let changeMuscleGroupAction = UIAlertAction(title: "Change Muscle Group", style: .default) { (action) in
+            guard let navController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ExerciseEditNavigationController") as? UINavigationController, let muscleGroupVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ExerciseMuscleGroupViewController") as? ExerciseMuscleGroupViewController else {
+                fatalError("Could not instantiate ExerciseMuscleGroupViewController")
+            }
+            navController.setViewControllers([muscleGroupVC], animated: true)
+            if let exercise = self.exercise as? UserCreatedExercise {
+                muscleGroupVC.existingExercise = exercise
+            }
+            self.present(navController, animated: true, completion: {
+                //
+            })
         }
 
         actionSheet.addAction(renameAction)
@@ -78,7 +87,7 @@ class ExerciseDetailViewController: UIViewController {
         actionSheet.addAction(deleteAction)
         actionSheet.addAction(cancelAction)
 
-        self.presentViewController(actionSheet, animated: true, completion: nil)
+        self.present(actionSheet, animated: true, completion: nil)
     }
 
     /*

@@ -9,12 +9,33 @@
 import UIKit
 import CoreData
 
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
+
 class HomeTableViewController: UITableViewController {
 
-    /*
+
     let kTableHeaderHeight: CGFloat = 150.0
     var headerView: UIView!
-    */
+
     var coreDataStack = CoreDataStack.sharedInstance
     var muscleGroups = [MuscleGroup]()
     var expansionPacks: [String] = []
@@ -26,7 +47,9 @@ class HomeTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+//        navigationController?.hidesBarsOnSwipe = true
+
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
 
         self.hudQuoteLabel.text = HUDGreeting.getQuoteForGreeting()
@@ -35,13 +58,13 @@ class HomeTableViewController: UITableViewController {
         let logo = UIImage(named: "mixfit-title-logo")
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 80, height: 24))
         imageView.image = logo
-        imageView.contentMode = .ScaleAspectFit
+        imageView.contentMode = .scaleAspectFit
         self.navigationItem.titleView = imageView
 
         // Dummy data
         expansionPacks = ["Kettlebell", "Bodyweight"]
 
-        /*
+
         // Assign storyboard headerView to headerView property
         headerView = tableView.tableHeaderView
         tableView.tableHeaderView = nil
@@ -51,33 +74,33 @@ class HomeTableViewController: UITableViewController {
         tableView.contentOffset = CGPoint(x: 0, y: -kTableHeaderHeight)
 
         updateHeaderView()
-        */
+
 
         // Set color of tableViewCell separators
         tableView.separatorColor = UIColor(colorLiteralRed: 0.88, green: 0.88, blue: 0.88, alpha: 1)
 
         let nib = UINib(nibName: "TableSectionHeader", bundle: nil)
-        tableView.registerNib(nib, forHeaderFooterViewReuseIdentifier: "TableSectionHeader")
+        tableView.register(nib, forHeaderFooterViewReuseIdentifier: "TableSectionHeader")
 
         // Remove extra emtpy tableViewCell rows after last cell
         tableView.tableFooterView = UIView()
 
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         self.hudGreetingLabel.text = HUDGreeting.displayGreetingForTimeOfDay()
         reloadData()
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
     }
 
     func reloadData() {
-        let fetchRequest = NSFetchRequest(entityName: "MuscleGroup")
+        let fetchRequest = NSFetchRequest<MuscleGroup>(entityName: "MuscleGroup")
         let predicate = NSPredicate(format: "parentMuscleGroup == nil")
         fetchRequest.predicate = predicate
         fetchRequest.sortDescriptors = [
@@ -85,9 +108,9 @@ class HomeTableViewController: UITableViewController {
         ]
 
         do {
-            if let results = try coreDataStack.managedObjectContext.executeFetchRequest(fetchRequest) as? [MuscleGroup] {
-                muscleGroups = results
-            }
+            let results = try coreDataStack.managedObjectContext.fetch(fetchRequest)
+            muscleGroups = results
+
         } catch {
             fatalError("Error fetching data! \(error)")
         }
@@ -95,7 +118,7 @@ class HomeTableViewController: UITableViewController {
         tableView.reloadData()
     }
 
-    /*
+
     func updateHeaderView() {
         var headerRect = CGRect(x: 0, y: -kTableHeaderHeight, width: tableView.bounds.width, height: kTableHeaderHeight)
         if tableView.contentOffset.y < -kTableHeaderHeight {
@@ -105,69 +128,58 @@ class HomeTableViewController: UITableViewController {
 
         headerView.frame = headerRect
 
-        if tableView.contentOffset.y >= 0 {
-            tableView.contentInset = UIEdgeInsetsZero
-        } else {
-            tableView.contentInset = UIEdgeInsets(top: min(-tableView.contentOffset.y, kTableHeaderHeight), left: 0, bottom: 0, right: 0)
-        }
+
 
     }
-    */
 
-    override func scrollViewDidScroll(scrollView: UIScrollView) {
-//        updateHeaderView()
+
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+
+//        if tableView.contentOffset.y >= 0 {
+//            tableView.contentInset = UIEdgeInsetsZero
+//        } else {
+//            tableView.contentInset = UIEdgeInsets(top: min(-tableView.contentOffset.y, kTableHeaderHeight), left: 0, bottom: 0, right: 0)
+//        }
+
+        updateHeaderView()
     }
 
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return muscleGroups.count
-        case 1:
-            return 1
-        default:
-            return muscleGroups.count
-        }
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return muscleGroups.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> MuscleGroupTableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("MuscleGroupCell", forIndexPath: indexPath) as! MuscleGroupTableViewCell
-        let muscleGroup = muscleGroups[indexPath.row]
-//        cell.muscleGroup = muscleGroup
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> MuscleGroupTableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MuscleGroupCell", for: indexPath) as! MuscleGroupTableViewCell
 
-        var cellTitle: String
-        if indexPath.section == 0 {
-            cell.mgCellTextLabel.text = muscleGroup.name.uppercaseString
-        } else {
-            cellTitle = "Kettlebell Expansion"
-            cell.mgCellTextLabel.text = cellTitle.uppercaseString
-        }
+        let muscleGroup = muscleGroups[(indexPath as NSIndexPath).row]
+
+        cell.mgCellTextLabel.text = muscleGroup.name.uppercased()
 
         if muscleGroup.subMuscleGroups?.count > 0 {
-            cell.accessoryType = .DisclosureIndicator
+            cell.accessoryType = .disclosureIndicator
         } else {
-            cell.accessoryType = .None
+            cell.accessoryType = .none
         }
-
 
         return cell
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        let muscleGroup = muscleGroups[indexPath.row]
-        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        let muscleGroup = muscleGroups[(indexPath as NSIndexPath).row]
+        let cell = tableView.cellForRow(at: indexPath)
 
         if muscleGroup.subMuscleGroups?.count > 0 {
-            performSegueWithIdentifier("ShowSubMuscleGroups", sender: cell)
+            performSegue(withIdentifier: "ShowSubMuscleGroups", sender: cell)
         } else {
-            performSegueWithIdentifier("ShowExercisePageController", sender: cell)
+            performSegue(withIdentifier: "ShowExercisePageController", sender: cell)
         }
 
 //        guard let exercises = muscleGroup.exercises,
@@ -182,28 +194,25 @@ class HomeTableViewController: UITableViewController {
 //            print("\(exercise.name)\n\(exercise.exerciseID)\n")
 //        }
 
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
+    /*
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-
-        let cell = self.tableView.dequeueReusableHeaderFooterViewWithIdentifier("TableSectionHeader")
+        let cell = self.tableView.dequeueReusableHeaderFooterView(withIdentifier: "TableSectionHeader")
         let header = cell as! TableSectionHeader
 
-        if section == 0 {
-            header.titleLabel.text = "MUSCLE GROUPS"
-        } else {
-            header.titleLabel.text = "EXPANSION PACKS"
-        }
+        header.titleLabel.text = "MUSCLE GROUPS"
 
         return cell
     }
 
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40.0
     }
-
+    */
 
     /*
     // Override to support conditional editing of the table view.
@@ -244,13 +253,13 @@ class HomeTableViewController: UITableViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        guard let selectedCell = sender as? MuscleGroupTableViewCell, let selectedRowIndex = tableView.indexPathForCell(selectedCell)?.row else {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let selectedCell = sender as? MuscleGroupTableViewCell, let selectedRowIndex = (tableView.indexPath(for: selectedCell) as NSIndexPath?)?.row else {
             fatalError("Sender is not a UITableViewCell or was not found in the tableView, or segue.identifier is not correct")
         }
         let muscleGroup = muscleGroups[selectedRowIndex]
         if segue.identifier == "ShowExercisePageController" {
-            let navController = segue.destinationViewController as? UINavigationController
+            let navController = segue.destination as? UINavigationController
             let destinationViewController = navController?.topViewController as? ExercisePageViewController
             destinationViewController?.mixlistName = muscleGroup.name
 //            destinationViewController?.coreDataStack = self.coreDataStack
@@ -261,7 +270,7 @@ class HomeTableViewController: UITableViewController {
             }
         } else if segue.identifier == "ShowSubMuscleGroups" {
             // Segue to subMuscleGroup view controller
-            let destinationViewController = segue.destinationViewController as? SubMuscleGroupsTableViewController
+            let destinationViewController = segue.destination as? SubMuscleGroupsTableViewController
             destinationViewController?.muscleGroup = muscleGroup
         }
     }

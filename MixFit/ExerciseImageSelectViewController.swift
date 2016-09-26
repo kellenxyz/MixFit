@@ -7,26 +7,39 @@
 //
 
 import UIKit
+import CoreData
 
 class ExerciseImageSelectViewController: UIViewController {
 
+    var coreDataStack = CoreDataStack.sharedInstance
     var exercise: UserCreatedExercise?
     var existingExercise: UserCreatedExercise?
+    var saveButton: UIBarButtonItem!
+
+    var exerciseName: String!
+    var muscleGroup: MuscleGroup!
 
     @IBOutlet weak var saveBarButtonItem: UIBarButtonItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let exercise = exercise {
-            print(exercise)
-        }
+        saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(ExerciseImageSelectViewController.onSaveButtonPressed(_:)))
+        saveButton.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 16, weight: UIFontWeightBold), NSForegroundColorAttributeName: ColorWheel.leadColor()], for: .normal)
+        navigationItem.rightBarButtonItem = saveButton
+
+//        if let exercise = exercise {
+//            print(exercise)
+//        }
 
         if existingExercise != nil {
             title = "EDIT IMAGE"
         } else {
             title = "NEW EXERCISE"
         }
+
+        print(exerciseName)
+        print(muscleGroup)
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,9 +49,21 @@ class ExerciseImageSelectViewController: UIViewController {
 
     // MARK: - IBActions
     
-    @IBAction func onSaveButtonPressed(sender: UIBarButtonItem) {
+    @IBAction func onSaveButtonPressed(_ sender: UIBarButtonItem) {
 
-        self.dismissViewControllerAnimated(true, completion: nil)
+        guard let entity = NSEntityDescription.entity(forEntityName: "UserCreatedExercise", in: coreDataStack.managedObjectContext) else {
+            fatalError("Could not find entity descriptions!")
+        }
+
+        let newExercise = UserCreatedExercise(entity: entity, insertInto: coreDataStack.managedObjectContext)
+        newExercise.name = self.exerciseName
+        newExercise.muscleGroup = self.muscleGroup
+        newExercise.isFavorite = false
+        newExercise.targetedMuscleGroups = self.muscleGroup.name
+
+        self.coreDataStack.saveMainContext()
+
+        self.dismiss(animated: true, completion: nil)
     }
 
     /*

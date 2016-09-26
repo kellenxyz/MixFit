@@ -13,7 +13,7 @@ struct HUDGreeting {
     static func displayGreetingForTimeOfDay() -> String {
 
         var greeting = "Hello!"
-        let hour = NSCalendar.currentCalendar().component(.Hour, fromDate: NSDate())
+        let hour = (Calendar.current as NSCalendar).component(.hour, from: Date())
 
         if hour >= 0  && hour < 12 {
             greeting = "Good morning!"
@@ -23,7 +23,7 @@ struct HUDGreeting {
             greeting = "Good evening!"
         }
 
-        return greeting.uppercaseString
+        return greeting.uppercased()
     }
 
     static func getQuoteForGreeting() -> String {

@@ -24,81 +24,81 @@ class PreloadDataManager {
 
     // MARK: - Muscle Groups & Exercises
 
-    func preloadExerciseAndMuscleGroupData(completion: () -> Void) {
-        guard let entity = NSEntityDescription.entityForName("MuscleGroup", inManagedObjectContext: coreDataStack.managedObjectContext) else {
+    func preloadExerciseAndMuscleGroupData(_ completion: @escaping () -> Void) {
+        guard let entity = NSEntityDescription.entity(forEntityName: "MuscleGroup", in: coreDataStack.managedObjectContext) else {
             fatalError("Could not find entity descriptions!")
         }
 
         // Back
-        let back = MuscleGroup(entity: entity, insertIntoManagedObjectContext: coreDataStack.managedObjectContext)
+        let back = MuscleGroup(entity: entity, insertInto: coreDataStack.managedObjectContext)
         back.name = "Back"
         back.orderTag = "0"
 
         // Chest
-        let chest = MuscleGroup(entity: entity, insertIntoManagedObjectContext: coreDataStack.managedObjectContext)
+        let chest = MuscleGroup(entity: entity, insertInto: coreDataStack.managedObjectContext)
         chest.name = "Chest"
         chest.orderTag = "1"
 
         // Legs subGroups
         // Quads
-        let quads = MuscleGroup(entity: entity, insertIntoManagedObjectContext: coreDataStack.managedObjectContext)
+        let quads = MuscleGroup(entity: entity, insertInto: coreDataStack.managedObjectContext)
         quads.name = "Quads"
         quads.orderTag = "0"
         //Hamstrings
-        let hamstrings = MuscleGroup(entity: entity, insertIntoManagedObjectContext: coreDataStack.managedObjectContext)
+        let hamstrings = MuscleGroup(entity: entity, insertInto: coreDataStack.managedObjectContext)
         hamstrings.name = "Hamstrings"
         hamstrings.orderTag = "1"
         // Glutes
-        let glutes = MuscleGroup(entity: entity, insertIntoManagedObjectContext: coreDataStack.managedObjectContext)
+        let glutes = MuscleGroup(entity: entity, insertInto: coreDataStack.managedObjectContext)
         glutes.name = "Glutes"
         glutes.orderTag = "2"
         // Calves
-        let calves = MuscleGroup(entity: entity, insertIntoManagedObjectContext: coreDataStack.managedObjectContext)
+        let calves = MuscleGroup(entity: entity, insertInto: coreDataStack.managedObjectContext)
         calves.name = "Calves"
         calves.orderTag = "3"
 
         // Legs
-        let legs = MuscleGroup(entity: entity, insertIntoManagedObjectContext: coreDataStack.managedObjectContext)
+        let legs = MuscleGroup(entity: entity, insertInto: coreDataStack.managedObjectContext)
         legs.name = "Legs"
         legs.orderTag = "2"
         // Add subGroup relationships to Legs
-        let legSubMuscleGroups = legs.mutableSetValueForKey("subMuscleGroups")
-        legSubMuscleGroups.addObject(hamstrings)
-        legSubMuscleGroups.addObject(quads)
-        legSubMuscleGroups.addObject(glutes)
-        legSubMuscleGroups.addObject(calves)
+        let legSubMuscleGroups = legs.mutableSetValue(forKey: "subMuscleGroups")
+        legSubMuscleGroups.add(hamstrings)
+        legSubMuscleGroups.add(quads)
+        legSubMuscleGroups.add(glutes)
+        legSubMuscleGroups.add(calves)
 
         // Arms subGroups
         // Biceps
-        let biceps = MuscleGroup(entity: entity, insertIntoManagedObjectContext: coreDataStack.managedObjectContext)
+        let biceps = MuscleGroup(entity: entity, insertInto: coreDataStack.managedObjectContext)
         biceps.name = "Biceps"
         biceps.orderTag = "0"
         // Triceps
-        let triceps = MuscleGroup(entity: entity, insertIntoManagedObjectContext: coreDataStack.managedObjectContext)
+        let triceps = MuscleGroup(entity: entity, insertInto: coreDataStack.managedObjectContext)
         triceps.name = "Triceps"
         triceps.orderTag = "1"
 
         // Arms
-        let arms = MuscleGroup(entity: entity, insertIntoManagedObjectContext: coreDataStack.managedObjectContext)
+        let arms = MuscleGroup(entity: entity, insertInto: coreDataStack.managedObjectContext)
         arms.name = "Arms"
         arms.orderTag = "3"
         // Add subGroup relationships to Arms
-        let armsSubMuscleGroups = arms.mutableSetValueForKey("subMuscleGroups")
-        armsSubMuscleGroups.addObject(biceps)
-        armsSubMuscleGroups.addObject(triceps)
+        let armsSubMuscleGroups = arms.mutableSetValue(forKey: "subMuscleGroups")
+        armsSubMuscleGroups.add(biceps)
+        armsSubMuscleGroups.add(triceps)
 
         // Shoulders
-        let shoulders = MuscleGroup(entity: entity, insertIntoManagedObjectContext: coreDataStack.managedObjectContext)
+        let shoulders = MuscleGroup(entity: entity, insertInto: coreDataStack.managedObjectContext)
         shoulders.name = "Shoulders"
         shoulders.orderTag = "4"
 
         // Core
-        let core = MuscleGroup(entity: entity, insertIntoManagedObjectContext: coreDataStack.managedObjectContext)
+        let core = MuscleGroup(entity: entity, insertInto: coreDataStack.managedObjectContext)
         core.name = "Core"
         core.orderTag = "5"
 
         // Full Body
-        let fullBody = MuscleGroup(entity: entity, insertIntoManagedObjectContext: coreDataStack.managedObjectContext)
+        let fullBody = MuscleGroup(entity: entity, insertInto: coreDataStack.managedObjectContext)
         fullBody.name = "Full Body"
         fullBody.orderTag = "6"
 
@@ -109,7 +109,7 @@ class PreloadDataManager {
             var json: Payload!
 
             do {
-                json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions()) as? Payload
+                json = try JSONSerialization.jsonObject(with: data as Data, options: JSONSerialization.ReadingOptions()) as? Payload
             } catch {
                 print(error)
                 fatalError("Error paring JSON file!")
@@ -128,14 +128,14 @@ class PreloadDataManager {
             self.loadExercisesFromJSON("fullBody", json: json, muscleGroup: fullBody)
         }
 
-        dispatch_async(dispatch_get_main_queue()) { 
+        DispatchQueue.main.async { 
             completion()
         }
     }
 
-    func loadExercisesFromJSON(keyName: String, json: Payload, muscleGroup: MuscleGroup) {
+    func loadExercisesFromJSON(_ keyName: String, json: Payload, muscleGroup: MuscleGroup) {
 
-        guard let entity = NSEntityDescription.entityForName("DefaultExercise", inManagedObjectContext: coreDataStack.managedObjectContext) else {
+        guard let entity = NSEntityDescription.entity(forEntityName: "DefaultExercise", in: coreDataStack.managedObjectContext) else {
             fatalError("Could not find entity descriptions!")
         }
 
@@ -155,7 +155,7 @@ class PreloadDataManager {
                     fatalError("Error parsing exercise dictionary!")
             }
 
-            let exercise = DefaultExercise(entity: entity, insertIntoManagedObjectContext: coreDataStack.managedObjectContext)
+            let exercise = DefaultExercise(entity: entity, insertInto: coreDataStack.managedObjectContext)
             exercise.exerciseID = exerciseID
             exercise.name = name
             exercise.isFavorite = false
@@ -184,17 +184,17 @@ class PreloadDataManager {
 
     }
 
-    func loadExerciseVolumesFromPlist(keyName: String, dict: NSDictionary) {
-        guard let entity = NSEntityDescription.entityForName("ExerciseVolume", inManagedObjectContext: coreDataStack.managedObjectContext), let zoneEntity = NSEntityDescription.entityForName("TrainingZone", inManagedObjectContext: coreDataStack.managedObjectContext) else {
+    func loadExerciseVolumesFromPlist(_ keyName: String, dict: NSDictionary) {
+        guard let entity = NSEntityDescription.entity(forEntityName: "ExerciseVolume", in: coreDataStack.managedObjectContext), let zoneEntity = NSEntityDescription.entity(forEntityName: "TrainingZone", in: coreDataStack.managedObjectContext) else {
             fatalError("Could not find entity descriptions!")
         }
 
-        let trainingZone = TrainingZone(entity: zoneEntity, insertIntoManagedObjectContext: coreDataStack.managedObjectContext)
+        let trainingZone = TrainingZone(entity: zoneEntity, insertInto: coreDataStack.managedObjectContext)
         trainingZone.name = keyName
         trainingZone.isActive = true
-        let exerciseVolumesRelation = trainingZone.mutableSetValueForKey("exerciseVolumes")
+        let exerciseVolumesRelation = trainingZone.mutableSetValue(forKey: "exerciseVolumes")
 
-        guard let exerciseVolumes = dict[keyName.lowercaseString] as? [[String: AnyObject]]
+        guard let exerciseVolumes = dict[keyName.lowercased()] as? [[String: AnyObject]]
             else {
                 fatalError("Error parsing plist")
         }
@@ -207,12 +207,12 @@ class PreloadDataManager {
                     fatalError("Error parsing exerciseVolumes dictionary")
             }
 
-            let exerciseVolume = ExerciseVolume(entity: entity, insertIntoManagedObjectContext: coreDataStack.managedObjectContext)
+            let exerciseVolume = ExerciseVolume(entity: entity, insertInto: coreDataStack.managedObjectContext)
             exerciseVolume.sets = sets
             exerciseVolume.reps = reps
             exerciseVolume.restTime = restTime
 
-            exerciseVolumesRelation.addObject(exerciseVolume)
+            exerciseVolumesRelation.add(exerciseVolume)
         }
 
         coreDataStack.saveMainContext()

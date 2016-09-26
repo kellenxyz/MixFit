@@ -19,16 +19,16 @@ class ExercisePageViewController: UIPageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = mixlistName.uppercaseString
+        title = mixlistName.uppercased()
 
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = UIColor.white
 
-        setViewControllers([exerciseForPage(0)], direction: .Forward, animated: false, completion: nil)
+        setViewControllers([exerciseForPage(0)], direction: .forward, animated: false, completion: nil)
         dataSource = self
     }
 
-    private func exerciseForPage(inPage: Int) -> ExerciseViewController {
-        let exerciseVC = storyboard!.instantiateViewControllerWithIdentifier("ExerciseViewController") as! ExerciseViewController
+    fileprivate func exerciseForPage(_ inPage: Int) -> ExerciseViewController {
+        let exerciseVC = storyboard!.instantiateViewController(withIdentifier: "ExerciseViewController") as! ExerciseViewController
         let page = min(max(0, inPage), pageCount - 1)
         exerciseVC.page = page
         exerciseVC.exercise = exercises[page]
@@ -37,8 +37,8 @@ class ExercisePageViewController: UIPageViewController {
         return exerciseVC
     }
     
-    @IBAction func onCloseButtonPressed(sender: UIBarButtonItem) {
-        dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func onCloseButtonPressed(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
     }
 
     /*
@@ -55,7 +55,7 @@ class ExercisePageViewController: UIPageViewController {
 
 extension ExercisePageViewController: UIPageViewControllerDataSource {
 
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         if let currentExercisePage = viewController as? ExerciseViewController {
             if currentExercisePage.page < pageCount - 1 {
                 return exerciseForPage(currentExercisePage.page + 1)
@@ -64,7 +64,7 @@ extension ExercisePageViewController: UIPageViewControllerDataSource {
         return nil
     }
 
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         if let currentExercisePage = viewController as? ExerciseViewController {
             if currentExercisePage.page > 0 {
                 return exerciseForPage(currentExercisePage.page - 1)

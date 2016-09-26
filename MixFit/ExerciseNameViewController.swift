@@ -11,8 +11,6 @@ import CoreData
 
 class ExerciseNameViewController: UIViewController {
 
-    var coreDataStack = CoreDataStack.sharedInstance
-    var newExercise: UserCreatedExercise?
     var existingExercise: UserCreatedExercise?
     var exerciseName: String = ""
     var newTitle: String?
@@ -23,46 +21,34 @@ class ExerciseNameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = newTitle ?? "New Exercise".uppercaseString
-
-        if let exercise = newExercise {
-            exerciseName = exercise.name
-            exerciseNameTextField.text = exerciseName
-        }
+        title = newTitle ?? "New Exercise".uppercased()
 
         if exerciseName == "" {
-            nextBarButtonItem.enabled = false
+            nextBarButtonItem.isEnabled = false
         } else {
-            nextBarButtonItem.enabled = true
+            nextBarButtonItem.isEnabled = true
         }
 
         exerciseNameTextField.becomeFirstResponder()
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if newExercise != nil {
-            print(newExercise)
-        }
+        print(exerciseName)
+
     }
 
 
     // MARK: - IBActions
 
-    @IBAction func onCancelButtonPressed(sender: UIBarButtonItem) {
-
-        if let exercise = newExercise {
-            print("Deleted \(exercise.name)")
-            coreDataStack.managedObjectContext.deleteObject(exercise)
-            coreDataStack.saveMainContext()
-        }
+    @IBAction func onCancelButtonPressed(_ sender: UIBarButtonItem) {
 
         exerciseNameTextField.resignFirstResponder()
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 
-    @IBAction func onNextButtonPressed(sender: UIBarButtonItem) {
+    @IBAction func onNextButtonPressed(_ sender: UIBarButtonItem) {
 
 
     }
@@ -71,29 +57,10 @@ class ExerciseNameViewController: UIViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-
-        if newExercise == nil {
-//            let holderMuscleGroup = MuscleGroup()
-
-            guard let entity = NSEntityDescription.entityForName("UserCreatedExercise", inManagedObjectContext: coreDataStack.managedObjectContext) else {
-                fatalError("Could not find entity descriptions!")
-            }
-            let exercise = UserCreatedExercise(entity: entity, insertIntoManagedObjectContext: coreDataStack.managedObjectContext)
-            if let text = exerciseNameTextField.text {
-                exercise.name = text
-            }
-//            let muscleGroupRelation = exercise.mutableSetValueForKey("muscleGroup")
-//            muscleGroupRelation.addObject(holderMuscleGroup)
-            exercise.isFavorite = false
-
-            coreDataStack.saveMainContext()
-
-            newExercise = exercise
-        }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        let destinationViewController = segue.destinationViewController as? ExerciseMuscleGroupViewController
-        destinationViewController?.exercise = newExercise
+        let destinationViewController = segue.destination as? ExerciseMuscleGroupViewController
+        destinationViewController?.exerciseName = self.exerciseName
     }
 
 
@@ -101,20 +68,20 @@ class ExerciseNameViewController: UIViewController {
 
 extension ExerciseNameViewController: UITextFieldDelegate {
 
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let maxLength = 34
         return (exerciseNameTextField?.text?.utf16.count ?? 0) + string.utf16.count - range.length <= maxLength
     }
 
-    @IBAction func textFieldTextDidChange(sender: UITextField) {
+    @IBAction func textFieldTextDidChange(_ sender: UITextField) {
         if let name = exerciseNameTextField.text {
             exerciseName = name
         }
 
         if exerciseName == "" {
-            nextBarButtonItem.enabled = false
+            nextBarButtonItem.isEnabled = false
         } else {
-            nextBarButtonItem.enabled = true
+            nextBarButtonItem.isEnabled = true
         }
 
     }

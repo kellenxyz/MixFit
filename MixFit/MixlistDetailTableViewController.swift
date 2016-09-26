@@ -16,7 +16,7 @@ class MixlistDetailTableViewController: UITableViewController {
     var mixlist: UserCreatedMixlist?
     var mixlistName: String!
     var isFavoritesMixlist: Bool = false
-    var fetchedResultsController: NSFetchedResultsController!
+    var fetchedResultsController: NSFetchedResultsController<Exercise>!
 
     let kTableHeaderHeight: CGFloat = 180.0
     var headerView: UIView!
@@ -28,10 +28,10 @@ class MixlistDetailTableViewController: UITableViewController {
         super.viewDidLoad()
 
         // Remove bottom line on navBar
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
 
-        self.mixlistNameLabel.text = self.mixlistName.uppercaseString
+        self.mixlistNameLabel.text = self.mixlistName.uppercased()
 
         if isFavoritesMixlist {
             navigationItem.rightBarButtonItems = []
@@ -58,7 +58,7 @@ class MixlistDetailTableViewController: UITableViewController {
 //        tableView.tableFooterView = UIView()
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         if isFavoritesMixlist {
@@ -74,16 +74,15 @@ class MixlistDetailTableViewController: UITableViewController {
     func reloadMixlistData() {
 
         if let exercises = self.mixlist?.exercises  {
-            let fetchRequest = NSFetchRequest(entityName: "Exercise")
+            let fetchRequest = NSFetchRequest<Exercise>(entityName: "Exercise")
             fetchRequest.sortDescriptors = [
                 NSSortDescriptor(key: "name", ascending: true)
             ]
             fetchRequest.predicate = NSPredicate(format: "SELF IN %@", exercises)
 
             do {
-                if let results = try coreDataStack.managedObjectContext.executeFetchRequest(fetchRequest) as? [Exercise] {
-                    self.exercises = results
-                }
+                let results = try coreDataStack.managedObjectContext.fetch(fetchRequest)
+                self.exercises = results
             } catch {
                 fatalError("Error fetching exercises data for mixlist \(error)")
             }
@@ -94,16 +93,15 @@ class MixlistDetailTableViewController: UITableViewController {
 
     func reloadFavoritesData() {
 
-        let fetchRequest = NSFetchRequest(entityName: "Exercise")
+        let fetchRequest = NSFetchRequest<Exercise>(entityName: "Exercise")
         fetchRequest.sortDescriptors = [
             NSSortDescriptor(key: "name", ascending: true)
         ]
         fetchRequest.predicate = NSPredicate(format: "isFavorite == true")
 
         do {
-            if let results = try coreDataStack.managedObjectContext.executeFetchRequest(fetchRequest) as? [Exercise] {
-                exercises = results
-            }
+            let results = try coreDataStack.managedObjectContext.fetch(fetchRequest)
+            self.exercises = results
         } catch {
             fatalError("Error fetching data! \(error)")
         }
@@ -113,10 +111,10 @@ class MixlistDetailTableViewController: UITableViewController {
 
     func updateStartMixlistButton() {
         if self.exercises.count <= 0 {
-            self.startMixlistButton.enabled = false
+            self.startMixlistButton.isEnabled = false
             self.startMixlistButton.borderColor = UIColor(colorLiteralRed: 1.0, green: 1.0, blue: 1.0, alpha: 0.3)
         } else {
-            self.startMixlistButton.enabled = true
+            self.startMixlistButton.isEnabled = true
             self.startMixlistButton.borderColor = UIColor(colorLiteralRed: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         }
     }
@@ -124,33 +122,33 @@ class MixlistDetailTableViewController: UITableViewController {
     func instantiateViewForNoExercises() {
 
         if self.exercises.count <= 0 {
-            let testView = UIView(frame: CGRectMake(0, 0, view.frame.width, 150))
+            let testView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 150))
 
-            let label = UILabel(frame: CGRectMake(0, 0, view.frame.width - 80, 60))
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width - 80, height: 60))
             label.center = testView.center
             label.numberOfLines = 0
-            label.textAlignment = NSTextAlignment.Center
+            label.textAlignment = NSTextAlignment.center
             if isFavoritesMixlist {
                 label.text = "You have not favorited any exercises"
             } else {
                 label.text = "You have not added any exercises to this mixlist"
             }
-            label.font = UIFont.systemFontOfSize(14)
+            label.font = UIFont.systemFont(ofSize: 14)
             label.textColor = UIColor(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.3)
             label.alpha = 0
             testView.addSubview(label)
 
             self.tableView.tableFooterView = testView
 
-            UIView.animateWithDuration(1.0) {
+            UIView.animate(withDuration: 1.0, animations: {
                 label.alpha = 1.0
-            }
+            }) 
         } else {
             self.tableView.tableFooterView = UIView()
         }
     }
 
-    override func scrollViewDidScroll(scrollView: UIScrollView) {
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         updateHeaderView()
         updateNavBarTitle()
     }
@@ -188,7 +186,7 @@ class MixlistDetailTableViewController: UITableViewController {
 //                self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: font, NSForegroundColorAttributeName: titleColor]
 //            }
 
-            self.title = self.mixlistName.uppercaseString
+            self.title = self.mixlistName.uppercased()
 
         } else {
             self.title = ""
@@ -197,81 +195,81 @@ class MixlistDetailTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return exercises.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ExerciseCell", forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ExerciseCell", for: indexPath)
 
-        let exercise = exercises[indexPath.row]
+        let exercise = exercises[(indexPath as NSIndexPath).row]
 
         cell.textLabel?.text = exercise.name
-        cell.accessoryType = .DisclosureIndicator
+        cell.accessoryType = .disclosureIndicator
 
         return cell
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
 
     // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
 
     // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
             // Delete the row from the data source
             if isFavoritesMixlist {
-                let alertController = UIAlertController(title: "Unfavorite exercise?", message: "Are you sure you wish to remove this exercise from your favorites?", preferredStyle: .Alert)
-                let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-                let removeAction = UIAlertAction(title: "Unfavorite", style: .Destructive, handler: { (action) in
-                    let exercise = self.exercises[indexPath.row]
+                let alertController = UIAlertController(title: "Unfavorite exercise?", message: "Are you sure you wish to remove this exercise from your favorites?", preferredStyle: .alert)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                let removeAction = UIAlertAction(title: "Unfavorite", style: .destructive, handler: { (action) in
+                    let exercise = self.exercises[(indexPath as NSIndexPath).row]
                     exercise.isFavorite = false
-                    self.exercises.removeAtIndex(indexPath.row)
+                    self.exercises.remove(at: (indexPath as NSIndexPath).row)
                     self.updateStartMixlistButton()
                     self.instantiateViewForNoExercises()
-                    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                    tableView.deleteRows(at: [indexPath], with: .fade)
                     self.coreDataStack.saveMainContext()
                 })
                 alertController.addAction(cancelAction)
                 alertController.addAction(removeAction)
-                self.presentViewController(alertController, animated: true, completion: nil)
+                self.present(alertController, animated: true, completion: nil)
             } else {
-                let alertController = UIAlertController(title: "Remove exercise?", message: "Are you sure you wish to remove this exercise from this mixlist?", preferredStyle: .Alert)
-                let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-                let removeAction = UIAlertAction(title: "Remove", style: .Destructive, handler: { (action) in
-                    let exercise = self.exercises[indexPath.row]
-                    let exercisesRelation = self.mixlist?.mutableSetValueForKey("exercises")
-                    exercisesRelation?.removeObject(exercise)
-                    self.exercises.removeAtIndex(indexPath.row)
+                let alertController = UIAlertController(title: "Remove exercise?", message: "Are you sure you wish to remove this exercise from this mixlist?", preferredStyle: .alert)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                let removeAction = UIAlertAction(title: "Remove", style: .destructive, handler: { (action) in
+                    let exercise = self.exercises[(indexPath as NSIndexPath).row]
+                    let exercisesRelation = self.mixlist?.mutableSetValue(forKey: "exercises")
+                    exercisesRelation?.remove(exercise)
+                    self.exercises.remove(at: (indexPath as NSIndexPath).row)
                     self.updateStartMixlistButton()
                     self.instantiateViewForNoExercises()
-                    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                    tableView.deleteRows(at: [indexPath], with: .fade)
                     self.coreDataStack.saveMainContext()
                 })
                 alertController.addAction(cancelAction)
                 alertController.addAction(removeAction)
-                self.presentViewController(alertController, animated: true, completion: nil)
+                self.present(alertController, animated: true, completion: nil)
             }
 
-        } else if editingStyle == .Insert {
+        } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
 
-    override func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
+    override func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return "Remove"
     }
 
@@ -292,30 +290,31 @@ class MixlistDetailTableViewController: UITableViewController {
 
     // MARK: - IBActions
 
-    @IBAction func onStartMixlistButtonPressed(sender: UIButton) {
-        performSegueWithIdentifier("ShowExercisePageController", sender: self)
+    @IBAction func onStartMixlistButtonPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: "ShowExercisePageController", sender: self)
     }
 
-    @IBAction func onOptionsButtonPressed(sender: UIBarButtonItem) {
-        let actionSheet = UIAlertController(title: "Mixlist Options", message: nil, preferredStyle: .ActionSheet)
-        let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-        let rename = UIAlertAction(title: "Rename", style: .Default) { (action) in
+    @IBAction func onOptionsButtonPressed(_ sender: UIBarButtonItem) {
+        let actionSheet = UIAlertController(title: "Mixlist Options", message: nil, preferredStyle: .actionSheet)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let rename = UIAlertAction(title: "Rename", style: .default) { (action) in
             // present rename view controller
-            self.performSegueWithIdentifier("RenameMixlistSegue", sender: self)
+            self.performSegue(withIdentifier: "RenameMixlistSegue", sender: self)
         }
-        let addExercises = UIAlertAction(title: "Add Exercises", style: .Default) { (action) in
+        let addExercises = UIAlertAction(title: "Add Exercises", style: .default) { (action) in
             // present add exercises view controller
         }
-        let deleteMixlist = UIAlertAction(title: "Delete Mixlist", style: .Destructive) { (action) in
-            let alertController = UIAlertController(title: "Delete \"\(self.mixlistName)\"?", message: "Are you sure you wish to delete this mixlist? This action cannot be undone.", preferredStyle: .Alert)
-            let cancelDelete = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-            let delete = UIAlertAction(title: "Delete", style: .Destructive, handler: { (action) in
+        let deleteMixlist = UIAlertAction(title: "Delete Mixlist", style: .destructive) { (action) in
+            guard let name = self.mixlistName else { fatalError("Could not find a value for self.mixlistName") }
+            let alertController = UIAlertController(title: "Delete \"\(name)\"?", message: "Are you sure you wish to delete this mixlist? This action cannot be undone.", preferredStyle: .alert)
+            let cancelDelete = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            let delete = UIAlertAction(title: "Delete", style: .destructive, handler: { (action) in
                 // delete mixlist
-                self.performSegueWithIdentifier("DeleteMixlistFromDataSource", sender: self)
+                self.performSegue(withIdentifier: "DeleteMixlistFromDataSource", sender: self)
             })
             alertController.addAction(cancelDelete)
             alertController.addAction(delete)
-            self.presentViewController(alertController, animated: true, completion: { 
+            self.present(alertController, animated: true, completion: { 
                 // take any further actions required here
             })
         }
@@ -323,7 +322,7 @@ class MixlistDetailTableViewController: UITableViewController {
         actionSheet.addAction(addExercises)
         actionSheet.addAction(deleteMixlist)
         actionSheet.addAction(cancel)
-        self.presentViewController(actionSheet, animated: true) { 
+        self.present(actionSheet, animated: true) { 
             // take any further actions required
         }
     }
@@ -331,38 +330,38 @@ class MixlistDetailTableViewController: UITableViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
         if segue.identifier == "ShowExercisePageController" {
-            let navController = segue.destinationViewController as? UINavigationController
+            let navController = segue.destination as? UINavigationController
             let destinationViewController = navController?.topViewController as? ExercisePageViewController
             destinationViewController?.mixlistName = self.mixlistName
             destinationViewController?.coreDataStack = self.coreDataStack
             destinationViewController?.pageCount = self.exercises.count
             destinationViewController?.exercises = self.exercises.shuffle()
         } else if segue.identifier == "RenameMixlistSegue" {
-            let navController = segue.destinationViewController as? UINavigationController
+            let navController = segue.destination as? UINavigationController
             let destinationViewController = navController?.topViewController as? NewMixlistViewController
             destinationViewController?.mixlist = self.mixlist
             destinationViewController?.newTitle = "RENAME MIXLIST"
         } else if segue.identifier == "ShowExerciseDetailSegue" {
-            guard let selectedCell = sender as? UITableViewCell, let selectedRowIndexPath = tableView.indexPathForCell(selectedCell) else {
+            guard let selectedCell = sender as? UITableViewCell, let selectedRowIndexPath = tableView.indexPath(for: selectedCell) else {
                 fatalError("Sender is not a UITableViewCell or was not found in the tableView, or segue.identifier is not correct")
             }
 
-            let exercise = exercises[selectedRowIndexPath.row]
+            let exercise = exercises[(selectedRowIndexPath as NSIndexPath).row]
 
-            let destinationViewController = segue.destinationViewController as? ExerciseDetailViewController
+            let destinationViewController = segue.destination as? ExerciseDetailViewController
             destinationViewController?.exercise = exercise
         }
     }
 
 
-    @IBAction func unwindToMixlistDetail(segue: UIStoryboardSegue) {
-        if let sourceVC = segue.sourceViewController as? NewMixlistViewController,
+    @IBAction func unwindToMixlistDetail(_ segue: UIStoryboardSegue) {
+        if let sourceVC = segue.source as? NewMixlistViewController,
             let mixlist = sourceVC.mixlist {
             self.mixlistName = mixlist.name
-            self.mixlistNameLabel.text = self.mixlistName.uppercaseString
+            self.mixlistNameLabel.text = self.mixlistName.uppercased()
         }
     }
 

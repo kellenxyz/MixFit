@@ -14,7 +14,8 @@ typealias Payload = [String:AnyObject]
 class DataManager {
 
     class func getExercisesDataFromFileWithSuccess(_ success: @escaping ((_ data: Data) -> Void)) {
-        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: {
+        let queue = DispatchQueue(label: "getExerciseData")
+        queue.async(execute: {
             let filePath = Bundle.main.path(forResource: "exercises", ofType:"json")
             let data = try! Data(contentsOf: URL(fileURLWithPath: filePath!),
                 options: NSData.ReadingOptions.uncached)
@@ -23,7 +24,8 @@ class DataManager {
     }
 
     func getMuscleGroupsDataFromFileWithSuccess(_ success: @escaping ((_ data: Data) -> Void)) {
-        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async {
+        let queue = DispatchQueue(label: "getMuscleGroupData")
+        queue.async {
             let filePath = Bundle.main.path(forResource: "muscle-groups", ofType: "json")
             let data = try! Data(contentsOf: URL(fileURLWithPath: filePath!),
                                    options: NSData.ReadingOptions.uncached)
@@ -32,7 +34,8 @@ class DataManager {
     }
 
     class func getTrainingZonesDataFromFileWithSuccess(_ success: @escaping ((_ dict: NSDictionary) -> Void)) {
-        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async {
+        let queue = DispatchQueue(label: "getTrainingZonesData")
+        queue.async {
             let filePath = Bundle.main.path(forResource: "ExerciseVolume", ofType: "plist")
             let dict = NSDictionary(contentsOfFile: filePath!) as! [String: AnyObject]
 

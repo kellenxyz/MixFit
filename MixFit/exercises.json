@@ -10,7 +10,7 @@
     },
     {
       "exerciseID" : "5PRG4UP4",
-      "name" : "Reverse Back Row",
+      "name" : "Reverse Back Row Cool",
       "userCreated" : false,
       "imageName" : "reverse-back-row",
       "exerciseDescription" : "Here is something descriptive.",
@@ -26,11 +26,11 @@
     },
     {
       "exerciseID" : "R95NG7E9",
-      "name" : "Cable Lat Pulldown",
+      "name" : "Cable Lat Pulldown New Name",
       "userCreated" : false,
       "imageName" : "cable-lat-pulldown",
       "exerciseDescription" : "Here is something descriptive.",
-      "targetedMuscleGroups" : "Lats, Biceps",
+      "targetedMuscleGroups" : "Lats, Biceps, Cool Muscle Group",
     },
     {
       "exerciseID" : "XWUDTKWA",
@@ -39,6 +39,22 @@
       "imageName" : "barbell-row",
       "exerciseDescription" : "Here is something descriptive.",
       "targetedMuscleGroups" : "Lats, Biceps",
+    },
+    {
+        "exerciseID" : "G7EJ98QN",
+        "name" : "New JSON Exercise Test",
+        "userCreated" : false,
+        "imageName" : "barbell-row",
+        "exerciseDescription" : "Here is something descriptive.",
+        "targetedMuscleGroups" : "Lats, Biceps, Test",
+    },
+    {
+        "exerciseID" : "G8EJ91QN",
+        "name" : "New Exercise Test 2",
+        "userCreated" : false,
+        "imageName" : "barbell-row",
+        "exerciseDescription" : "Here is something descriptive.",
+        "targetedMuscleGroups" : "Lats, Biceps, Test 2",
     },
   ],
   
@@ -453,7 +469,7 @@
     },
   ],
   
-  "fullBody" : [
+  "full body" : [
     {
       "exerciseID" : "TS8JCQGH",
       "name" : "Dip",

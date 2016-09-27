@@ -16,11 +16,11 @@ struct HUDGreeting {
         let hour = (Calendar.current as NSCalendar).component(.hour, from: Date())
 
         if hour >= 0  && hour < 12 {
-            greeting = "Good morning!"
+            greeting = "Good morning, Nathaniel!"
         } else if hour >= 12 && hour < 17 {
-            greeting = "Good afternoon!"
+            greeting = "Good afternoon, Nathaniel!"
         } else if hour >= 17 {
-            greeting = "Good evening!"
+            greeting = "Good evening, Nathaniel!"
         }
 
         return greeting.uppercased()

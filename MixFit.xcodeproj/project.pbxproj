@@ -56,6 +56,7 @@
 		43A987081D10E131008276DF /* SubMuscleGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A987071D10E131008276DF /* SubMuscleGroupsTableViewController.swift */; };
 		43A9870A1D11FDA9008276DF /* ExercisePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A987091D11FDA9008276DF /* ExercisePageViewController.swift */; };
 		43A9870C1D11FDBC008276DF /* ExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A9870B1D11FDBC008276DF /* ExerciseViewController.swift */; };
+		43B353E41D9B1EA2005204F5 /* UpdateDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B353E31D9B1EA2005204F5 /* UpdateDataManager.swift */; };
 		43B447001D24853D0019F897 /* EditMixlistTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B446FF1D24853D0019F897 /* EditMixlistTableViewController.swift */; };
 		43D891B91D3EC3EC00A71A50 /* ExerciseVolume.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43D891B81D3EC3EC00A71A50 /* ExerciseVolume.plist */; };
 		43D891BE1D43E24700A71A50 /* ExerciseVolume+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D891BA1D43E24700A71A50 /* ExerciseVolume+CoreDataProperties.swift */; };
@@ -139,6 +140,7 @@
 		43A987071D10E131008276DF /* SubMuscleGroupsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubMuscleGroupsTableViewController.swift; sourceTree = "<group>"; };
 		43A987091D11FDA9008276DF /* ExercisePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExercisePageViewController.swift; sourceTree = "<group>"; };
 		43A9870B1D11FDBC008276DF /* ExerciseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseViewController.swift; sourceTree = "<group>"; };
+		43B353E31D9B1EA2005204F5 /* UpdateDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateDataManager.swift; sourceTree = "<group>"; };
 		43B446FF1D24853D0019F897 /* EditMixlistTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditMixlistTableViewController.swift; sourceTree = "<group>"; };
 		43D891B81D3EC3EC00A71A50 /* ExerciseVolume.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ExerciseVolume.plist; sourceTree = "<group>"; };
 		43D891BA1D43E24700A71A50 /* ExerciseVolume+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ExerciseVolume+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 				438424BD1D4D15EA0021B0CB /* HUDGreeting.swift */,
 				43568A241D2D8A9E004F45D3 /* DataManager.swift */,
 				43D891C31D43EFBC00A71A50 /* PreloadDataManager.swift */,
+				43B353E31D9B1EA2005204F5 /* UpdateDataManager.swift */,
 				434C20631D341A6D00724E76 /* CollectionType+Shuffle.swift */,
 				43D891B81D3EC3EC00A71A50 /* ExerciseVolume.plist */,
 			);
@@ -487,6 +490,7 @@
 				43A9870C1D11FDBC008276DF /* ExerciseViewController.swift in Sources */,
 				43DCD32C1D56825A00AA615A /* ExerciseImageSelectViewController.swift in Sources */,
 				434C20661D36C57F00724E76 /* AddToMixlistTableViewController.swift in Sources */,
+				43B353E41D9B1EA2005204F5 /* UpdateDataManager.swift in Sources */,
 				43568A181D2C2540004F45D3 /* Mixlist+CoreDataProperties.swift in Sources */,
 				43568A251D2D8A9E004F45D3 /* DataManager.swift in Sources */,
 				43A986CA1D07946B008276DF /* AppDelegate.swift in Sources */,

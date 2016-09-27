@@ -7,11 +7,6 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="RobotoCondensed-Bold.ttf">
-            <string>RobotoCondensed-Bold</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--MIXFIT-->
         <scene sceneID="z1y-xI-0lk">
@@ -50,14 +45,14 @@
                                 </visualEffectView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="PvT-0E-cmK">
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GOOD MORNING, KELLEN" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eYF-ko-4KD">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GOOD AFTERNOON, KIMBERLY" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eYF-ko-4KD">
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                             <size key="shadowOffset" width="0.0" height="1"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You were born to do amazing things." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hab-cr-fR0">
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You were born to do amazing things. And amazing things you will do." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hab-cr-fR0">
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -197,7 +192,7 @@
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qkc-o7-06H">
                                             <frame key="frameInset" minX="15" width="290" height="59"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -361,7 +356,7 @@
         <!--Exercise Name View Controller-->
         <scene sceneID="THe-TM-aNq">
             <objects>
-                <viewController id="tsm-eU-HwT" customClass="ExerciseNameViewController" customModule="MixFit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ExerciseNameViewController" id="tsm-eU-HwT" customClass="ExerciseNameViewController" customModule="MixFit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kcv-R2-AXo"/>
                         <viewControllerLayoutGuide type="bottom" id="G8y-JC-nZc"/>
@@ -378,11 +373,11 @@
                                 <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rjw-JV-p5h">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="Rjw-JV-p5h">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="ajV-FU-W21"/>
+                                    <constraint firstAttribute="height" constant="40" id="ajV-FU-W21"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                 <connections>
                                     <action selector="textFieldTextDidChange:" destination="tsm-eU-HwT" eventType="editingChanged" id="1MI-g8-wKe"/>
@@ -401,7 +396,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="eh0-Zg-SAf">
                         <barButtonItem key="backBarButtonItem" title=" " id="duy-r1-Cbv"/>
-                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="fyu-C1-tLq">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="fyu-C1-tLq">
                             <connections>
                                 <action selector="onCancelButtonPressed:" destination="tsm-eU-HwT" id="kQt-1W-DdO"/>
                             </connections>
@@ -883,11 +878,11 @@
                         <inset key="imageInsets" minX="0.0" minY="1" maxX="0.0" maxY="-1"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" translucent="NO" id="9OA-zX-PnZ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="9OA-zX-PnZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="barTintColor" red="0.79607843137254897" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.82352941176470584" green="0.14509803921568626" blue="0.16862745098039217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1121,8 +1116,8 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="BOt-LU-SZb"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="RobotoCondensed-Bold" family="Roboto Condensed" pointSize="30"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                 <connections>
                                     <action selector="onTextFieldEditingChanged:" destination="cuM-gy-lRj" eventType="editingChanged" id="T4j-WB-og0"/>
                                 </connections>
@@ -1140,7 +1135,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="ML0-TN-0ms">
                         <barButtonItem key="backBarButtonItem" title=" " id="gZ6-bH-WNN"/>
-                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="vTY-7N-09d">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="vTY-7N-09d">
                             <color key="tintColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="onCancelButtonPressed:" destination="cuM-gy-lRj" id="TZx-Z6-oPW"/>
@@ -1314,11 +1309,11 @@
                         <inset key="imageInsets" minX="0.0" minY="1" maxX="0.0" maxY="-1"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" translucent="NO" id="51t-CO-UEk">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="51t-CO-UEk">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="barTintColor" red="0.79607843137254897" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.82352941180000006" green="0.1450980392" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1341,11 +1336,11 @@
                         <inset key="imageInsets" minX="0.0" minY="1" maxX="0.0" maxY="-1"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" translucent="NO" id="7J8-q2-hnO">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="7J8-q2-hnO">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="barTintColor" red="0.79607843137254897" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.82352941176470584" green="0.14509803921568626" blue="0.16862745098039217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1409,10 +1404,10 @@
                         <inset key="imageInsets" minX="0.0" minY="1" maxX="0.0" maxY="-1"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" translucent="NO" id="swT-hm-KhP">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="swT-hm-KhP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.82352941180000006" green="0.1450980392" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1432,7 +1427,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wdd-9h-2Zh" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="tjL-Ds-lVo">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="tjL-Ds-lVo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1455,7 +1450,7 @@
             <objects>
                 <navigationController storyboardIdentifier="NewMixlistNavController" automaticallyAdjustsScrollViewInsets="NO" id="Kwb-TH-mtZ" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="MSo-Xd-oPJ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="MSo-Xd-oPJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1478,7 +1473,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Riw-wB-wgu" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="2wi-iL-Bgr">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="2wi-iL-Bgr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1505,7 +1500,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>

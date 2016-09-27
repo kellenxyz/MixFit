@@ -52,7 +52,7 @@ class MoreTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
         let cellTitle: String = moreArray[(indexPath as NSIndexPath).row]
-        cell.textLabel?.text = cellTitle.uppercased()
+        cell.textLabel?.text = cellTitle
         cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
 
         return cell

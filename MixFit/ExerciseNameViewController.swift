@@ -11,11 +11,13 @@ import CoreData
 
 class ExerciseNameViewController: UIViewController {
 
+    var coreDataStack = CoreDataStack.sharedInstance
     var existingExercise: UserCreatedExercise?
     var exerciseName: String = ""
     var newTitle: String?
-    
-    @IBOutlet weak var nextBarButtonItem: UIBarButtonItem!
+
+    var saveButton: UIBarButtonItem?
+    @IBOutlet weak var nextBarButtonItem: UIBarButtonItem?
     @IBOutlet weak var exerciseNameTextField: UITextField!
 
     override func viewDidLoad() {
@@ -23,10 +25,27 @@ class ExerciseNameViewController: UIViewController {
 
         title = newTitle ?? "New Exercise".uppercased()
 
-        if exerciseName == "" {
-            nextBarButtonItem.isEnabled = false
+        if existingExercise != nil {
+            // Create and add close button
+            title = "RENAME EXERCISE"
+//            let closeBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(ExerciseMuscleGroupViewController.dismissWithoutSaving))
+//            navigationItem.leftBarButtonItem = closeBarButtonItem
+            // Create and add save button
+            saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(ExerciseNameViewController.onSaveButtonPressed))
+            saveButton?.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 16, weight: UIFontWeightBold), NSForegroundColorAttributeName: ColorWheel.leadColor()], for: .normal)
+            navigationItem.rightBarButtonItem = saveButton
+
+            exerciseName = existingExercise!.name
+            exerciseNameTextField.text = existingExercise!.name
         } else {
-            nextBarButtonItem.isEnabled = true
+            title = "NEW EXERCISE"
+            navigationItem.rightBarButtonItem = self.nextBarButtonItem
+
+            if exerciseName == "" {
+                nextBarButtonItem?.isEnabled = false
+            } else {
+                nextBarButtonItem?.isEnabled = true
+            }
         }
 
         exerciseNameTextField.becomeFirstResponder()
@@ -51,6 +70,16 @@ class ExerciseNameViewController: UIViewController {
     @IBAction func onNextButtonPressed(_ sender: UIBarButtonItem) {
 
 
+    }
+
+    func onSaveButtonPressed() {
+        self.existingExercise?.name = exerciseName
+        coreDataStack.saveMainContext()
+
+        exerciseNameTextField.resignFirstResponder()
+        self.dismiss(animated: true) {
+            //
+        }
     }
 
 
@@ -78,10 +107,18 @@ extension ExerciseNameViewController: UITextFieldDelegate {
             exerciseName = name
         }
 
-        if exerciseName == "" {
-            nextBarButtonItem.isEnabled = false
+        if existingExercise != nil {
+            if exerciseName == "" {
+                saveButton?.isEnabled = false
+            } else {
+                saveButton?.isEnabled = true
+            }
         } else {
-            nextBarButtonItem.isEnabled = true
+            if exerciseName == "" {
+                nextBarButtonItem?.isEnabled = false
+            } else {
+                nextBarButtonItem?.isEnabled = true
+            }
         }
 
     }

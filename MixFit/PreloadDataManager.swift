@@ -17,7 +17,9 @@ class PreloadDataManager {
 
         preloadExerciseAndMuscleGroupData { () -> Void in
             print("Finished loading muscle groups and exercises.")
-            self.loadTrainingZones()
+            self.loadTrainingZones { () -> Void in
+                print("Finished loading training zones.")
+            }
         }
 
     }
@@ -125,7 +127,7 @@ class PreloadDataManager {
             self.loadExercisesFromJSON("triceps", json: json, muscleGroup: triceps)
             self.loadExercisesFromJSON("shoulders", json: json, muscleGroup: shoulders)
             self.loadExercisesFromJSON("core", json: json, muscleGroup: core)
-            self.loadExercisesFromJSON("fullBody", json: json, muscleGroup: fullBody)
+            self.loadExercisesFromJSON("full body", json: json, muscleGroup: fullBody)
         }
 
         DispatchQueue.main.async { 
@@ -170,7 +172,7 @@ class PreloadDataManager {
 
     // MARK: - Training Zones
 
-    func loadTrainingZones() {
+    func loadTrainingZones(_ completion: @escaping () -> Void) {
 
         DataManager.getTrainingZonesDataFromFileWithSuccess{ (dict) in
 
@@ -180,8 +182,10 @@ class PreloadDataManager {
                 self.loadExerciseVolumesFromPlist(zone, dict: dict)
             }
 
+            DispatchQueue.main.async {
+                completion()
+            }
         }
-
     }
 
     func loadExerciseVolumesFromPlist(_ keyName: String, dict: NSDictionary) {

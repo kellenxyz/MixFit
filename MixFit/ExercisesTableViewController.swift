@@ -127,6 +127,7 @@ class ExercisesTableViewController: UITableViewController {
             cell.textLabel?.text = exercise.name + " ❤️" + " 💪🏼"
         } else if exercise.isFavorite == true {
             cell.textLabel?.text = exercise.name + " ❤️"
+//            cell.detailTextLabel?.text = "❤️"
         } else if exercise == exercise as? UserCreatedExercise {
             cell.textLabel?.text = exercise.name + " 💪🏼"
         } else {
@@ -316,7 +317,10 @@ extension ExercisesTableViewController: UISearchResultsUpdating, UISearchBarDele
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         // Remove search bar from nav bar and display left and right bar button items
-        navigationItem.titleView = nil
+
+        searchController.dismiss(animated: true) {
+            self.navigationItem.titleView = nil
+        }
 
         let searchItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(ExercisesTableViewController.onSearchBarButtonPressed))
         searchItem.tintColor = UIColor.white
@@ -326,6 +330,8 @@ extension ExercisesTableViewController: UISearchResultsUpdating, UISearchBarDele
 
         navigationItem.leftBarButtonItem = searchItem
         navigationItem.rightBarButtonItem = addItem
+
+        initializeFetchedResultsController(nil)
 
     }
 }

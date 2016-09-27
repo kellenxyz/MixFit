@@ -36,6 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let results = try coreDataStack.managedObjectContext.fetch(fetchRequest)
             if results.count == 0 {
                 preloadData()
+            } else {
+                updateData()
             }
         } catch {
             fatalError("Error fetching data!")
@@ -70,6 +72,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let preloadDataManager = PreloadDataManager()
         preloadDataManager.coreDataStack = self.coreDataStack
         preloadDataManager.preloadAppData()
+    }
+
+    func updateData() {
+        let updateDataManager = UpdateDataManager()
+        updateDataManager.coreDataStack = self.coreDataStack
+        updateDataManager.updateAppData()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

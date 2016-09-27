@@ -85,6 +85,7 @@ class ExerciseMuscleGroupViewController: UIViewController {
         // Save data to MOC
         if let selectedMuscleGroup = self.selectedMuscleGroup {
             self.existingExercise?.muscleGroup = selectedMuscleGroup
+            self.existingExercise?.targetedMuscleGroups = selectedMuscleGroup.name
             coreDataStack.saveMainContext()
         }
         self.dismiss(animated: true) { 

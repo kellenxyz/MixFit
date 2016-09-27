@@ -31,12 +31,19 @@ class ExerciseDetailViewController: UIViewController {
         }
 
         // Set labels
-        exerciseNameLabel.text = exercise.name.uppercased()
         muscleGroupsTargetedLabel.text = exercise.targetedMuscles
         trainersNotesLabel.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
 
         scrollView.contentSize.width = view.frame.width
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        // Set changeable labels
+        exerciseNameLabel.text = exercise.name.uppercased()
+        muscleGroupsTargetedLabel.text = exercise.targetedMuscles
     }
 
     override func didReceiveMemoryWarning() {
@@ -64,6 +71,17 @@ class ExerciseDetailViewController: UIViewController {
         }
         let renameAction = UIAlertAction(title: "Rename", style: .default) { (action) in
             // Rename view controller
+            guard let navController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ExerciseEditNavigationController") as? UINavigationController, let renameVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ExerciseNameViewController") as? ExerciseNameViewController else {
+                fatalError("Could not instantiate ExerciseNameViewController")
+            }
+            navController.setViewControllers([renameVC], animated: true)
+            if let exercise = self.exercise as? UserCreatedExercise {
+                renameVC.newTitle = "Rename Exercise"
+                renameVC.existingExercise = exercise
+            }
+            self.present(navController, animated: true, completion: {
+                //
+            })
         }
         let editImageAction = UIAlertAction(title: "Edit Exercise Image", style: .default) { (action) in
             // Choose new image

@@ -15,7 +15,7 @@ class ExercisesTableViewController: UITableViewController {
 
     var coreDataStack = CoreDataStack.sharedInstance
     var fetchedResultsController: NSFetchedResultsController<Exercise>!
-//    var muscleGroups = [MuscleGroup]()
+    var indexPath: IndexPath?
     var searchController: UISearchController!
 
     override func viewDidLoad() {
@@ -25,15 +25,10 @@ class ExercisesTableViewController: UITableViewController {
 
 //        configureSearchController()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-
         // Change color of cell separators
         tableView.separatorColor = UIColor(colorLiteralRed: 0.88, green: 0.88, blue: 0.88, alpha: 1)
 
+        // Register view for section headers
         let nib = UINib(nibName: "TableSectionHeader", bundle: nil)
         tableView.register(nib, forHeaderFooterViewReuseIdentifier: "TableSectionHeader")
     }
@@ -162,40 +157,14 @@ class ExercisesTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    override func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        // After a new exercise is created and the cell for that exercise is scrolled to the top, the method to highlight the cell is called. (if the indexPath property is set)
+        // If the tableView is still scrolling when attempting to access the cell at the exercise object's indexPath, the cell will return nil if it's out of range. So we wait until scroll has finished to access the cell.
+        if let indexPath = self.indexPath {
+            highlightNewlyCreatedExerciseCell(at: indexPath)
+        }
     }
-    */
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
     // MARK: - IBActions
 
@@ -232,6 +201,11 @@ class ExercisesTableViewController: UITableViewController {
             let exercise = fetchedResultsController.object(at: selectedRowIndexPath)
             let destinationVC = segue.destination as? ExerciseDetailViewController
             destinationVC?.exercise = exercise
+        } else if segue.identifier == "NewExerciseSegue" {
+            let navController = segue.destination as? UINavigationController
+            let destinationVC = navController?.topViewController as? ExerciseNameViewController
+
+            destinationVC?.exerciseCreationDelegate = self
         }
 
     }
@@ -253,44 +227,7 @@ class ExercisesTableViewController: UITableViewController {
 
 }
 
-/*
-extension ExercisesTableViewController: NSFetchedResultsControllerDelegate {
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.beginUpdates()
-    }
-
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
-        switch type {
-        case .insert:
-            tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
-        case .delete:
-            tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
-        case .move:
-            break
-        case .update:
-            break
-        }
-    }
-
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        switch type {
-        case .delete:
-            tableView.deleteRows(at: [indexPath!], with: .fade)
-        case .insert:
-            tableView.insertRows(at: [newIndexPath!], with: .fade)
-        case .update:
-            configureCell(self.tableView.cellForRow(at: indexPath!)!, indexPath: indexPath!)
-        case .move:
-            tableView.deleteRows(at: [indexPath!], with: .fade)
-            tableView.insertRows(at: [indexPath!], with: .fade)
-        }
-    }
-
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.endUpdates()
-    }
-}
-*/
+    // MARK: - Search Controller Delegate
 
 extension ExercisesTableViewController: UISearchResultsUpdating, UISearchBarDelegate {
     func updateSearchResults(for searchController: UISearchController) {
@@ -333,6 +270,41 @@ extension ExercisesTableViewController: UISearchResultsUpdating, UISearchBarDele
 
         initializeFetchedResultsController(nil)
 
+    }
+}
+
+    // MARK: - Exercise Creation Delegate
+
+extension ExercisesTableViewController: ExerciseCreationDelegate {
+    func didCreateNewExercise(_ exercise: UserCreatedExercise) {
+        // Delegate method called after new exercise is created
+        // Get indexPath of new exercise object
+        if let indexPath = fetchedResultsController.indexPath(forObject: exercise) {
+            // Set indexPath property for use outside of this method
+            self.indexPath = indexPath
+            // Scroll cell of new exercise to top
+            tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+            // After this method completes, the tableView delegate method scrollViewDidEndScrollingAnimation(_:) will run. This is where the func to change the cell color is called.
+        }
+    }
+
+    func highlightNewlyCreatedExerciseCell(at indexPath: IndexPath) {
+        // Called from within scrollViewDidEndScrollingAnimation(_:)
+        // Get cell of newly created exercise
+        if let cell = tableView.cellForRow(at: indexPath) {
+            // Change cell color of newly created exercise to highlight what's new
+            let color = UIColor(red: 220.0/255.0, green: 220.0/255.0, blue: 220.0/255.0, alpha: 1.0)
+            cell.textLabel?.backgroundColor = color
+            cell.backgroundColor = color
+
+            // After a 1 second delay, fade cell color back to white
+            UIView.animateKeyframes(withDuration: 1.0, delay: 1.0, options: [], animations: {
+                cell.textLabel?.backgroundColor = UIColor.white
+                cell.backgroundColor = UIColor.white
+                }, completion: { (Bool) in
+                    //
+            })
+        }
     }
 }
 

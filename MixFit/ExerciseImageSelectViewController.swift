@@ -9,12 +9,18 @@
 import UIKit
 import CoreData
 
+protocol ExerciseCreationDelegate {
+    func didCreateNewExercise(_ exercise: UserCreatedExercise)
+}
+
 class ExerciseImageSelectViewController: UIViewController {
 
     var coreDataStack = CoreDataStack.sharedInstance
     var exercise: UserCreatedExercise?
     var existingExercise: UserCreatedExercise?
     var saveButton: UIBarButtonItem!
+
+    var delegate: ExerciseCreationDelegate?
 
     var exerciseName: String!
     var muscleGroup: MuscleGroup!
@@ -63,7 +69,11 @@ class ExerciseImageSelectViewController: UIViewController {
 
         self.coreDataStack.saveMainContext()
 
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true) { 
+            if let delegate = self.delegate {
+                delegate.didCreateNewExercise(newExercise)
+            }
+        }
     }
 
     /*

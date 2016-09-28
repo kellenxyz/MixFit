@@ -19,6 +19,8 @@ class ExerciseMuscleGroupViewController: UIViewController {
     var exerciseName: String?
     var existingExercise: UserCreatedExercise?
 
+    var exerciseCreationDelegate: ExerciseCreationDelegate?
+
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var nextBarButtonItem: UIBarButtonItem?
 
@@ -105,6 +107,9 @@ class ExerciseMuscleGroupViewController: UIViewController {
             fatalError("Did not set muscle group before segue")
         }
         destinationViewController?.muscleGroup = muscleGroup
+        if let delegate = self.exerciseCreationDelegate {
+            destinationViewController?.delegate = delegate
+        }
     }
 
 

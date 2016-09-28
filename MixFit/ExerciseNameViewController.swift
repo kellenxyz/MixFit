@@ -16,6 +16,8 @@ class ExerciseNameViewController: UIViewController {
     var exerciseName: String = ""
     var newTitle: String?
 
+    var exerciseCreationDelegate: ExerciseCreationDelegate?
+
     var saveButton: UIBarButtonItem?
     @IBOutlet weak var nextBarButtonItem: UIBarButtonItem?
     @IBOutlet weak var exerciseNameTextField: UITextField!
@@ -90,6 +92,9 @@ class ExerciseNameViewController: UIViewController {
         
         let destinationViewController = segue.destination as? ExerciseMuscleGroupViewController
         destinationViewController?.exerciseName = self.exerciseName
+        if let delegate = self.exerciseCreationDelegate {
+            destinationViewController?.exerciseCreationDelegate = delegate
+        }
     }
 
 

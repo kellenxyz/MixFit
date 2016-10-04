@@ -135,6 +135,7 @@ class PreloadDataManager {
         }
     }
 
+    
     func loadExercisesFromJSON(_ keyName: String, json: Payload, muscleGroup: MuscleGroup) {
 
         guard let entity = NSEntityDescription.entity(forEntityName: "DefaultExercise", in: coreDataStack.managedObjectContext) else {

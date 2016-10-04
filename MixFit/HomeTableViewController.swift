@@ -38,7 +38,6 @@ class HomeTableViewController: UITableViewController {
 
     var coreDataStack = CoreDataStack.sharedInstance
     var muscleGroups = [MuscleGroup]()
-    var expansionPacks: [String] = []
 
     @IBOutlet weak var hudGreetingLabel: UILabel!
     @IBOutlet weak var hudQuoteLabel: UILabel!
@@ -61,9 +60,6 @@ class HomeTableViewController: UITableViewController {
         imageView.contentMode = .scaleAspectFit
         self.navigationItem.titleView = imageView
 
-        // Dummy data
-        expansionPacks = ["Kettlebell", "Bodyweight"]
-
 
         // Assign storyboard headerView to headerView property
         headerView = tableView.tableHeaderView
@@ -74,7 +70,6 @@ class HomeTableViewController: UITableViewController {
         tableView.contentOffset = CGPoint(x: 0, y: -kTableHeaderHeight)
 
         updateHeaderView()
-
 
         // Set color of tableViewCell separators
         tableView.separatorColor = UIColor(colorLiteralRed: 0.88, green: 0.88, blue: 0.88, alpha: 1)
@@ -87,17 +82,22 @@ class HomeTableViewController: UITableViewController {
 
     }
 
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        // Say hello
         self.hudGreetingLabel.text = HUDGreeting.displayGreetingForTimeOfDay()
+
         reloadData()
     }
+
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
     }
+
 
     func reloadData() {
         let fetchRequest = NSFetchRequest<MuscleGroup>(entityName: "MuscleGroup")
@@ -127,9 +127,6 @@ class HomeTableViewController: UITableViewController {
         }
 
         headerView.frame = headerRect
-
-
-
     }
 
 
@@ -151,9 +148,11 @@ class HomeTableViewController: UITableViewController {
         return 1
     }
 
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return muscleGroups.count
     }
+
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> MuscleGroupTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MuscleGroupCell", for: indexPath) as! MuscleGroupTableViewCell
@@ -171,6 +170,7 @@ class HomeTableViewController: UITableViewController {
         return cell
     }
 
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         let muscleGroup = muscleGroups[(indexPath as NSIndexPath).row]
@@ -181,18 +181,6 @@ class HomeTableViewController: UITableViewController {
         } else {
             performSegue(withIdentifier: "ShowExercisePageController", sender: cell)
         }
-
-//        guard let exercises = muscleGroup.exercises,
-//            let exercisesArray = Array(exercises) as? [DefaultExercise]
-//            else {
-//                fatalError("Oops!")
-//        }
-//
-//        print("******************************\n\(muscleGroup.name): \(exercises.count) exercises\n")
-//
-//        for exercise in exercisesArray {
-//            print("\(exercise.name)\n\(exercise.exerciseID)\n")
-//        }
 
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -214,41 +202,6 @@ class HomeTableViewController: UITableViewController {
     }
     */
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
 
     // MARK: - Navigation
 
@@ -262,7 +215,6 @@ class HomeTableViewController: UITableViewController {
             let navController = segue.destination as? UINavigationController
             let destinationViewController = navController?.topViewController as? ExercisePageViewController
             destinationViewController?.mixlistName = muscleGroup.name
-//            destinationViewController?.coreDataStack = self.coreDataStack
             if let exercises = muscleGroup.exercises {
                 destinationViewController?.pageCount = exercises.count
                 let exercisesArray = Array(exercises) as! [Exercise]

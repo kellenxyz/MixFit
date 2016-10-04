@@ -23,7 +23,7 @@ class ExerciseViewController: UIViewController {
     @IBOutlet weak var trainersNotesLabel: UILabel!
 
     var page = 0
-//    var isFavorite: Bool = false
+
     var exercise: Exercise?
     var exerciseVolumes: [ExerciseVolume]?
 
@@ -40,6 +40,7 @@ class ExerciseViewController: UIViewController {
 
     }
 
+    /// Fetches exercise data from MOC and populates the view with the current exercise's data
     fileprivate func loadExerciseData() {
         guard let exercise = self.exercise else {
             fatalError("Could not find exercise object")
@@ -52,6 +53,7 @@ class ExerciseViewController: UIViewController {
             fatalError("Error fetching data!")
         }
 
+        // Select a random exercise volume
         if let exerciseVolumes = self.exerciseVolumes {
             let randomNumber = Int(arc4random_uniform(UInt32(exerciseVolumes.count)))
             let exerciseVolume = exerciseVolumes[randomNumber]
@@ -70,7 +72,7 @@ class ExerciseViewController: UIViewController {
     }
 
 
-    /// Toggles state of favorite button
+    /// Toggles state / appearance of favorite button
     fileprivate func setFavoriteButtonTitle() {
         guard let exercise = self.exercise else {
             fatalError("Could not find exercise object")

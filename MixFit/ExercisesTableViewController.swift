@@ -190,7 +190,7 @@ class ExercisesTableViewController: UITableViewController {
 
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    // Preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
         if segue.identifier == "ShowExerciseDetailSegue" {
@@ -284,7 +284,8 @@ extension ExercisesTableViewController: ExerciseCreationDelegate {
             self.indexPath = indexPath
             // Scroll cell of new exercise to top
             tableView.scrollToRow(at: indexPath, at: .top, animated: true)
-            // After this method completes, the tableView delegate method scrollViewDidEndScrollingAnimation(_:) will run. This is where the func to change the cell color is called.
+            // After this method completes, the tableView delegate method scrollViewDidEndScrollingAnimation(_:) will run. This is where the method to change the cell color is called.
+            // 
         }
     }
 
@@ -296,7 +297,6 @@ extension ExercisesTableViewController: ExerciseCreationDelegate {
             let color = UIColor(red: 220.0/255.0, green: 220.0/255.0, blue: 220.0/255.0, alpha: 1.0)
             cell.textLabel?.backgroundColor = color
             cell.backgroundColor = color
-
             // After a 1 second delay, fade cell color back to white
             UIView.animateKeyframes(withDuration: 1.0, delay: 1.0, options: [], animations: {
                 cell.textLabel?.backgroundColor = UIColor.white

@@ -16,6 +16,8 @@ class UpdateDataManager {
     var fetchedMuscleGroups = [MuscleGroup]()
     var exerciseIDSet = Set<String>()
 
+    /// Parses exercises.json file and compares its contents to existing DefaultExercise objects. DefaultExercise objects that need updates are updated.
+    /// JSON objects that don't yet exist in the MOC are created and added to the MOC as DefaultExercise objects.
     func updateAppData() {
         updateExerciseAndMuscleGroupData { 
             print("Updated exercises")
@@ -62,6 +64,10 @@ class UpdateDataManager {
         }
     }
 
+    /**
+     Deserializes JSON data that is passed in and runs checks against existing exercise objects, by comparing their exerciseIDs, to see if any existing DefaultExercise needs to have its data updated. 
+     If it encounters a JSON exercise object that has not yet been added to the MOC, it creates a new exercise object.
+    */
     func loadExercisesFromJSON(_ keyName: String, json: Payload, muscleGroup: MuscleGroup) {
 
         guard let entity = NSEntityDescription.entity(forEntityName: "DefaultExercise", in: coreDataStack.managedObjectContext) else {

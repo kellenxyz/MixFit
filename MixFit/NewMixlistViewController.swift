@@ -23,7 +23,8 @@ class NewMixlistViewController: UIViewController {
 
         self.title = newTitle ?? "NEW MIXLIST"
 
-        // Do any additional setup after loading the view.
+        // Set font weight for Save button
+        saveButton.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 16, weight: UIFontWeightBold), NSForegroundColorAttributeName: ColorWheel.leadColor()], for: .normal)
 
         if mixlist != nil {
             self.mixlistTitleTextField.text = mixlist?.name

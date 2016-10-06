@@ -177,7 +177,7 @@ class PreloadDataManager {
 
         DataManager.getTrainingZonesDataFromFileWithSuccess{ (dict) in
 
-            let trainingZones = ["Hypertrophy", "Power", "Strength", "Endurance"]
+            let trainingZones = ["Hypertrophy", "Strength", "Power", "Endurance"]
 
             for zone in trainingZones {
                 self.loadExerciseVolumesFromPlist(zone, dict: dict)

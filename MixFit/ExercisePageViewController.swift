@@ -20,6 +20,7 @@ class ExercisePageViewController: UIPageViewController {
         super.viewDidLoad()
 
         title = mixlistName.uppercased()
+        delegate = self
 
         view.backgroundColor = UIColor.white
 
@@ -53,7 +54,7 @@ class ExercisePageViewController: UIPageViewController {
 
 }
 
-extension ExercisePageViewController: UIPageViewControllerDataSource {
+extension ExercisePageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         if let currentExercisePage = viewController as? ExerciseViewController {
@@ -71,6 +72,25 @@ extension ExercisePageViewController: UIPageViewControllerDataSource {
             }
         }
         return nil
+    }
+
+//    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+//        if #available(iOS 10.0, *) {
+//            let generator = UISelectionFeedbackGenerator()
+//            generator.selectionChanged()
+//        } else {
+//            // Fallback on earlier versions
+//        }
+//    }
+
+    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
+        if #available(iOS 10.0, *) {
+            let generator = UIImpactFeedbackGenerator(style: .light)
+//            generator.selectionChanged()
+            generator.impactOccurred()
+        } else {
+            // Fallback on earlier versions
+        }
     }
 
 }

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		434C20641D341A6D00724E76 /* CollectionType+Shuffle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434C20631D341A6D00724E76 /* CollectionType+Shuffle.swift */; };
 		434C20661D36C57F00724E76 /* AddToMixlistTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434C20651D36C57F00724E76 /* AddToMixlistTableViewController.swift */; };
-		4351FB4C1D2DBFFC007BAD9A /* exercises.json in Resources */ = {isa = PBXBuildFile; fileRef = 4351FB4B1D2DBFFC007BAD9A /* exercises.json */; };
 		43568A161D2C2540004F45D3 /* Exercise+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43568A081D2C2540004F45D3 /* Exercise+CoreDataProperties.swift */; };
 		43568A171D2C2540004F45D3 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43568A091D2C2540004F45D3 /* Exercise.swift */; };
 		43568A181D2C2540004F45D3 /* Mixlist+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43568A0A1D2C2540004F45D3 /* Mixlist+CoreDataProperties.swift */; };
@@ -68,6 +67,10 @@
 		43DCD32A1D56823C00AA615A /* ExerciseMuscleGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DCD3291D56823C00AA615A /* ExerciseMuscleGroupViewController.swift */; };
 		43DCD32C1D56825A00AA615A /* ExerciseImageSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DCD32B1D56825A00AA615A /* ExerciseImageSelectViewController.swift */; };
 		43DF130C1D2AC1D400599024 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DF130B1D2AC1D400599024 /* CoreDataStack.swift */; };
+		43ED05A81DA57E8500C99665 /* exercises.json in Resources */ = {isa = PBXBuildFile; fileRef = 43ED05A71DA57E8500C99665 /* exercises.json */; };
+		43ED05AA1DA5AABA00C99665 /* ExerciseVolumeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43ED05A91DA5AABA00C99665 /* ExerciseVolumeTableViewCell.swift */; };
+		43ED05AE1DA6BD6400C99665 /* TrainingZoneInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43ED05AD1DA6BD6400C99665 /* TrainingZoneInfoTableViewCell.swift */; };
+		43ED05B01DA6BD8100C99665 /* TrainingZoneInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43ED05AF1DA6BD8100C99665 /* TrainingZoneInfoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,7 +93,6 @@
 /* Begin PBXFileReference section */
 		434C20631D341A6D00724E76 /* CollectionType+Shuffle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionType+Shuffle.swift"; sourceTree = "<group>"; };
 		434C20651D36C57F00724E76 /* AddToMixlistTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddToMixlistTableViewController.swift; sourceTree = "<group>"; };
-		4351FB4B1D2DBFFC007BAD9A /* exercises.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = exercises.json; sourceTree = "<group>"; };
 		43568A081D2C2540004F45D3 /* Exercise+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Exercise+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		43568A091D2C2540004F45D3 /* Exercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		43568A0A1D2C2540004F45D3 /* Mixlist+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Mixlist+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -152,6 +154,10 @@
 		43DCD3291D56823C00AA615A /* ExerciseMuscleGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseMuscleGroupViewController.swift; sourceTree = "<group>"; };
 		43DCD32B1D56825A00AA615A /* ExerciseImageSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseImageSelectViewController.swift; sourceTree = "<group>"; };
 		43DF130B1D2AC1D400599024 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		43ED05A71DA57E8500C99665 /* exercises.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = exercises.json; sourceTree = "<group>"; };
+		43ED05A91DA5AABA00C99665 /* ExerciseVolumeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseVolumeTableViewCell.swift; sourceTree = "<group>"; };
+		43ED05AD1DA6BD6400C99665 /* TrainingZoneInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainingZoneInfoTableViewCell.swift; sourceTree = "<group>"; };
+		43ED05AF1DA6BD8100C99665 /* TrainingZoneInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainingZoneInfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,6 +240,8 @@
 				43A986CD1D07946B008276DF /* Main.storyboard */,
 				43A986D51D07946B008276DF /* LaunchScreen.storyboard */,
 				4361B5E21D1B505100C8E8E8 /* MuscleGroupTableViewCell.swift */,
+				43ED05A91DA5AABA00C99665 /* ExerciseVolumeTableViewCell.swift */,
+				43ED05AD1DA6BD6400C99665 /* TrainingZoneInfoTableViewCell.swift */,
 				4361B5E61D21EA2200C8E8E8 /* TableSectionHeader.swift */,
 				4361B5E41D21E91E00C8E8E8 /* TableSectionHeader.xib */,
 				4361B5DC1D19D83E00C8E8E8 /* CustomButton.swift */,
@@ -262,6 +270,7 @@
 				43DCD3271D56822B00AA615A /* ExerciseNameViewController.swift */,
 				43DCD3291D56823C00AA615A /* ExerciseMuscleGroupViewController.swift */,
 				43DCD32B1D56825A00AA615A /* ExerciseImageSelectViewController.swift */,
+				43ED05AF1DA6BD8100C99665 /* TrainingZoneInfoViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -272,7 +281,7 @@
 				43A986C91D07946B008276DF /* AppDelegate.swift */,
 				43A986D81D07946B008276DF /* Info.plist */,
 				43A986D31D07946B008276DF /* Assets.xcassets */,
-				4351FB4B1D2DBFFC007BAD9A /* exercises.json */,
+				43ED05A71DA57E8500C99665 /* exercises.json */,
 				4361B5E81D237A9E00C8E8E8 /* RobotoCondensed-Bold.ttf */,
 				4361B5E91D237A9E00C8E8E8 /* RobotoCondensed-Light.ttf */,
 				4361B5EA1D237A9E00C8E8E8 /* RobotoCondensed-Regular.ttf */,
@@ -431,7 +440,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				43A986D71D07946B008276DF /* LaunchScreen.storyboard in Resources */,
-				4351FB4C1D2DBFFC007BAD9A /* exercises.json in Resources */,
 				4361B5EB1D237A9E00C8E8E8 /* RobotoCondensed-Bold.ttf in Resources */,
 				4361B5ED1D237A9E00C8E8E8 /* RobotoCondensed-Regular.ttf in Resources */,
 				4361B5E51D21E91E00C8E8E8 /* TableSectionHeader.xib in Resources */,
@@ -439,6 +447,7 @@
 				43A986D41D07946B008276DF /* Assets.xcassets in Resources */,
 				4361B5EC1D237A9E00C8E8E8 /* RobotoCondensed-Light.ttf in Resources */,
 				43A986CF1D07946B008276DF /* Main.storyboard in Resources */,
+				43ED05A81DA57E8500C99665 /* exercises.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,6 +488,7 @@
 				43568A171D2C2540004F45D3 /* Exercise.swift in Sources */,
 				43568A211D2C2540004F45D3 /* MuscleGroup.swift in Sources */,
 				43DCD3281D56822B00AA615A /* ExerciseNameViewController.swift in Sources */,
+				43ED05AA1DA5AABA00C99665 /* ExerciseVolumeTableViewCell.swift in Sources */,
 				43568A1C1D2C2540004F45D3 /* DefaultExercise+CoreDataProperties.swift in Sources */,
 				43A987061D10D484008276DF /* ExercisesTableViewController.swift in Sources */,
 				43A986FB1D10BA2E008276DF /* MoreTableViewController.swift in Sources */,
@@ -498,6 +508,7 @@
 				43568A1A1D2C2540004F45D3 /* UserCreatedMixlist+CoreDataProperties.swift in Sources */,
 				43DCD32A1D56823C00AA615A /* ExerciseMuscleGroupViewController.swift in Sources */,
 				4361B5E31D1B505100C8E8E8 /* MuscleGroupTableViewCell.swift in Sources */,
+				43ED05AE1DA6BD6400C99665 /* TrainingZoneInfoTableViewCell.swift in Sources */,
 				434C20641D341A6D00724E76 /* CollectionType+Shuffle.swift in Sources */,
 				43B447001D24853D0019F897 /* EditMixlistTableViewController.swift in Sources */,
 				4361B5DF1D19E81B00C8E8E8 /* NotificationAlertViewController.swift in Sources */,
@@ -512,6 +523,7 @@
 				43568A1D1D2C2540004F45D3 /* DefaultExercise.swift in Sources */,
 				43568A201D2C2540004F45D3 /* MuscleGroup+CoreDataProperties.swift in Sources */,
 				438424BE1D4D15EA0021B0CB /* HUDGreeting.swift in Sources */,
+				43ED05B01DA6BD8100C99665 /* TrainingZoneInfoViewController.swift in Sources */,
 				438424C01D4FC1A20021B0CB /* ExerciseDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

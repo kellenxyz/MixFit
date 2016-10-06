@@ -15,17 +15,21 @@ class ExerciseViewController: UIViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var exerciseNameLabel: UILabel!
-    @IBOutlet weak var setsAndRepsLabel: UILabel!
-    @IBOutlet weak var restTimeLabel: UILabel!
+//    @IBOutlet weak var setsAndRepsLabel: UILabel!
+//    @IBOutlet weak var restTimeLabel: UILabel!
     @IBOutlet weak var addToFavoritesButton: CustomButton!
     @IBOutlet weak var addToMixlistButton: UIButton!
+    @IBOutlet weak var exerciseVolumeInfoButton: UIButton!
     @IBOutlet weak var targetedMuscleGroupsLabel: UILabel!
     @IBOutlet weak var trainersNotesLabel: UILabel!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
 
     var page = 0
 
     var exercise: Exercise?
-    var exerciseVolumes: [ExerciseVolume]?
+    var exerciseVolumes = [(trainingZone: TrainingZone, exerciseVolume: ExerciseVolume)]()
+    var trainingZones: [TrainingZone]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,29 +50,53 @@ class ExerciseViewController: UIViewController {
             fatalError("Could not find exercise object")
         }
 
-        let fetchRequest = NSFetchRequest<ExerciseVolume>(entityName: "ExerciseVolume")
+        let zoneFetchRequest = NSFetchRequest<TrainingZone>(entityName: "TrainingZone")
+        zoneFetchRequest.predicate = NSPredicate(format: "isActive == true")
+//        zoneFetchRequest.predicate = NSPredicate(format: "name == %@", "Hypertrophy")
         do {
-            self.exerciseVolumes = try coreDataStack.managedObjectContext.fetch(fetchRequest)
+            self.trainingZones = try coreDataStack.managedObjectContext.fetch(zoneFetchRequest)
         } catch {
-            fatalError("Error fetching data!")
+            fatalError("Error fetcing training zone data!")
         }
 
-        // Select a random exercise volume
-        if let exerciseVolumes = self.exerciseVolumes {
-            let randomNumber = Int(arc4random_uniform(UInt32(exerciseVolumes.count)))
-            let exerciseVolume = exerciseVolumes[randomNumber]
-            setsAndRepsLabel.text = exerciseVolume.setsAndReps
-            restTimeLabel.text = "\(exerciseVolume.restTime) rest"
+        if let zones = self.trainingZones {
+            for zone in zones {
+                loadExerciseVolumeData(trainingZone: zone)
+            }
+            let rowHeight = tableView.rowHeight
+            let constant: Int = zones.count * Int(rowHeight)
+            self.tableViewHeightConstraint.constant = CGFloat(constant)
         }
+
+        tableView.reloadData()
+
         exerciseNameLabel.text = exercise.name.uppercased()
         targetedMuscleGroupsLabel.text = exercise.targetedMuscles
-        trainersNotesLabel.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-//        trainersNotesLabel.text = exercise.detailDescription
+        trainersNotesLabel.text = exercise.detailDescription
         if let defaultExercise = exercise as? DefaultExercise {
             let exerciseID = defaultExercise.exerciseID ?? "No id"
             print(exerciseID)
         }
-        
+    }
+
+    func loadExerciseVolumeData(trainingZone: TrainingZone) {
+        let fetchRequest = NSFetchRequest<ExerciseVolume>(entityName: "ExerciseVolume")
+
+        fetchRequest.predicate = NSPredicate(format: "trainingZone == %@", trainingZone)
+        var tempExerciseVolumes = [ExerciseVolume]()
+        do {
+            tempExerciseVolumes = try coreDataStack.managedObjectContext.fetch(fetchRequest)
+        } catch {
+            fatalError("Error fetching exercise volume data!")
+        }
+
+        // Select a random exercise volume
+        let randomNumber = Int(arc4random_uniform(UInt32(tempExerciseVolumes.count)))
+        let exerciseVolume = tempExerciseVolumes[randomNumber]
+
+        let zoneAndVolume = (trainingZone: trainingZone, exerciseVolume: exerciseVolume)
+        self.exerciseVolumes.append(zoneAndVolume)
+//        print("\(zoneAndVolume.trainingZone.name): \(zoneAndVolume.exerciseVolume.setsAndReps)")
     }
 
 
@@ -129,8 +157,19 @@ class ExerciseViewController: UIViewController {
         self.performSegue(withIdentifier: "ShowMixlistsSegue", sender: self)
     }
 
+    @IBAction func onExerciseVolumeInfoButtonPressed(_ sender: UIButton) {
+        guard let trainingZoneInfoModal = storyboard?.instantiateViewController(withIdentifier: "TrainingZoneInfo") as? TrainingZoneInfoViewController else {
+            fatalError("Could not instantiate Training Zone Info View Controller")
+        }
+
+        trainingZoneInfoModal.parentView = self.navigationController
+
+        present(trainingZoneInfoModal, animated: true, completion: nil)
+    }
+
+
     func notificationAlertWithTitle(_ title: String) {
-        guard let notificationAlert = storyboard!.instantiateViewController(withIdentifier: "NotificationAlert") as? NotificationAlertViewController else {
+        guard let notificationAlert = storyboard?.instantiateViewController(withIdentifier: "NotificationAlert") as? NotificationAlertViewController else {
             fatalError("Could not instantiate Notification Alert ViewController")
         }
 
@@ -187,6 +226,39 @@ class ExerciseViewController: UIViewController {
     }
     
 
+}
+
+extension ExerciseViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.exerciseVolumes.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ExerciseVolumeCell", for: indexPath) as? ExerciseVolumeTableViewCell else {
+            fatalError("Cell is not ExerciseVolumeTableViewCell")
+        }
+
+        let zoneAndVolume = self.exerciseVolumes[indexPath.row]
+
+        if zoneAndVolume.trainingZone.name == "Hypertrophy" {
+            cell.trainingZoneLabel.textColor = UIColor(red: 139.0/255.0, green: 195.0/255.0, blue: 74.0/255.0, alpha: 1.0)
+        } else if zoneAndVolume.trainingZone.name == "Endurance" {
+            cell.trainingZoneLabel.textColor = UIColor(red: 0.0, green: 145.0/255.0, blue: 234.0/255.0, alpha: 1.0)
+        } else if zoneAndVolume.trainingZone.name == "Power" {
+            cell.trainingZoneLabel.textColor = ColorWheel.redColor()
+        } else {
+            cell.trainingZoneLabel.textColor = UIColor(red: 239.0/255.0, green: 108.0/255.0, blue: 0.0, alpha: 1.0)
+        }
+
+        cell.trainingZoneLabel.text = zoneAndVolume.trainingZone.name
+        cell.exerciseVolumeLabel.text = "\(zoneAndVolume.exerciseVolume.setsAndReps), \(zoneAndVolume.exerciseVolume.rest)"
+
+        return cell
+    }
 }
 
 extension ExerciseViewController: AddToMixlistDelegate {
